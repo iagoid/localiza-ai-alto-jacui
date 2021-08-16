@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 // Instanciando conexão com o banco
-require_once 'app/Db/Database.php';
+require_once 'App/Db/Database.php';
 
 use \App\Db\Database;
 use PDO;

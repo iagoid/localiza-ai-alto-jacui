@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 // Instanciando conexão com o banco
-require_once 'app/Db/Database.php';
+require_once 'App/Db/Database.php';
 
 use \App\Db\Database;
 use PDO;
 
-class Usuario
+class Endereco
 {
   public $cod;
+  public $uf;
   public $cod_cidade;
   public $rua;
   public $numero;
@@ -23,18 +24,22 @@ class Usuario
     $objDatabase = new Database('endereco');
 
     $this->cod = $objDatabase->insert([
+      'uf' => $this->uf,
       'cod_cidade' => $this->cod_cidade,
       'rua' => $this->rua,
       'numero' => $this->numero,
       'bairro' => $this->bairro,
       'cep' => $this->cep,
     ]);
+
+    $GLOBALS["idEndereco"] =  $this->cod;
     return true;
   }
 
   public function atualizar()
   {
     return (new Database('endereco'))->update('cod = ' . $this->cod, [
+      'uf' => $this->uf,
       'cod_cidade' => $this->cod_cidade,
       'rua' => $this->rua,
       'numero' => $this->numero,
@@ -50,7 +55,7 @@ class Usuario
 
   public static function getEnderecos($where = null, $order = null, $limit = null)
   {
-    return (new Database('endereco'))->select($where, $order, $limit, "cod, cod_cidade, rua, 
+    return (new Database('endereco'))->select($where, $order, $limit, "cod, cod_cidade, uf, rua, 
     numero, bairro, cep")->fetchAll(PDO::FETCH_CLASS);
   }
 

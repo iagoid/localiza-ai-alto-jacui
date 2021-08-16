@@ -1,4 +1,53 @@
 <?php
+require_once 'App/Entity/PontoTuristico.php';
+require_once 'App/Entity/Endereco.php';
+
+use \App\Entity\PontoTuristico;
+use \App\Entity\Endereco;
+
+$objPontoTuristico = new PontoTuristico;
+$objEndereco = new Endereco;
+$idEndereco;
+
+if (isset(
+    $_POST['uf'],
+    $_POST['cod_cidade'],
+    $_POST['rua'],
+    $_POST['numero'],
+    $_POST['bairro'],
+    $_POST['cep'],
+    $_POST['nome'],
+    $_POST['cap'],
+    $_POST['periodo'],
+    $_POST['valor'],
+    $_POST['descr'],
+    $_POST['hist'],
+    $_POST['longi'],
+    $_POST['latit'],
+)) {
+
+    $objEndereco->uf = $_POST['uf'];
+    $objEndereco->cod_cidade = $_POST['cod_cidade'];
+    $objEndereco->rua = $_POST['rua'];
+    $objEndereco->numero = $_POST['numero'];
+    $objEndereco->bairro = $_POST['bairro'];
+    $objEndereco->cep = $_POST['cep'];
+    $objEndereco->cadastrar();
+
+    $objPontoTuristico->nome = $_POST['nome'];
+    $objPontoTuristico->cap = $_POST['cap'];
+    $objPontoTuristico->obs = $_POST['obs'];
+    $objPontoTuristico->periodo = $_POST['periodo'];
+    $objPontoTuristico->valor = $_POST['valor'];
+    $objPontoTuristico->descr = $_POST['descr'];
+    $objPontoTuristico->hist = $_POST['hist'];
+    $objPontoTuristico->longi = $_POST['longi'];
+    $objPontoTuristico->latit = $_POST['latit'];
+    $objPontoTuristico->cod_end = $idEndereco;
+    $objPontoTuristico->cadastrar();
+}
+
+
 include __DIR__ . '/includes/header.php';
 ?>
 
@@ -32,63 +81,9 @@ include __DIR__ . '/includes/header.php';
         </div>
         <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
             <div class="contact__form">
-                <form action="#">
-                    <h2>Endereço Do Ponto Turístico</h2>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-                            <select name="UF" id="" class="col-lg-12 col-md-12 col-sm-12">
-                                <option value="">UF</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-                            <select name="cidade" id="" class="col-lg-12 col-md-12 col-sm-12">
-                                <option value="">Cidade</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-                            <input name="bairro" type="text" placeholder="Bairro">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="rua" type="text" placeholder="Rua">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="numero" type="text" placeholder="Número">
-                        </div>
-                    </div>
-
-                    <h2>Ponto Turístico</h2>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="nome" type="text" placeholder="Nome">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="capacidade" type="number" placeholder="Capacidade de publico">
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <input name="observacao" type="text" placeholder="Observação" maxlength="100">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="periodo" type="text" placeholder="Período de Funcionamento" maxlength="100">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="valor" type="number" step="0.01" placeholder="Valor Ingresso">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <textarea placeholder="Descrição" name="descricao"></textarea>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <textarea placeholder="História" name="historia"></textarea>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="latitude" type="text" placeholder="Latitude (Google Maps)">
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <input name="longitude" type="text" placeholder="Longitude (Google Maps)">
-                        </div>
-                    </div>
-
-                    <button type="submit">Proxima Página</button>
-                </form>
+                <?php
+                include __DIR__ . '/includes/formularioPontoTuritico.php';
+                ?>
             </div>
         </div>
     </div>

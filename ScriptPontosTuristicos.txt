@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS endereco(
 	rua VARCHAR(50) NOT NULL,
 	numero smallint NOT NULL,
 	bairro VARCHAR(50) NOT NULL,
+	uf VARCHAR(50) NOT NULL,
 	cep numeric(8) NOT NULL,
 	CONSTRAINT pk_endereco PRIMARY KEY(cod),
 	CONSTRAINT fk_endereco_cidade FOREIGN KEY (cod_cidade) REFERENCES cidade (cod)
