@@ -1,9 +1,18 @@
 <?php
 require_once 'App/Entity/PontoTuristico.php';
 require_once 'App/Entity/Endereco.php';
+require_once 'App/Entity/Cidade.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
+use \App\Entity\Cidade;
+
+$cidades = Cidade::getcidades();
+
+$cidades_resultados = '';
+foreach ($cidades as $cidade) {
+    $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
+}
 
 $objPontoTuristico = new PontoTuristico;
 $objEndereco = new Endereco;
@@ -82,7 +91,7 @@ include __DIR__ . '/includes/header.php';
         <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
             <div class="contact__form">
                 <?php
-                include __DIR__ . '/includes/formularioPontoTuritico.php';
+                include __DIR__ . '/includes/formularioPontoTuristico.php';
                 ?>
             </div>
         </div>
