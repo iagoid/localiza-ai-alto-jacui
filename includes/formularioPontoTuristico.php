@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" action="../cadastro2.php?cod=<?php $GLOBALS["idPontoTuristico"] ?>">
     <h2>Endereço Do Ponto Turístico</h2>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">

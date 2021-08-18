@@ -17,6 +17,7 @@ foreach ($cidades as $cidade) {
 $objPontoTuristico = new PontoTuristico;
 $objEndereco = new Endereco;
 $idEndereco;
+$idPontoTuristico;
 
 if (isset(
     $_POST['uf'],

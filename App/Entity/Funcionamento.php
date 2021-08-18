@@ -14,6 +14,7 @@ class Funcionamento
   public $cod_pt;
   public $inicio;
   public $fim;
+  public $dia;
 
   public function cadastrar()
   {
@@ -24,6 +25,7 @@ class Funcionamento
       'cod_pt' => $this->cod_pt,
       'inicio' => $this->inicio,
       'fim' => $this->fim,
+      'dia' => $this->dia,
     ]);
     return true;
   }
@@ -34,6 +36,7 @@ class Funcionamento
       'cod_pt' => $this->cod_pt,
       'inicio' => $this->inicio,
       'fim' => $this->fim,
+      'dia' => $this->dia,
     ]);
   }
 
@@ -42,13 +45,8 @@ class Funcionamento
     return (new Database('funcionamento'))->delete('cod = ' . $this->cod);
   }
 
-  public static function getFuncionamentos($where = null, $order = null, $limit = null)
+  public static function getFuncionamentoFromPt($cod_pt)
   {
-    return (new Database('funcionamento'))->select($where, $order, $limit, "cod, cod_pt, inicio, fim")->fetchAll(PDO::FETCH_CLASS);
-  }
-
-  public static function getFuncionamento($cod)
-  {
-    return (new Database('funcionamento'))->select('cod = ' . $cod)->fetchObject(self::class);
+    return (new Database('funcionamento'))->select('cod_pt = ' . $cod_pt)->fetchAll(PDO::FETCH_CLASS);
   }
 }

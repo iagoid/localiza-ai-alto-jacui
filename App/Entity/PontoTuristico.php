@@ -39,6 +39,8 @@ class PontoTuristico
       'longi' => $this->longi,
       'latit' => $this->latit,
     ]);
+
+    $GLOBALS["idPontoTuristico"] =  $this->cod;
     return true;
   }
 

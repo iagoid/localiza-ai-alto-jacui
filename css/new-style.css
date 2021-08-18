@@ -16,3 +16,12 @@ select#multiselect.form-control {
 select#multiselect+.nice-select {
     display: none;
 }
+
+.div-funcionamento {
+    border-bottom: rgb(224, 224, 224) 1px solid;
+    margin-top: 20px;
+}
+
+.div-funcionamento h2 {
+    margin-top: 10px !important;
+}
