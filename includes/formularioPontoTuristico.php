@@ -1,13 +1,13 @@
-<form method="POST" action="../cadastro2.php?cod=<?php $GLOBALS["idPontoTuristico"] ?>">
+<form method="POST" enctype="multipart/form-data">
     <h2>Endereço Do Ponto Turístico</h2>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-            <select name="uf" id="" class="col-lg-12 col-md-12 col-sm-12" required>
+            <select name="uf" id="" class="form-select col-lg-12 col-md-12 col-sm-12" required>
                 <option selected value="RS">RS</option>
             </select>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-            <select name="cod_cidade" class="col-lg-12 col-md-12 col-sm-12 cidade_select" required>
+            <select name="cod_cidade" class="form-select col-lg-12 col-md-12 col-sm-12 cidade_select" required>
                 <?= $cidades_resultados ?>
             </select>
         </div>
