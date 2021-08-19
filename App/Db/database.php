@@ -50,7 +50,6 @@ class Database
 
         $query = 'INSERT INTO ' . $this->table . '(' . implode(',', $fields) . ')
         VALUES (' . implode(",", $binds) . ')';
-
         $this->execute($query, array_values($values));
         return $this->connection->lastInsertId();
     }

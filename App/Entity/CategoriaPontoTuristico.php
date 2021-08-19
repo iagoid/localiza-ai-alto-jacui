@@ -15,10 +15,9 @@ class CategoriaPontoTuristico
 
   public function cadastrar()
   {
-    // criando o endereço no DB
-    $objDatabase = new Database('cont_pt');
+    $objDatabase = new Database('cat_pt');
 
-    $this->cod = $objDatabase->insert([
+    $objDatabase->insert([
       'cod_cat' => $this->cod_cat,
       'cod_pt' => $this->cod_pt,
     ]);
@@ -27,7 +26,7 @@ class CategoriaPontoTuristico
 
   public function atualizar()
   {
-    return (new Database('cont_pt'))->update('cod_cat = ' . $this->cod_cat . 'AND cod_pt = ' . $this->cod_pt,  [
+    return (new Database('cat_pt'))->update('cod_cat = ' . $this->cod_cat . 'AND cod_pt = ' . $this->cod_pt,  [
       'cod_cat' => $this->cod_cat,
       'cod_pt' => $this->cod_pt,
     ]);
@@ -35,11 +34,11 @@ class CategoriaPontoTuristico
 
   public function excluir()
   {
-    return (new Database('cont_pt'))->delete('cod_cat = ' . $this->cod_cat . 'AND cod_pt = ' . $this->cod_pt);
+    return (new Database('cat_pt'))->delete('cod_cat = ' . $this->cod_cat . 'AND cod_pt = ' . $this->cod_pt);
   }
 
   public static function getCategoriaPontoTuristico($cod_cat, $cod_pt)
   {
-    return (new Database('cont_pt'))->select('cod_cat = ' . $cod_cat . 'AND cod_pt = ' . $cod_pt)->fetchObject(self::class);
+    return (new Database('cat_pt'))->select('cod_cat = ' . $cod_cat . 'AND cod_pt = ' . $cod_pt)->fetchObject(self::class);
   }
 }

@@ -18,10 +18,14 @@ select#multiselect+.nice-select {
 }
 
 .div-funcionamento {
-    border-bottom: rgb(224, 224, 224) 1px solid;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
-.div-funcionamento h2 {
-    margin-top: 10px !important;
+.div-funcionamento select {
+    height: 180px !important;
+}
+
+.form-select {
+    border-radius: 10px !important;
+    height: 50px;
 }

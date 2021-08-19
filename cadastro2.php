@@ -1,10 +1,20 @@
 <?php
 require_once 'App/Entity/Categoria.php';
+require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Funcionamento.php';
+require_once 'App/Entity/Contato.php';
+require_once 'App/Entity/ContatoPontoTuristico.php';
 
 use \App\Entity\Categoria;
+use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
+use \App\Entity\Contato;
+use \App\Entity\ContatoPontoTuristico;
 
+if (!isset($_GET['cod']) or !is_numeric(($_GET['cod']))) {
+    header('location: index.php?status=error');
+    exit;
+}
 
 $categorias = Categoria::getcategorias();
 
@@ -15,70 +25,65 @@ foreach ($categorias as $categoria) {
 
 $objFuncionamento = new Funcionamento;
 $objFuncionamento->cod_pt = $_GET['cod'];
-print_r($objFuncionamento);
-exit;
+
+$objCategoriaPontoTuristico = new CategoriaPontoTuristico;
+$objCategoriaPontoTuristico->cod_pt = $_GET['cod'];
+
+$objContato = new Contato;
+$objContato->cod_pt = $_GET['cod'];
+
+$objContatoPontoTuristico = new ContatoPontoTuristico;
+$objContatoPontoTuristico->cod_pt = $_GET['cod'];
+
 if (isset(
-    $_POST['inicio-domingo'],
-    $_POST['fim-domingo'],
+    $_POST['Submit'],
 )) {
-    $objFuncionamento->inicio = $_POST['inicio-domingo'];
-    $objFuncionamento->fim = $_POST['fim-domingo'];
-    $objFuncionamento->dia = "Domingo";
-    $objFuncionamento->cadastrar();
+    for ($i = 0; $i < 7; $i++) {
+        $diaString = 'dia' . $i;
+        $inicioString = 'inicio' . $i;
+        $fimString = 'fim' . $i;
+
+        if (isset(
+            $_POST[$diaString],
+            $_POST[$inicioString],
+            $_POST[$fimString],
+        )) {
+            if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
+                foreach ($_POST[$diaString] as $dia) {
+                    $objFuncionamento->dia = $dia;
+                    $objFuncionamento->inicio = $_POST[$inicioString];
+                    $objFuncionamento->fim = $_POST[$fimString];
+                    $objFuncionamento->cadastrar();
+                }
+            }
+        }
+    }
 }
+
 if (isset(
-    $_POST['inicio-segunda'],
-    $_POST['fim-segunda'],
+    $_POST['categoria'],
 )) {
-    $objFuncionamento->inicio = $_POST['inicio-segunda'];
-    $objFuncionamento->fim = $_POST['fim-segunda'];
-    $objFuncionamento->dia = "Segunda";
-    $objFuncionamento->cadastrar();
+    foreach ($_POST['categoria'] as $categoria) {
+        $objCategoriaPontoTuristico->cod_cat = $categoria;
+        $objCategoriaPontoTuristico->cadastrar();
+    }
 }
+
 if (isset(
-    $_POST['inicio-terca'],
-    $_POST['fim-terca'],
+    $_POST['tipo'],
+    $_POST['url'],
 )) {
-    $objFuncionamento->inicio = $_POST['inicio-terca'];
-    $objFuncionamento->fim = $_POST['fim-terca'];
-    $objFuncionamento->dia = "Terça";
-    $objFuncionamento->cadastrar();
-}
-if (isset(
-    $_POST['inicio-quarta'],
-    $_POST['fim-quarta'],
-)) {
-    $objFuncionamento->inicio = $_POST['inicio-quarta'];
-    $objFuncionamento->fim = $_POST['fim-quarta'];
-    $objFuncionamento->dia = "Quarta";
-    $objFuncionamento->cadastrar();
-}
-if (isset(
-    $_POST['inicio-quinta'],
-    $_POST['fim-quinta'],
-)) {
-    $objFuncionamento->inicio = $_POST['inicio-quinta'];
-    $objFuncionamento->fim = $_POST['fim-quinta'];
-    $objFuncionamento->dia = "Quinta";
-    $objFuncionamento->cadastrar();
-}
-if (isset(
-    $_POST['inicio-sexta'],
-    $_POST['fim-sexta'],
-)) {
-    $objFuncionamento->inicio = $_POST['inicio-sexta'];
-    $objFuncionamento->fim = $_POST['fim-sexta'];
-    $objFuncionamento->dia = "Sexta";
-    $objFuncionamento->cadastrar();
-}
-if (isset(
-    $_POST['inicio-sabado'],
-    $_POST['fim-sabado'],
-)) {
-    $objFuncionamento->inicio = $_POST['inicio-sabado'];
-    $objFuncionamento->fim = $_POST['fim-sabado'];
-    $objFuncionamento->dia = "Sábado";
-    $objFuncionamento->cadastrar();
+    $i = 0;
+    foreach ($_POST['url'] as $url) {
+        if ($url != "") {
+            $objContato->tipo = $_POST['tipo'][$i];
+            $objContato->url = $url;
+            $objContato->cadastrar();
+            $objContatoPontoTuristico->cod_cont = $objContato->cod;
+            $objContatoPontoTuristico->cadastrar();
+        }
+        $i++;
+    }
 }
 
 include __DIR__ . '/includes/header.php';
