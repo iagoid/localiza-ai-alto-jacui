@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" action="cadastro2.php">
     <h2>Endereço Do Ponto Turístico</h2>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
@@ -40,7 +40,7 @@
             <input name="periodo" type="text" placeholder="Período de Funcionamento" maxlength="50" required>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <input name="valor" type="number" step="0.01" max="9999.99" maxlength="8" placeholder="Valor Ingresso" required>
+            <input name="valor" type="number" step="0.01" max="1000" placeholder="Valor Ingresso" required>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
             <textarea placeholder="Descrição" name="descr" required></textarea>

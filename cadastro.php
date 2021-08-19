@@ -9,6 +9,8 @@ use \App\Entity\Endereco;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
 
+session_start();
+
 $cidades = Cidade::getcidades();
 
 $cidades_resultados = '';
@@ -21,7 +23,6 @@ $objEndereco = new Endereco;
 $objImagem = new Imagem;
 $idEndereco;
 $idPontoTuristico;
-$idImagem;
 
 if (isset(
     $_POST['uf'],
@@ -61,6 +62,7 @@ if (isset(
     $objPontoTuristico->cod_end = $idEndereco;
     $objPontoTuristico->cadastrar();
 
+    $_SESSION['idPontoTuristico'] = $idPontoTuristico;
 
     //IMAGEM
     $file = $_FILES['imagem'];
@@ -94,7 +96,7 @@ if (isset(
     }
 
     $objImagem->nome = $fileDestination;
-    $objImagem->cod_pt = $idPontoTuristico;
+    $objImagem->cod_pt = $_SESSION['idPontoTuristico'];
     $objImagem->cadastrar();
 }
 

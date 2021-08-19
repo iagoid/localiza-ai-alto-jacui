@@ -11,7 +11,9 @@ use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
 use \App\Entity\ContatoPontoTuristico;
 
-if (!isset($_GET['cod']) or !is_numeric(($_GET['cod']))) {
+session_start();
+
+if (!$_SESSION['idPontoTuristico']) {
     header('location: index.php?status=error');
     exit;
 }
@@ -24,16 +26,16 @@ foreach ($categorias as $categoria) {
 }
 
 $objFuncionamento = new Funcionamento;
-$objFuncionamento->cod_pt = $_GET['cod'];
+$objFuncionamento->cod_pt = $_SESSION['idPontoTuristico'];
 
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
-$objCategoriaPontoTuristico->cod_pt = $_GET['cod'];
+$objCategoriaPontoTuristico->cod_pt = $_SESSION['idPontoTuristico'];
 
 $objContato = new Contato;
-$objContato->cod_pt = $_GET['cod'];
+$objContato->cod_pt = $_SESSION['idPontoTuristico'];
 
 $objContatoPontoTuristico = new ContatoPontoTuristico;
-$objContatoPontoTuristico->cod_pt = $_GET['cod'];
+$objContatoPontoTuristico->cod_pt = $_SESSION['idPontoTuristico'];
 
 if (isset(
     $_POST['Submit'],
