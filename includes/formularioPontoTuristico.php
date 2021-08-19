@@ -54,6 +54,10 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <input name="longi" type="text" placeholder="Longitude (Google Maps)" required>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <label>Enviar imagem(ns)</label>
+            <input name="imagem" type="file" accept="image/*" enctype="multipart/form-data">
+        </div>
     </div>
 
     <button type="submit">Proxima Página</button>

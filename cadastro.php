@@ -2,10 +2,12 @@
 require_once 'App/Entity/PontoTuristico.php';
 require_once 'App/Entity/Endereco.php';
 require_once 'App/Entity/Cidade.php';
+require_once 'App/Entity/Imagem.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
 use \App\Entity\Cidade;
+use \App\Entity\Imagem;
 
 $cidades = Cidade::getcidades();
 
@@ -16,8 +18,10 @@ foreach ($cidades as $cidade) {
 
 $objPontoTuristico = new PontoTuristico;
 $objEndereco = new Endereco;
+$objImagem = new Imagem;
 $idEndereco;
 $idPontoTuristico;
+$idImagem;
 
 if (isset(
     $_POST['uf'],
@@ -34,6 +38,7 @@ if (isset(
     $_POST['hist'],
     $_POST['longi'],
     $_POST['latit'],
+    $_POST['imagem']
 )) {
 
     $objEndereco->uf = $_POST['uf'];
@@ -55,6 +60,44 @@ if (isset(
     $objPontoTuristico->latit = $_POST['latit'];
     $objPontoTuristico->cod_end = $idEndereco;
     $objPontoTuristico->cadastrar();
+
+
+//IMAGEM
+
+    $file = $_FILES['imagem'];
+
+    $fileName = $_FILES['imagem']['name'];
+    $fileTmpName = $_FILES['imagem']['tmp_name'];
+    $fileSize = $_FILES['imagem']['size'];
+    $fileError = $_FILES['imagem']['error'];
+    $fileType = $_FILES['imagem']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg','jpeg','png');
+
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            if($fileSize < 500000){
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = 'img/imagens-pt/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                header("Location: index.php?uploadsuccess");
+            }else{
+                echo "O arquivo é muito grande!";
+            }
+        }else{
+            echo "Ocorreu um erro ao enviar o arquivo!";    
+        }
+    }else{
+        echo "Essa extenção de arquivo não é suportada!";
+    }
+
+    $objImagem->nome = $fileDestination;
+    $objImagem->cod_pt = $idPontoTuristico;
+    $objImagem->cadastrar();
+
 }
 
 
