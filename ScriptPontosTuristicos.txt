@@ -23,13 +23,13 @@ CREATE TABLE IF NOT EXISTS ponto_turistico(
 	cod_end INTEGER NOT NULL,
 	obs VARCHAR(100),
 	periodo VARCHAR(50) NOT NULL,
-	valor decimal(4,2) NOT NULL,
+	valor decimal(8,2) NOT NULL,
 	nome VARCHAR(100) NOT NULL,
 	descr text NOT NULL,
 	hist text NOT NULL,
 	cap INTEGER NOT NULL,
-	longi decimal(11,8) NOT NULL,
-	latit decimal(10,8) NOT NULL,
+	longi VARCHAR(20) NOT NULL,
+	latit VARCHAR(20) NOT NULL,
 	CONSTRAINT pk_ponto_turistico PRIMARY KEY (cod),
 	CONSTRAINT fk_pt_end FOREIGN KEY (cod_end) REFERENCES endereco (cod)
 
@@ -165,7 +165,7 @@ O Museu promove ações culturais e exposições ao longo do ano: Exposição da
 Em 2020, como estamos vivendo a pandemia de Covid-19, por orientação do IBRAM e SEM/RS, o Museu está trabalhando com expediente interno ou home office. Desenvolve atividades em ambiente virtual como um vídeo institucional na Semana dos Museus (18 a 24/05), divulgação do Museu na imprensa local na Primavera de Museus (21 a 27 de setembro), assessoramento cultural a pessoas da comunidade, imprensa, estudantes universitários, professores para elaborar suas aulas online, mediante agendamento (54) 9.9211-2928, não havendo atendimento presencial ao público.
 O órgão está sob a coordenação da professora de História Ivanisa Coréti Lenz, responsável pelo atendimento e pela realização dos trabalhos na instituição.
 ', 'O Museu Municipal Theobaldo Becker, de Ibirubá, foi criado pelo Projeto de Lei nº 830/86 e inaugurado no dia 20 de setembro de 1986.
-Idealizado pelo prefeito municipal da época, Olando Kanitz, foi implementado pelo então secretário municipal de Educação e Cultura, Rudi Schweig, e organizado pela professora Roseli Binsfeld que, desenvolvendo uma série de ações de caráter técnico e administrativo, alcançou a função primordial de preservação e comunicação daquilo que nos une e nos remete a uma lembrança pessoal e coletiva.', 50, -28.631048926356712, -53.09498206431661);
+Idealizado pelo prefeito municipal da época, Olando Kanitz, foi implementado pelo então secretário municipal de Educação e Cultura, Rudi Schweig, e organizado pela professora Roseli Binsfeld que, desenvolvendo uma série de ações de caráter técnico e administrativo, alcançou a função primordial de preservação e comunicação daquilo que nos une e nos remete a uma lembrança pessoal e coletiva.', 50, '-28.631048926356712', '-53.09498206431661');
 
 
 

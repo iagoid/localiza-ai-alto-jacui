@@ -10,6 +10,7 @@ if (!isset($_GET['cod']) or !is_numeric(($_GET['cod']))) {
     exit;
 }
 
+
 $pontoTuristico = PontoTuristico::getPontoTuristico($_GET['cod']);
 $funcionamentos = Funcionamento::getFuncionamentoFromPt($_GET['cod']);
 

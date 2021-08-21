@@ -16,9 +16,4 @@ class Categoria
   {
     return (new Database('categoria'))->select($where, $order, $limit, "cod, nome")->fetchAll(PDO::FETCH_CLASS);
   }
-
-  public static function getcategoria($cod)
-  {
-    return (new Database('categoria'))->select('cod = ' . $cod)->fetchObject(self::class);
-  }
 }

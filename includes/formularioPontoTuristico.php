@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data" action="cadastro2.php">
+<form method="POST" enctype="multipart/form-data">
     <h2>Endereço Do Ponto Turístico</h2>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
@@ -7,7 +7,7 @@
             </select>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-            <select name="cod_cidade" class="form-select col-lg-12 col-md-12 col-sm-12 cidade_select" required>
+            <select name="cod_cidade" class="form-select col-lg-12 col-md-12 col-sm-12 cidade_select">
                 <?= $cidades_resultados ?>
             </select>
         </div>
@@ -56,9 +56,9 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
             <label>Enviar imagem(ns)</label>
-            <input name="imagem" type="file" accept="image/*" enctype="multipart/form-data">
+            <input name="imagem" type="file" accept="image/*" enctype="multipart/form-data" required>
         </div>
     </div>
 
-    <button type="submit">Proxima Página</button>
+    <button type="submit" name="Submit">Proxima Página</button>
 </form>

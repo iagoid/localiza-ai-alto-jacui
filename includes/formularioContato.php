@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <h2>Funcionamento</h2>
     <p>*Caso o estabelecimento não funcione em algum dia da semana deixe o campo em branco, deixe o campo em branco</p>
     <div class="" id="funcionamentos">
@@ -59,5 +59,5 @@
     </div>
 
 
-    <button class="mt-3" id="submit-contato" type="submit" name="Submit">Concluir Cadastro</button>
+    <button class="mt-3" id="submit-contato" name="Submit">Concluir Cadastro</button>
 </form>

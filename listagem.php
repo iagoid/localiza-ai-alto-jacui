@@ -5,15 +5,14 @@ require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Cidade.php';
 require_once 'App/Entity/Imagem.php';
 require_once 'App/Entity/Endereco.php';
+require_once 'App/Entity/JoinsSql.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Categoria;
-use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
-use \App\Entity\Endereco;
-
-session_start();
+use \App\Entity\CategoriasDoPonto;
+use \App\Entity\CidadeDoPonto;
 
 $pontosTuristicos = PontoTuristico::getPontoTuristicos();
 $categorias = Categoria::getcategorias();
@@ -32,21 +31,13 @@ foreach ($cidades as $cidade) {
 
 $ponto_resultados = '';
 foreach ($pontosTuristicos as $ponto) {
+    $categoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto("cod_pt = " . $ponto->cod, null, null, 1);
+    $categoriaNome = $categoriaPontoTuristico ? '<div class="tag">' . $categoriaPontoTuristico[0]->nome . '</div>' : "";
+
+    $cidadePontoTuristico = CidadeDoPonto::cidadeDoPonto("ponto_turistico.cod = " . $ponto->cod, null, null, 1);
+    $cidadeNome = $cidadePontoTuristico ?  $cidadePontoTuristico[0]->nome : 'Não Informada';
+
     $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 1);
-    $categoriaPontoTuristico = CategoriaPontoTuristico::getcategoriasporntoturistico("cod_pt = " . $ponto->cod, null, null, 1);
-    $enderecoPontoTuristico = Endereco::getEnderecos("cod = " . $ponto->cod_end, null, null, 1);
-
-    $cidadeNome = "";
-    if ($enderecoPontoTuristico) {
-        $cidade = Cidade::getcidades("cod = " . $enderecoPontoTuristico[0]->cod_cidade, null, null, 1);
-        $cidadeNome = $cidade ? $cidade[0]->nome : "";
-    }
-
-    $categoriaNome = "";
-    if ($categoriaPontoTuristico) {
-        $categoria = Categoria::getcategorias("cod = " . $categoriaPontoTuristico[0]->cod_cat, null, null, 1);
-        $categoriaNome = $categoria ? $categoria[0]->nome : "";
-    }
     $nomeImagem = $imagem ? $imagem[0]->nome : "image-not-found.jpg";
 
     $ponto_resultados .= '
@@ -54,10 +45,10 @@ foreach ($pontosTuristicos as $ponto) {
         <div class="blog__item">
             <div class="blog__item__pic">
                 <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
-                <div class="tag">' . $categoriaNome . '</div>
+                ' . $categoriaNome . '
             </div>
             <div class="blog__item__text">
-                <p><i class="fa fa-clock-o"></i>' .  $cidadeNome . '</p>
+                <p><i class="fa fa-map-o"></i>' .  $cidadeNome . '</p>
                 <h5><a href="' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
             </div>
         </div>

@@ -25,17 +25,18 @@ foreach ($categorias as $categoria) {
     $categorias_resultados .= '<option value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
 }
 
+$idPonto = $_SESSION['idPontoTuristico'];
 $objFuncionamento = new Funcionamento;
-$objFuncionamento->cod_pt = $_SESSION['idPontoTuristico'];
+$objFuncionamento->cod_pt = $idPonto;
 
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
-$objCategoriaPontoTuristico->cod_pt = $_SESSION['idPontoTuristico'];
+$objCategoriaPontoTuristico->cod_pt = $idPonto;
 
 $objContato = new Contato;
-$objContato->cod_pt = $_SESSION['idPontoTuristico'];
+$objContato->cod_pt = $idPonto;
 
 $objContatoPontoTuristico = new ContatoPontoTuristico;
-$objContatoPontoTuristico->cod_pt = $_SESSION['idPontoTuristico'];
+$objContatoPontoTuristico->cod_pt = $idPonto;
 
 if (isset(
     $_POST['Submit'],
@@ -60,32 +61,36 @@ if (isset(
             }
         }
     }
-}
 
-if (isset(
-    $_POST['categoria'],
-)) {
-    foreach ($_POST['categoria'] as $categoria) {
-        $objCategoriaPontoTuristico->cod_cat = $categoria;
-        $objCategoriaPontoTuristico->cadastrar();
-    }
-}
 
-if (isset(
-    $_POST['tipo'],
-    $_POST['url'],
-)) {
-    $i = 0;
-    foreach ($_POST['url'] as $url) {
-        if ($url != "") {
-            $objContato->tipo = $_POST['tipo'][$i];
-            $objContato->url = $url;
-            $objContato->cadastrar();
-            $objContatoPontoTuristico->cod_cont = $objContato->cod;
-            $objContatoPontoTuristico->cadastrar();
+    if (isset(
+        $_POST['categoria'],
+    )) {
+        foreach ($_POST['categoria'] as $categoria) {
+            $objCategoriaPontoTuristico->cod_cat = $categoria;
+            $objCategoriaPontoTuristico->cadastrar();
         }
-        $i++;
     }
+
+    if (isset(
+        $_POST['tipo'],
+        $_POST['url'],
+    )) {
+        $i = 0;
+        foreach ($_POST['url'] as $url) {
+            if ($url != "") {
+                $objContato->tipo = $_POST['tipo'][$i];
+                $objContato->url = $url;
+                $objContato->cadastrar();
+                $objContatoPontoTuristico->cod_cont = $objContato->cod;
+                $objContatoPontoTuristico->cadastrar();
+            }
+            $i++;
+        }
+    }
+    session_destroy();
+    $url =  str_replace("cadastro2.php", "ponto-turistico?cod=" . $idPonto, $_SERVER['REQUEST_URI']);
+    header('Location: ' . $url);
 }
 
 include __DIR__ . '/includes/header.php';
