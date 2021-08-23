@@ -48,4 +48,8 @@ class Imagem
   {
     return (new Database('imagem'))->select($where, $order, $limit, "cod, cod_pt, nome")->fetchObject(self::class);
   }
+   public static function getImagemFromPt($cod_pt)
+  {
+    return (new Database('imagem'))->select('cod_pt = ' . $cod_pt)->fetchAll(PDO::FETCH_CLASS);
+  }
 }

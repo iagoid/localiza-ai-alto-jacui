@@ -2,11 +2,6 @@
     <h2>Endereço Do Ponto Turístico</h2>
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
-            <select name="uf" id="" class="form-select col-lg-12 col-md-12 col-sm-12" required>
-                <option selected value="RS">RS</option>
-            </select>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
             <select name="cod_cidade" class="form-select col-lg-12 col-md-12 col-sm-12 cidade_select">
                 <?= $cidades_resultados ?>
             </select>
@@ -21,7 +16,7 @@
             <input name="numero" type="number" required placeholder="Número" min="0" max="10000">
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
-            <input name="cep" type="number" placeholder="CEP" required maxlength="8">
+            <input name="cep" type="number" placeholder="CEP" required pattern="\d{5}-\d{3}" min="8" max="8">
         </div>
     </div>
 
@@ -49,14 +44,14 @@
             <textarea placeholder="História" name="hist" required></textarea>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <input name="latit" type="text" placeholder="Latitude (Google Maps)" required>
+            <input name="latit" type="text" placeholder="Latitude (Google Maps)" max="20" required>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <input name="longi" type="text" placeholder="Longitude (Google Maps)" required>
+            <input name="longi" type="text" placeholder="Longitude (Google Maps)" max="20" required>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
             <label>Enviar imagem(ns)</label>
-            <input name="imagem" type="file" accept="image/*" enctype="multipart/form-data" required>
+            <input name="imagem" type="file" accept="image/*"  required>
         </div>
     </div>
 

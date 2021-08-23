@@ -12,21 +12,37 @@ use \App\Entity\Categoria;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
 use \App\Entity\CategoriasDoPonto;
+use \App\Entity\PontosDaCategoria;
 use \App\Entity\CidadeDoPonto;
 
-$pontosTuristicos = PontoTuristico::getPontoTuristicos();
-$categorias = Categoria::getcategorias();
+$busca = filter_input(INPUT_GET, 'busca', FILTER_SANITIZE_STRING);
+
+/*$filtroCategorias = filter_input(INPUT_GET, 'filtroCategoria', FILTER_SANITIZE_STRING);
+$joinCategorias = PontosDaCategoria::pontosDaCategoria("cod_cat = " . $filtroCategorias, null, null, 1);
+
+$filtroCidades = filter_input(INPUT_GET, 'filtroCidade', FILTER_SANITIZE_STRING);*/
+
+$condicoes = [
+    strlen($busca) ? 'nome LIKE "%'.str_replace(' ', '%', $busca)  .'%"' : null,
+    //strlen($joinCategorias) ? ''
+];
+
+$where = implode(' AND ', $condicoes);
+
+$pontosTuristicos = PontoTuristico::getPontoTuristicos($where);
 $cidades = Cidade::getcidades();
+$categorias = Categoria::getcategorias();
+
 
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
-    $categorias_resultados .= '<li><a href="' . $categoria->cod . '">' . $categoria->nome . '</a></li>';
+    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
 }
 
 
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
-    $cidades_resultados .= '<li><a href="' . $cidade->nome . '">' . $cidade->nome . '</a></li>';
+    $cidades_resultados .= '<option value="' . $cidade->nome . '">' . $cidade->nome . '</option>';
 }
 
 $ponto_resultados = '';
@@ -49,7 +65,7 @@ foreach ($pontosTuristicos as $ponto) {
             </div>
             <div class="blog__item__text">
                 <p><i class="fa fa-map-o"></i>' .  $cidadeNome . '</p>
-                <h5><a href="' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
+                <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
             </div>
         </div>
     </div>
@@ -60,7 +76,6 @@ foreach ($pontosTuristicos as $ponto) {
 
 include __DIR__ . '/includes/header.php';
 ?>
-
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.jpg">
     <div class="container">
@@ -101,22 +116,28 @@ include __DIR__ . '/includes/header.php';
             <div class="col-lg-4 col-md-4">
                 <div class="blog__sidebar">
                     <div class="blog__sidebar__search">
-                        <h4>Search</h4>
-                        <form action="#">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit">Search</button>
+                        <h4>Buscar por nome</h4>
+                        <form method="get">
+                            <input type="text" name="busca" placeholder="Buscar" value="<?=$busca?>">
+                            <button type="submit">Buscar</button>
                         </form>
                     </div>
+                    <form method="get">
                     <div class="blog__sidebar__categories">
-                        <h4>Categorias</h4>
-                        <ul>
+                        <div class="mt-3"><h4>Filtrar por Categorias</h4>
+                            <select class="form-control" type="submit" name="filtroCategoria" value="<?=$filtroCategorias?>">
+                                <option value="">Selecione uma Opção</option>
                             <?= $categorias_resultados ?>
-                        </ul>
-                        <h4>Cidades</h4>
-                        <ul>
+                        </select></div>
+                        <div class="mt-3"><h4>Filtrar por Cidades</h4>
+                            <select class="form-control" type="submit" name="filtroCidade" value="<?=$filtroCidades?>">
+                                <option value="">Selecione uma Opção</option>
+                        
                             <?= $cidades_resultados ?>
-                        </ul>
+                        </select></div>
                     </div>
+                    <button class="form-control" type="submit">Filtrar</button>
+                </form>
                 </div>
             </div>
         </div>

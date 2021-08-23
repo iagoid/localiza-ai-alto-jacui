@@ -24,7 +24,6 @@ class Endereco
     $objDatabase = new Database('endereco');
 
     $this->cod = $objDatabase->insert([
-      'uf' => $this->uf,
       'cod_cidade' => $this->cod_cidade,
       'rua' => $this->rua,
       'numero' => $this->numero,
@@ -39,7 +38,6 @@ class Endereco
   public function atualizar()
   {
     return (new Database('endereco'))->update('cod = ' . $this->cod, [
-      'uf' => $this->uf,
       'cod_cidade' => $this->cod_cidade,
       'rua' => $this->rua,
       'numero' => $this->numero,
@@ -55,7 +53,7 @@ class Endereco
 
   public static function getEnderecos($where = null, $order = null, $limit = null)
   {
-    return (new Database('endereco'))->select($where, $order, $limit, "cod, cod_cidade, uf, rua, 
+    return (new Database('endereco'))->select($where, $order, $limit, "cod, cod_cidade, rua, 
     numero, bairro, cep")->fetchAll(PDO::FETCH_CLASS);
   }
 

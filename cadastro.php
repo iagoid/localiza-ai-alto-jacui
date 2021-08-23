@@ -23,7 +23,6 @@ $idPontoTuristico;
 
 if (isset($_POST['Submit'])) {
     if (isset(
-        $_POST['uf'],
         $_POST['cod_cidade'],
         $_POST['rua'],
         $_POST['numero'],
@@ -40,7 +39,6 @@ if (isset($_POST['Submit'])) {
         $_FILES['imagem']
     )) {
         $objEndereco = new Endereco;
-        $objEndereco->uf = $_POST['uf'];
         $objEndereco->cod_cidade = $_POST['cod_cidade'];
         $objEndereco->rua = $_POST['rua'];
         $objEndereco->numero = $_POST['numero'];
@@ -66,7 +64,7 @@ if (isset($_POST['Submit'])) {
         //IMAGEM
         $file = $_FILES['imagem'];
 
-        $fileName = $_FILES['imagem']['name'];
+        $fileName = ($_FILES['imagem']['name']);
         $fileTmpName = $_FILES['imagem']['tmp_name'];
         $fileSize = $_FILES['imagem']['size'];
         $fileError = $_FILES['imagem']['error'];
