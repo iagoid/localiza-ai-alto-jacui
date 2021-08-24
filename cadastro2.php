@@ -89,7 +89,7 @@ if (isset(
         }
     }
     session_destroy();
-    $url =  str_replace("cadastro2.php", "ponto-turistico?cod=" . $idPonto, $_SERVER['REQUEST_URI']);
+    $url =  str_replace("cadastro2", "ponto-turistico?cod=" . $idPonto, $_SERVER['REQUEST_URI']);
     header('Location: ' . $url);
 }
 

@@ -26,7 +26,9 @@
         <div class="container">
             <div class="footer__content">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
                         <div class="footer__about">
                             <div class="footer__logo">
                                 <a href="#"><img src="img/logo.png" alt=""></a>
@@ -44,41 +46,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 offset-lg- col-md-5 offset-md-1 col-sm-6">
+                    <div class="col-lg-3 offset-lg- col-md-3 offset-md-1 col-sm-12">
                         <div class="footer__widget">
-                            <h4>Quick Link</h4>
+                            <h4>Links</h4>
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Booking</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Review</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="./index.php">Home</a></li>
+                                <li><a href="./listagem.php">PontosTurísticos</a></li>
+                                <li><a href="./about.php">Sobre Nós</a></li>
+                                <li><a href="./contact.php">Fale Conosco</a></li>
                             </ul>
-                            <ul>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Our Room</a></li>
-                                <li><a href="#">Restaurants</a></li>
-                                <li><a href="#">Payments</a></li>
-                                <li><a href="#">Events</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-8 col-sm-12">
-                        <div class="footer__newslatter">
-                            <h4>Subscribe our newlatester</h4>
-                            <form action="#">
-                                <input type="text" placeholder="Your E-mail Address">
-                                <button type="submit">Subscribe</button>
-                            </form>
-                            <div class="footer__newslatter__find">
-                                <h5>Find Us:</h5>
-                                <div class="footer__newslatter__find__links">
-                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                    <a href="#"><i class="fa fa-map-o"></i></a>
-                                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                                    <a href="#"><i class="fa fa-forumbee"></i></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

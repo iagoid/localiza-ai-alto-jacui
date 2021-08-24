@@ -16,7 +16,7 @@
             <input name="numero" type="number" required placeholder="Número" min="0" max="10000">
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
-            <input name="cep" type="number" placeholder="CEP" required pattern="\d{5}-\d{3}" min="8" max="8">
+            <input name="cep" type="number" placeholder="CEP" required pattern="\d{5}-\d{3}" max="99999999">
         </div>
     </div>
 
@@ -51,7 +51,7 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
             <label>Enviar imagem(ns)</label>
-            <input name="imagem" type="file" accept="image/*"  required>
+            <input name="imagem" type="file" accept="image/*" required>
         </div>
     </div>
 

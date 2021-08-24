@@ -95,7 +95,7 @@ if (isset($_POST['Submit'])) {
         $objImagem->nome = $fileDestination;
         $objImagem->cod_pt = $idPontoTuristico;
         $objImagem->cadastrar();
-        $url =  str_replace("cadastro.php", "cadastro2.php", $_SERVER['REQUEST_URI']);
+        $url =  str_replace("cadastro", "cadastro2", $_SERVER['REQUEST_URI']);
         header('Location: ' . $url);
     }
 }

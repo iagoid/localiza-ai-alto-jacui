@@ -14,35 +14,50 @@ use \App\Entity\Imagem;
 use \App\Entity\CategoriasDoPonto;
 use \App\Entity\PontosDaCategoria;
 use \App\Entity\CidadeDoPonto;
+use \App\Entity\PontosCadPT;
 
 $busca = filter_input(INPUT_GET, 'busca', FILTER_SANITIZE_STRING);
+$codCategoria = isset($_GET['filtroCategoria']) ? $_GET['filtroCategoria'] : null;
+$codCidade = isset($_GET['filtroCidade']) ? $_GET['filtroCidade'] : null;
 
-/*$filtroCategorias = filter_input(INPUT_GET, 'filtroCategoria', FILTER_SANITIZE_STRING);
-$joinCategorias = PontosDaCategoria::pontosDaCategoria("cod_cat = " . $filtroCategorias, null, null, 1);
+$pontosTuristicos = null;
+$whereBusca = null;
+if (isset($_GET['busca'])) {
+    $whereBusca = "nome LIKE '%" . $_GET['busca'] . "%'";
+    $pontosTuristicos = PontoTuristico::getPontoTuristicos($whereBusca);
+} else {
+    $where = null;
+    if ($codCategoria && $codCidade) {
+        $where = "cod_cat = " . $codCategoria . " AND cod_cidade = " . $codCidade;
+    } else if ($codCategoria) {
+        $where = "cod_cat = " . $codCategoria;
+    } else if ($codCidade) {
+        $where = "cod_cidade = " . $codCidade;
+    }
+    $pontosTuristicos = PontosCadPT::pontosCadPT($where);
+}
 
-$filtroCidades = filter_input(INPUT_GET, 'filtroCidade', FILTER_SANITIZE_STRING);*/
-
-$condicoes = [
-    strlen($busca) ? 'nome LIKE "%'.str_replace(' ', '%', $busca)  .'%"' : null,
-    //strlen($joinCategorias) ? ''
-];
-
-$where = implode(' AND ', $condicoes);
-
-$pontosTuristicos = PontoTuristico::getPontoTuristicos($where);
 $cidades = Cidade::getcidades();
 $categorias = Categoria::getcategorias();
 
 
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
-    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+    if ($codCategoria == $categoria->cod) {
+        $categorias_resultados .= '<option selected value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+    } else {
+        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+    }
 }
 
 
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
-    $cidades_resultados .= '<option value="' . $cidade->nome . '">' . $cidade->nome . '</option>';
+    if ($codCidade == $cidade->cod) {
+        $cidades_resultados .= '<option selected value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
+    } else {
+        $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
+    }
 }
 
 $ponto_resultados = '';
@@ -118,26 +133,30 @@ include __DIR__ . '/includes/header.php';
                     <div class="blog__sidebar__search">
                         <h4>Buscar por nome</h4>
                         <form method="get">
-                            <input type="text" name="busca" placeholder="Buscar" value="<?=$busca?>">
+                            <input type="text" name="busca" placeholder="Buscar" value="<?= $busca ?>">
                             <button type="submit">Buscar</button>
                         </form>
                     </div>
                     <form method="get">
-                    <div class="blog__sidebar__categories">
-                        <div class="mt-3"><h4>Filtrar por Categorias</h4>
-                            <select class="form-control" type="submit" name="filtroCategoria" value="<?=$filtroCategorias?>">
-                                <option value="">Selecione uma Opção</option>
-                            <?= $categorias_resultados ?>
-                        </select></div>
-                        <div class="mt-3"><h4>Filtrar por Cidades</h4>
-                            <select class="form-control" type="submit" name="filtroCidade" value="<?=$filtroCidades?>">
-                                <option value="">Selecione uma Opção</option>
-                        
-                            <?= $cidades_resultados ?>
-                        </select></div>
-                    </div>
-                    <button class="form-control" type="submit">Filtrar</button>
-                </form>
+                        <div class="blog__sidebar__categories">
+                            <div class="mt-3">
+                                <h4>Filtrar por Categorias</h4>
+                                <select class="form-control" type="submit" name="filtroCategoria" value="<?= $filtroCategorias ?>">
+                                    <option value="">Selecione uma Opção</option>
+                                    <?= $categorias_resultados ?>
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <h4>Filtrar por Cidades</h4>
+                                <select class="form-control" type="submit" name="filtroCidade" value="<?= $filtroCidades ?>">
+                                    <option value="">Selecione uma Opção</option>
+
+                                    <?= $cidades_resultados ?>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="form-control" type="submit">Filtrar</button>
+                    </form>
                 </div>
             </div>
         </div>

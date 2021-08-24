@@ -32,6 +32,29 @@ class PontosDaCategoria
     }
 }
 
+class PontosCadPT
+{
+    public $cod;
+    public $cod_end;
+    public $obs;
+    public $periodo;
+    public $valor;
+    public $nome;
+    public $descr;
+    public $hist;
+    public $cap;
+    public $longi;
+    public $latit;
+    public $cod_cat;
+
+    public static function pontosCadPT($where = null, $order = null, $limit = null)
+    {
+        $script = "SELECT * FROM ponto_turistico INNER JOIN cat_pt ON cat_pt.cod_pt=ponto_turistico.cod INNER JOIN endereco ON endereco.cod=ponto_turistico.cod_end";
+        $group = "GROUP BY ponto_turistico.cod";
+        return (new Database('ponto_turistico'))->join($script,  $where, $order, $limit, "*", $group)->fetchAll(PDO::FETCH_CLASS);
+    }
+}
+
 
 class CidadeDoPonto
 {
@@ -72,7 +95,6 @@ class ImagensDoPonto
     public static function imagensDoPonto($where = null, $order = null, $limit = null)
     {
         $script = "SELECT imagem.nome FROM imagem INNER JOIN ponto_turistico ON imagem.cod_pt = ponto_turistico.cod";
-        return (new Database('imagem'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS); 
-
+        return (new Database('imagem'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
     }
 }
