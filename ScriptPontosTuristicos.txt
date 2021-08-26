@@ -83,26 +83,6 @@ CREATE TABLE IF NOT EXISTS funcionamento(
 	CONSTRAINT fk_func_pt FOREIGN KEY (cod_pt) REFERENCES ponto_turistico (cod)
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 INSERT INTO cidade (nome, uf) VALUES ('Alto Alegre', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Arroio do Tigre', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Boa Vista do Incra', 'RS');
@@ -146,122 +126,255 @@ INSERT INTO cidade (nome, uf) VALUES ('Tupanciretã', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Victor Graeff', 'RS');
 
 
+INSERT INTO categoria (cod, nome) VALUES (1, 'Restaurante');
+INSERT INTO categoria (cod, nome) VALUES (2, 'Museu');
+INSERT INTO categoria (cod, nome) VALUES (3, 'Parque');
+INSERT INTO categoria (cod, nome) VALUES (4, 'Natureza');
+INSERT INTO categoria (cod, nome) VALUES (5, 'Outro');
 
 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (1, 34, 'Avenida Vinte e Cinco de Julho', 667, 'Centro', 99450000);
 
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (1, 1, '', 'Ano Todo', 10.00, 'Mini Mundo Parque Encantado', 'Mini Parque Encantado possui 35 mini prédios, sendo 9 capelas do interior do município de Selbach e também a Igreja Matriz São Tiago além de uma réplica de um moinho.', 'A casa onde se encontra o Mini Mundo foi construída na area rural de Selbach e depois transferida para a cidade. As madeiras foram numeradas uma a uma para que não se perdesse a ordem e nem como a casa havia sido construída. O Mini Mundo era a moradia do imigrante alemão Ein Bauerhof, que possuía um grande acervo de documentos, móveis, equipamentos de trabalho usados nos tempos da colonização do município. O Mini Parque Encantado foi montado com réplicas das primeiras casa construídas no município mostrando a arquitetura e o modo da vida das famílias alemãs e da origem dos municípios da região.', 30, '-28.63098907470703', '-52.95452880859375');
 
-
-INSERT INTO endereco (cod_cidade, rua, numero, bairro, cep) VALUES (1, 'Rua Getulio Vargas', 614, 'Centro', 98200000);
-
-
-
-
-
-INSERT INTO ponto_turistico (cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit) 
-VALUES (1, '', 'Ano Todo', 20.00,'Museu Municipal Theobaldo Becker', 'O Museu Municipal Theobaldo Becker tem como missão reunir, documentar, pesquisar, conservar, e divulgar com fins educativos, sociais e culturais e de deleite, levando em conta a valorização e o resgate da história local, dentro da perspectiva de um museu para todos.
-O Museu Municipal Theobaldo Becker possui registro no IBRAM (Instituto Brasileiro de Museus) e no SEM/RS (Sistema Estadual de Meseus do Rio Grande do Sul). Faz parte da 3° Região Museológica que implementa através de reuniões online ações conjuntas, sendo a mais recente a página do Facebook da 3° Região Museológica, que a comunidade ibirubense pode curtir acompanhando assim as ações dos museus da nossa região.
-O Museu promove ações culturais e exposições ao longo do ano: Exposição da Evolução Histórica de Ibirubá durante a Semana no Município (fevereiro-março), Semana dos Museus (maio), Viajando pela Rota (agosto), Primavera dos Museus (setembro), Aniversário do Museu (20 de setembro), União Faz a Vida – Sicredi (durante todo ano), visitas guiadas e orientadas às turmas de escolares visitantes, pesquisando acervo específico, atendimento individual a pesquisadores e visitantes, bem como registro, manutenção, limpeza, preservação e pesquisa do acervo.
-Em 2020, como estamos vivendo a pandemia de Covid-19, por orientação do IBRAM e SEM/RS, o Museu está trabalhando com expediente interno ou home office. Desenvolve atividades em ambiente virtual como um vídeo institucional na Semana dos Museus (18 a 24/05), divulgação do Museu na imprensa local na Primavera de Museus (21 a 27 de setembro), assessoramento cultural a pessoas da comunidade, imprensa, estudantes universitários, professores para elaborar suas aulas online, mediante agendamento (54) 9.9211-2928, não havendo atendimento presencial ao público.
-O órgão está sob a coordenação da professora de História Ivanisa Coréti Lenz, responsável pelo atendimento e pela realização dos trabalhos na instituição.
-', 'O Museu Municipal Theobaldo Becker, de Ibirubá, foi criado pelo Projeto de Lei nº 830/86 e inaugurado no dia 20 de setembro de 1986.
-Idealizado pelo prefeito municipal da época, Olando Kanitz, foi implementado pelo então secretário municipal de Educação e Cultura, Rudi Schweig, e organizado pela professora Roseli Binsfeld que, desenvolvendo uma série de ações de caráter técnico e administrativo, alcançou a função primordial de preservação e comunicação daquilo que nos une e nos remete a uma lembrança pessoal e coletiva.', 50, '-28.631048926356712', '-53.09498206431661');
-
-
-
-
-
-
-
-
-
-
-
-
-
-INSERT INTO contato (tipo, url) VALUES ('Facebook', 'https://www.facebook.com');
-
-
-
-
-
-
-
-
+INSERT INTO contato (cod, tipo, url) VALUES (1, 'Telefone', 'https://criarmeulink.com.br/u/1629895329274');
 
 INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (1, 1);
 
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 1);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Segunda', '08:30:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Terça', '08:30:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Quarta', '08:30:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Quinta', '08:30:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Sexta', '08:30:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Sábado', '08:30:00', '12:00:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (1, 'mini_mundo1.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (1, 'mini_mundo2.jpg');
 
 
 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (2, 8,'Avenida Padre Francisco Pacheco', 473, 'São Miguel', 98025-015);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (2, 3, '','Mês de Outubro', 0, 'Monumento Nossa Senhora de Fátima', 'No mês de outubro, acontece a celebração da Romaria de Fátima, onde reúne fiéis de várias cidades, para comemorar o dia 12 de Nossa Senhora de Fátima.', 'Erguido em um pedestal de 31 metros de altura. Inaugurado em outubro de 1952. A imagem da Santa, existente na capela do monumento, veio de Portugal, assim como uma ampola com água, existente na miniatura da Basílica de Fátima. O sítio é o destino final do trajeto da Grande Romaria de Fátima para os mais de 120 mil romeiros que participam todos os anos deste grande evento em outubro. O local possui uma vista privilegiada da cidade, às margens dos trilhos, com uma natureza repleta de árvores, gramados, pássaros e bancos para sentar. É um lugar de paz e tranquilidade, que conta com uma capela, um altar para celebrar missas e um grande monumento de Nossa Senhora de Fátima', 150.000, '-28.638600247015052', '-53.59515852663985'); 
+
+INSERT INTO contato (cod, tipo, url) VALUES (2, 'Facebook', 'https://m.facebook.com/Santu%C3%A1rio-Nsa-Sra-de-F%C3%A1tima-210878582762426/');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (2, 2);
+
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (5, 2);
 
 
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (2, 'Terça', '09:00:00', '17:00:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (2, 'roma1.png');
+INSERT INTO imagem (cod_pt, nome) VALUES (2, 'roma2.jpg');
 
 
-INSERT INTO categoria (nome) VALUES ('Restaurante');
-INSERT INTO categoria (nome) VALUES ('Museu');
-INSERT INTO categoria (nome) VALUES ('Parque');
-INSERT INTO categoria (nome) VALUES ('Natureza');
-INSERT INTO categoria (nome) VALUES ('Outro');
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (3, 18, 'Rua Ervino Petry', 100, 'Centro', 99495000);
 
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (3, 3, '', 'Ano Todo', 00.00, 'Praça da Lagoa', 'A praça da Lagoa é um ótimo destino para passar uma tarde ao ar livre com sua familia ou amigos.', 'A praça originou o nome de sua cidade, Lagoa dos Três Cantos. Isso porquê, desde o início, ela possuía realmente 3 cantos. A praça hoje está revitalizada, possui ciprestes desenhados e a prefeitura fica juntamente com a Praça. A arquitetura da Prefeitura leva as descendências Alemãs, povo que fundou a cidade.', 1500, '-28.571765', '-52.8561463');
 
+INSERT INTO contato (cod, tipo, url) VALUES (3, 'Site', 'https://lagoa3cantos.rs.gov.br/');
 
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (3, 3);
 
-
-
-
-
-
-
-
-
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 1);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (2, 1);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 2);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (2, 2);
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 3);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 4);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Segunda', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Terça', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Quarta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Quinta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Sexta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Sábado', 
+'00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (3, 'Domingo', 
+'00:00:00', '23:59:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (3, 'lagoa1.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (3, 'lagoa2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (3, 'lagoa3.jpg');
+
+
+
+
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (4, 41,'Rua Vinte e Tres de Outubro', 0, 'Centro', 99350000);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (4, 4,'','Ano Todo', 00.00, 'Praça Municipal Tranquedo Neves', 'Conhecida como a "Mais Bela Praça do Estado do Rio Grande do Sul"', 'Com mais de 150 esculturas de ciprestes, todos podados artesanalmente até o mês de maio de 2005 pelo Topiário Fredolino Selmiro Schimdt, idealizador de local e que se aposentou aos 70 anos de idade. Fundada em janeiro de 1982, a Praça começou a ser atração na região apenas a partir de 1989, quando o então agricultor Fredolino, conhecido por Mirio, mudou-se para a cidade e desde então dedicou sua vida a cuidar deste local que é o ponto turí­stico mais visitado de toda a região.', '5000', '-28.560850909464275', '-52.750099160117');
+
+
+INSERT INTO contato (cod, tipo, url) VALUES (4, 'Site', 'https://victorgraeff.rs.gov.br/pagina-inicial/praca/');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (4, 4);
+
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (4, 4);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 5);
+
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Segunda', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Terça', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Quarta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Quinta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Sexta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Sábado', 
+'00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (4, 'Domingo', 
+'00:00:00', '23:59:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (4, 'pra1.png');
+INSERT INTO imagem (cod_pt, nome) VALUES (4, 'pra2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (4, 'pra3.jpg');
+
+
+
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (5, 30, 'Avenida Balbuíno Bernhard', 1228, 'Harmonia', 99440000);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (5, 5, '', 'Ano Todo', 00.00, 'Balneário Municipal Vitor Hugo Borowiski', 'O Balneário Municipal é uma boa escolha para passar um fim de semana nas águas do Rio Jacuí.', 'O espaço foi revitalizado pela Prefeitura de Salto do Jacuí, para que moradores da cidade e visitantes pudessem desfrutar de uma experiência única.', 200, '-29.0832733', '-53.2072619');
+
+INSERT INTO contato (cod, tipo, url) VALUES (5, 'Facebook', 'https://www.facebook.com/balneario.sj/');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (5, 5);
+
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (4, 5);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 5);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 6);
-INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (2, 6);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Segunda', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Terça', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Quarta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Quinta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Sexta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Sábado', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (5, 'Domingo', '00:00:00', '23:59:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (5, 'balneario_salto.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (5, 'balneario_salto2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (5, 'balneario_salto3.jpg');
+
+
+
+
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (6, 17,' São João dos Mellos', 0, 'interior', 98130-000); 
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (6, 6, '', 'Ano Todo', 20.00, 'Jardim das Esculturas', 'Jardim possui uma areá de 60.000 m² e 610 Obras,entre monumentos de 6 m de altura, Possui  trilhas e áreas verdes,além de Restaurante Próprio.', 'O Jardim das Esculturas foi criado no ano de 2005, pelo escultor e proprietário Rogério Bertoldo. Toda a semana, Rogério esculpe uma nova peça, que representa um pouco da sua história, no qual busca deixar o marco dos animais nativos da região, signos orientais, a filosofia, artes marciais e até mesmo amigos e familiares, na trilha da “Montanha do Silêncio”, está a maior escultura do jardim, um buda de 6 metros de altura e 40 toneladas.', 200, '-29.433656227676135', '-53.54044626734097');
+
+INSERT INTO contato (cod, tipo, url) VALUES (6, 'Instagram', 'https://www.instagram.com/jardim_das_esculturas/');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (6, 6);
+
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 6);
 
 
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (6, 'Sexta', '09:00:00', '17:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (6, 'Sábado', '09:00:00', '17:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (6, 'Domingo', '09:00:00', '17:00:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (6, 'jardim1.png');
+INSERT INTO imagem (cod_pt, nome) VALUES (6, 'jardim2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (6, 'jardim3.jpg');
 
 
 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (7, 34, 'RS 223 KM 37', 0, 'Rodovia', 99450000);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (7, 7, '', 'Ano Todo', 22.50, 'Recanto do Mel', 'O Recanto do mel é conhecido pelo Café Colonial, com uma vasta variedade de pães, cucas e bolos totalmente artesanais, feitos no restaurante e servidos frescos aos clientes. ', 'O Recanto do mel iniciou suas atividades em 2000, com o objetivo de mostrar e vender ao turista do Rio Grande do Sul e do Brasil as delícias de Selbach e a região do Alto Jacuí, oferecendo o melhor em produtos coloniais e artesanato.', 150, '-28.6448241', '-52.9635586');
+
+INSERT INTO contato (cod, tipo, url) VALUES (7, 'Site', 'https://www.recantodomel.com.br/index.php');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (7, 7);
+
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 7);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Segunda', '0:30:00', '18:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Terça', '07:30:00', '21:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Quarta', '07:30:00', '21:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Quinta', '07:30:00', '21:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Sexta', '07:30:00', '21:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Sábado', '07:30:00', '21:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (7, 'Domingo', '15:00:00', '21:00:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (7, 'recanto_mel.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (7, 'recanto_mel2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (7, 'recanto_mel3.jpg');
+
+
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (8, 28, 'RS-510', 0, 'Interior', 98230-000);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (8, 9, '', 'Ano Todo', 00.00, 'Tenda Rural do Aterro', 'A Tenda Rural do Aterro é um ótimo destino para comer comidas coloniais e desfrutar da vista da Barragem do Passo Real.', 'A Tenda foi construída através de projeto e recursos da Prefeitura Municipal, em 25 de novembro de 2016, onde as famílias recebem orientação técnica da EMATER/RS-Ascar na produção e na organização Do grupo da Tenda do Aterro estão associadas às famílias: Luft, Becker, Petry e Ruppenthal.', 60,'-28.733641562404916', '-53.13840994662011');
+
+INSERT INTO contato (cod, tipo, url) VALUES (8, 'Facebook', 'https://www.facebook.com/pages/category/Restaurant/Tenda-Rural-do-Aterro-103227557940337/');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (8, 8);
+
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 8);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Segunda', '11:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Terça', '09:30:00', '23:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Quarta', '09:30:00', '23:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Quinta', '09:30:00', '23:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Sexta', '09:30:00', '23:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Sábado', '09:30:00', '23:30:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (8, 'Domingo', '09:30:00', '23:30:00');
+
+INSERT INTO imagem (cod_pt, nome) VALUES (8, 'tenda1.png');
+INSERT INTO imagem (cod_pt, nome) VALUES (8, 'tenda2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (8, 'tenda3.jpg');
 
 
 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (9, 25, 'Avenida Sete de Setembro', 0, 'Vila Lucas Araujo', 99072161);
 
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-fa568dafc87e8bcd04708549b925788b.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-d4576b3b305e1df6f8ef4517ec2f9615.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-9b05a6eb1b45ee9db16db89d9920e83f.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-21e7e8f50a5b741e792859d619d992f9.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-a3f56a0320d24252230b51897be7bc2c.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-5b876162b0b50fa70a42c6883ba62e0e.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-02c6e994bef59a0a424c9eb3d80c5d98.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-3b1d6f7fe2a5d5c152722eacbe1c367e.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-26178767bb0eb3bcb547bbc1b9560d03.png');
-INSERT INTO imagem (cod_pt, nome) VALUES (1, '1-d29aaa0b9cd402b4bfe2395a805f9ada.png');
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (9, 9, '', 'Ano Todo', 00.00, 'Parque da Gare', 'O Parque da Gare é um espaço de lazer criado para os moradores de Passo Fundo e seus visitantes. Espaço urbano verde com trilhas de caminhada, fontes e equipamentos para exercício ao ar livre, além de brinquedos para as crianças.', 'O espaço foi criado nos anos 1980, após a desativação da estação ferroviária, porém, não era um lugar agradável de se ir pois não havia infraestrutura adequada e não era bem cuidado. Foi somente na metade de 2016, com o projeto de revitalização, que o local foi resgatado, onde foram gastos aproximadamente 10 milhões de reais.', 5.000, '-28.26627', '-52.4106295');
 
+INSERT INTO contato (cod, tipo, url) VALUES (9, 'Telefone', 'https://criarmeulink.com.br/u/1629914384307');
 
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (9, 9);
 
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 9);
 
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Segunda', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Terça', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Quarta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Quinta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Sexta', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Sábado', '00:00:00', '23:59:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (9, 'Domingo', '00:00:00', '23:59:00');
 
-
-
-
-
-
-
-
-
+INSERT INTO imagem (cod_pt, nome) VALUES (9, 'parque_gare1.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (9, 'parque_gare2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (9, 'parque_gare3.jpg');
 
 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (10, 25, 'RS 142', 0, 'Centro', 99470-000);
+
+INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
+VALUES (10, 10, '', 'Mês de março', 00.00, 'Expodireto', 'A Expodireto Cotrijal é uma das maiores feiras do agronegócio internacional. Focada em tecnologia e negócios, .', 'ORealizada desde o ano 2000, a Expodireto Cotrijal atrai visitantes de mais de 70 países. São 250 mil pessoas que passam pelo parque em cinco dias, ávidas por ver o que os cerca de 500 expositores oferecem, nas áreas de máquinas e equipamentos agrícolas, produção vegetal, produção animal, agricultura familiar, meio ambiente, pesquisa e serviços voltados ao campo.', 5.000, '-28.47601575828467', '-52.801640261900886');
+
+INSERT INTO contato (cod, tipo, url) VALUES (10, 'site', 'https://www.expodireto.cotrijal.com.br/inicial');
+
+INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (10, 10);
+
+INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (5, 10);
+
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Segunda', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Terça', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Quarta', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Quinta', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Sexta', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Sábado', '08:00:00', '18:00:00');
+INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Domingo', '08:00:00', '18:00:00');
+
+
+INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo1.png');
+INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo2.jpg');
+INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo3.jpg');
 
 
 
-INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (1, 'Segunda', '06:30:00', '12:30:00');
