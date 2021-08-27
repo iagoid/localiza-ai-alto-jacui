@@ -12,9 +12,24 @@ use \App\Entity\Categoria;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
 use \App\Entity\CategoriasDoPonto;
-use \App\Entity\PontosDaCategoria;
 use \App\Entity\CidadeDoPonto;
 use \App\Entity\PontosCadPT;
+
+///////////////////////////// Paginação /////////////////////////////
+$itemsPorPagina = 1;
+$pagina = isset($_GET['page']) && intval($_GET['page'])  ? intval($_GET['page']) : 1;
+
+function paginacao($quantidadePontosTuristicos)
+{
+    $GLOBALS['quantidadePontosTuristicos'] = $quantidadePontosTuristicos;
+    $itemsPorPagina = $GLOBALS['itemsPorPagina'];
+    $pagina = $GLOBALS['pagina'];
+    $offset = (($itemsPorPagina) > ($quantidadePontosTuristicos % $itemsPorPagina)) ? ($itemsPorPagina * ($pagina - 1)) : $quantidadePontosTuristicos % $itemsPorPagina;
+    $paginacaoScript = $itemsPorPagina . ' OFFSET ' . $offset;
+    return $paginacaoScript;
+}
+
+//////////////////////////////////////////////////////////////////
 
 $busca = filter_input(INPUT_GET, 'busca', FILTER_SANITIZE_STRING);
 $codCategoria = isset($_GET['filtroCategoria']) ? $_GET['filtroCategoria'] : null;
@@ -24,7 +39,9 @@ $pontosTuristicos = null;
 $whereBusca = null;
 if (isset($_GET['busca'])) {
     $whereBusca = "nome LIKE '%" . $_GET['busca'] . "%'";
-    $pontosTuristicos = PontoTuristico::getPontoTuristicos($whereBusca);
+    $qtd = PontoTuristico::getPontoTuristicos($whereBusca, "ponto_turistico.cod DESC");
+    $paginacaoScript = paginacao(sizeof($qtd));
+    $qtd = PontoTuristico::getPontoTuristicos($whereBusca, "ponto_turistico.cod DESC", $paginacaoScript);
 } else {
     $where = null;
     if ($codCategoria && $codCidade) {
@@ -34,7 +51,9 @@ if (isset($_GET['busca'])) {
     } else if ($codCidade) {
         $where = "cod_cidade = " . $codCidade;
     }
-    $pontosTuristicos = PontosCadPT::pontosCadPT($where);
+    $qtd = PontosCadPT::pontosCadPT($where, "ponto_turistico.cod DESC");
+    $paginacaoScript = paginacao(sizeof($qtd));
+    $pontosTuristicos = PontosCadPT::pontosCadPT($where, "ponto_turistico.cod DESC", $paginacaoScript);
 }
 
 $cidades = Cidade::getcidades();
@@ -87,6 +106,42 @@ foreach ($pontosTuristicos as $ponto) {
         ';
 }
 
+$pagina_argumento = "";
+if ($busca) {
+    $pagina_argumento .= "&busca=" . $busca;
+}
+if ($codCategoria) {
+    $pagina_argumento .= "&filtroCategoria=" . $codCategoria;
+}
+if ($codCidade) {
+    $pagina_argumento .= "&filtroCidade=" . $codCidade;
+}
+
+$anterior = $pagina - 1;
+$pagina_anterior = "";
+if ($anterior >= 1) {
+    $pagina_anterior = '<a href="?page=' . $anterior . $pagina_argumento . '">' . $anterior . '</a>';
+}
+
+$pagina_atual = '<a class="active" href="?page=' . $pagina . $pagina_argumento . '">' . $pagina . '</a>';
+
+$proxima = $pagina  + 1;
+$pagina_proxima = '';
+if ($proxima * $itemsPorPagina - $itemsPorPagina < $quantidadePontosTuristicos) {
+    $pagina_proxima = $proxima ? '<a href="?page=' . $proxima . $pagina_argumento . '">' . $proxima . '</a>' : '';
+}
+
+
+$paginacao_resultados = '
+        <div class="col-lg-12">
+        <div class="pagination__number">'
+    . $pagina_anterior
+    . $pagina_atual
+    . $pagina_proxima .
+    '</div>
+    </div>
+    ';
+
 
 
 include __DIR__ . '/includes/header.php';
@@ -119,13 +174,9 @@ include __DIR__ . '/includes/header.php';
 
                     <?= $ponto_resultados ?>
 
-                    <div class="col-lg-12">
-                        <div class="pagination__number blog__pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">Next <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
+                    <?= $paginacao_resultados ?>
+
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">

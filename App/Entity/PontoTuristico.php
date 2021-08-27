@@ -75,4 +75,9 @@ class PontoTuristico
   {
     return (new Database('ponto_turistico'))->select('cod = ' . $cod)->fetchObject(self::class);
   }
+
+  public static function countPontoTuristico()
+  {
+    return (new Database('ponto_turistico'))->execute('SELECT COUNT(cod) as quantidade FROM ponto_turistico')->fetchObject(self::class);
+  }
 }

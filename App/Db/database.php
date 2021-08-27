@@ -61,7 +61,7 @@ class Database
         $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
 
 
-        $query = $script . ' ' . $where . ' ' . $order . ' ' . $limit . ' ' . $group;
+        $query = $script . ' ' . $where . ' '  . $group . ' ' . $order . ' ' . $limit;
         return $this->execute($query);
     }
 
