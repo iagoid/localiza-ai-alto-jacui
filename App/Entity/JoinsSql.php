@@ -98,3 +98,28 @@ class ImagensDoPonto
         return (new Database('imagem'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
     }
 }
+
+class EnderecoDoPonto
+{
+    public $nome;
+    public $cod_end;
+    public $codigo;
+
+    public static function enderecoDoPonto($where = null, $order = null, $limit = null)
+    {
+        $script = "SELECT * FROM endereco INNER JOIN ponto_turistico ON endereco.cod = ponto_turistico.cod_end";
+        return (new Database('endereco'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
+    }
+}
+
+/*class PontoTuristico1
+{
+    public $nome;
+    public $cod_end;
+    public $codigo;
+
+    public static function pontoTuristico1($where = null, $order = null, $limit = null)
+    {
+        $script = "SELECT * FROM endereco INNER JOIN ponto_turistico ON endereco.cod = ponto_turistico.cod_end INNER JOIN cidade on cidade.cod = endereco.cod_cidade"
+    }
+}*/

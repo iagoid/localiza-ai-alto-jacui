@@ -74,8 +74,18 @@ foreach ($imagens as $imagem) {
 
 $resultadosContato = '';
 
-$ContatoDoPonto = ContatoDoPonto::contatoDoPonto("cod_pt = " . $pontoTuristico->cod, null, null, null);
-$resultadosContato .= '<div class="room_details__desc"><a href="' . $ContatoDoPonto[0]->url . '">' . $ContatoDoPonto[0]->tipo . '</a></div>';
+$whereContato = "cod_pt = " . $pontoTuristico->cod; 
+$ContatoDoPonto = ContatoDoPonto::contatoDoPonto($whereContato);
+
+//var_dump($ContatoDoPonto);exit;
+
+if(is_array($ContatoDoPonto)){
+    $i=0;
+$resultadosContato .= '<div class="room_details__desc"><a href="' . $ContatoDoPonto[$i]->url . '">' . $ContatoDoPonto[$i]->tipo . '</a></div>';
+    $i++;
+}else{
+    $resultadosContato .= '<div class="room_details__desc"><a href="' . $ContatoDoPonto->url . '">' . $ContatoDoPonto->tipo . '</a></div>';
+}
 
 $pontos3 = "";
 $listagempontos = PontoTuristico::getPontoTuristicos(null, null, 3);

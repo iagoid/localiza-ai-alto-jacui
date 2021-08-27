@@ -18,6 +18,11 @@ foreach ($cidades as $cidade) {
     $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
 }
 
+$objPT = null;
+$objEnd = null;
+$objCid = null;
+$objImg = null;
+
 $idEndereco;
 $idPontoTuristico;
 

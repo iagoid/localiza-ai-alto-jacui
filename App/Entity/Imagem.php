@@ -50,6 +50,6 @@ class Imagem
   }
    public static function getImagemFromPt($cod_pt)
   {
-    return (new Database('imagem'))->select('cod_pt = ' . $cod_pt)->fetchAll(PDO::FETCH_CLASS);
+    return (new Database('imagem'))->select('cod_pt = ' . $cod_pt)->fetchObject(self::class);
   }
 }
