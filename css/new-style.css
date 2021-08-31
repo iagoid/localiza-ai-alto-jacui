@@ -34,3 +34,34 @@ select#multiselect+.nice-select {
     color: white;
     background-color: rgb(245, 185, 56) !important;
 }
+
+.blog__item__text.admin {
+    display: flex;
+    justify-content: space-around;
+}
+
+.blog__item__text.admin a {
+    font-size: 18px;
+}
+
+.blog__item__text.admin a.edit:hover {
+    color: rgb(65, 65, 238);
+}
+
+.blog__item__text.admin a.delete {
+    color: rgb(253, 86, 86);
+}
+
+.blog__item__text.admin a.delete:hover {
+    color: rgb(255, 35, 35);
+}
+
+.blog__item__text.ponto_name {
+    padding-top: 5px;
+    text-align: center;
+}
+
+.sem_resultados {
+    text-align: end !important;
+    margin-bottom: 20px;
+}

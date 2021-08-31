@@ -23,16 +23,16 @@ use \App\Entity\ContatoPontoTuristico;
 use \App\Entity\ContatoDoPonto;
 use \App\Entity\CategoriasDoPonto;
 
-if(!isset($_GET['cod']) or !is_numeric($_GET['cod'])){
-	header('location: listagem.php?status=error');
-	exit;
+if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
+    header('location: listagem.php?status=error');
+    exit;
 }
 
 $objPontoTuristico = PontoTuristico::getPontoTuristico($_GET['cod']);
 
-if(!$objPontoTuristico instanceof PontoTuristico){
-	header('location: listagem.php?status=error');
-	exit;
+if (!$objPontoTuristico instanceof PontoTuristico) {
+    header('location: listagem.php?status=error');
+    exit;
 }
 
 //PEGAR OS DADOS DO PONTO TURISTICO E COLOCAR NOS CAMPOS
@@ -43,10 +43,10 @@ $objCidade = Cidade::getcidade($objEndereco->cod_cidade);
 
 $objImagem = Imagem::getImagemFromPt($objPontoTuristico->cod);
 
-$whereContato = "cod_pt = ". $objPontoTuristico->cod;
+$whereContato = "cod_pt = " . $objPontoTuristico->cod;
 $objContato = ContatoDoPonto::contatoDoPonto($whereContato);
 
-$whereCategoria = "cod_pt = ". $objPontoTuristico->cod;
+$whereCategoria = "cod_pt = " . $objPontoTuristico->cod;
 $objCategoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto($whereCategoria);
 
 $i = 0;
@@ -56,8 +56,8 @@ $resultadosCategoriasCod = '';
 
 //var_dump($objCategoriaPontoTuristico);exit;
 
-foreach($objCategoriaPontoTuristico as $categoria){
-    $resultadosCategoriasNome .= $categoria->nome;
+foreach ($objCategoriaPontoTuristico as $categoria) {
+    $resultadosCategoriasNome .= utf8_encode($categoria->nome);
     $resultadosCategoriasCod .= $categoria->cod;
 }
 
@@ -66,7 +66,7 @@ $resultadosFuncionamento = '';
 
 
 foreach ($objFuncionamento as $funcionamento) {
-    $resultadosFuncionamento .='
+    $resultadosFuncionamento .= '
     <div class="row div-funcionamento">
         <div class="col-lg-3 col-md-3 col-sm-3">
             <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">
@@ -96,7 +96,7 @@ foreach ($objFuncionamento as $funcionamento) {
 $resultadoContatoUrl = '';*/
 $resultadoContato = '';
 
-foreach ($objContato as $contato){
+foreach ($objContato as $contato) {
     $resultadoContato .= '<div class="row div-contato">
             <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
                 <select name="tipo[]" id="" class="tipo form-select col-lg-12 col-md-12 col-sm-12">
@@ -318,8 +318,8 @@ include __DIR__ . '/includes/header.php';
         <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
             <div class="contact__form">
                 <!--<?php
-                //include __DIR__ . '/includes/EditarContato.php';
-                ?>-->
+                    //include __DIR__ . '/includes/EditarContato.php';
+                    ?>-->
             </div>
         </div>
     </div>

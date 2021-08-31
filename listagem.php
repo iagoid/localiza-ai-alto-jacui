@@ -16,7 +16,7 @@ use \App\Entity\CidadeDoPonto;
 use \App\Entity\PontosCadPT;
 
 ///////////////////////////// Paginação /////////////////////////////
-$itemsPorPagina = 1;
+$itemsPorPagina = 6;
 $pagina = isset($_GET['page']) && intval($_GET['page'])  ? intval($_GET['page']) : 1;
 
 function paginacao($quantidadePontosTuristicos)
@@ -63,9 +63,9 @@ $categorias = Categoria::getcategorias();
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
     if ($codCategoria == $categoria->cod) {
-        $categorias_resultados .= '<option selected value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+        $categorias_resultados .= '<option selected value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
     } else {
-        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
     }
 }
 
@@ -73,38 +73,42 @@ foreach ($categorias as $categoria) {
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
     if ($codCidade == $cidade->cod) {
-        $cidades_resultados .= '<option selected value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
+        $cidades_resultados .= '<option selected value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
     } else {
-        $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
+        $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
     }
 }
 
-$ponto_resultados = '';
-foreach ($pontosTuristicos as $ponto) {
-    $categoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto("cod_pt = " . $ponto->cod, null, null, 1);
-    $categoriaNome = $categoriaPontoTuristico ? '<div class="tag">' . $categoriaPontoTuristico[0]->nome . '</div>' : "";
+$ponto_resultados = '<h2 class="sem_resultados">Nenhum resultado encontrado</h2>';
+if ($pontosTuristicos) {
+    $ponto_resultados = "";
+    foreach ($pontosTuristicos as $ponto) {
+        $categoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto("cod_pt = " . $ponto->cod, null, null, 1);
+        $categoriaNome = $categoriaPontoTuristico ? '<div class="tag">' . $categoriaPontoTuristico[0]->nome . '</div>' : "";
 
-    $cidadePontoTuristico = CidadeDoPonto::cidadeDoPonto("ponto_turistico.cod = " . $ponto->cod, null, null, 1);
-    $cidadeNome = $cidadePontoTuristico ?  $cidadePontoTuristico[0]->nome : 'Não Informada';
+        $cidadePontoTuristico = CidadeDoPonto::cidadeDoPonto("ponto_turistico.cod = " . $ponto->cod, null, null, 1);
+        $cidadeNome = $cidadePontoTuristico ?  $cidadePontoTuristico[0]->nome : 'Não Informada';
 
-    $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 1);
-    $nomeImagem = $imagem ? $imagem[0]->nome : "image-not-found.jpg";
+        $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 1);
+        $nomeImagem = $imagem ? $imagem[0]->nome : "image-not-found.jpg";
 
-    $ponto_resultados .= '
-        <div class="col-lg-6 col-md-6">
-        <div class="blog__item">
-            <div class="blog__item__pic">
-                <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
-                ' . $categoriaNome . '
-            </div>
-            <div class="blog__item__text">
-                <p><i class="fa fa-map-o"></i>' .  $cidadeNome . '</p>
-                <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
+        $ponto_resultados .= '
+            <div class="col-lg-6 col-md-6">
+            <div class="blog__item">
+                <div class="blog__item__pic">
+                    <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
+                    ' . $categoriaNome . '
+                </div>
+                <div class="blog__item__text">
+                    <p><i class="fa fa-map-o"></i>' .  utf8_encode($cidadeNome) . '</p>
+                    <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . utf8_encode($ponto->nome) . '</a></h5>
+                </div>
             </div>
         </div>
-    </div>
-        ';
+            ';
+    }
 }
+
 
 $pagina_argumento = "";
 if ($busca) {
