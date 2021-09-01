@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 
 <head>
@@ -7,9 +7,10 @@
     <meta name="keywords" content="Hiroto, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hiroto | Template</title>
+    <title>Localiza Aí Alto Jacuí | <?=$title?></title>
 
     <!-- Css Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -18,6 +19,8 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/new-style.css" type="text/css">
+    <link rel="icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
 </head>
 
 <body>
@@ -30,7 +33,7 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__logo">
-            <a href="./index.php"><img src="img/logo.png" alt=""></a>
+            <a href="./index.php"><img src="img/logo3.png"></a>
         </div>
         <nav class="offcanvas__menu mobile-menu">
             <ul>
@@ -54,7 +57,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="header__logo">
-                            <a href="./index.php"><img src="img/logo.png" alt=""></a>
+                            <a href="./index.php"><img src="img/logo3.png"></a>
                         </div>
                     </div>
                     <div class="col-lg-10">

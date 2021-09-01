@@ -25,6 +25,8 @@ $funcionamentos = Funcionamento::getFuncionamentoFromPt($_GET['cod']);
 $imagens = Imagem::getImagemFromPt($_GET['cod']);
 $categorias = Categoria::getcategorias($_GET['cod']);
 
+$title = $pontoTuristico->nome;
+
 $resultadosCategorias = '';
 foreach ($categorias as $categoria) {
     $categoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto("cod_pt = " . $pontoTuristico->cod, null, null, 1);

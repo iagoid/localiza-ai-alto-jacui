@@ -8,6 +8,8 @@ use \App\Entity\PontoTuristico;
 use \App\Entity\Imagem;
 use \App\Entity\PontosCadPT;
 
+$title = "ADMIN";
+
 ///////////////////////////// Paginação /////////////////////////////
 $itemsPorPagina = 9;
 $pagina = isset($_GET['page']) && intval($_GET['page'])  ? intval($_GET['page']) : 1;

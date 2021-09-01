@@ -9,6 +9,8 @@ use \App\Entity\Endereco;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
 
+$title = "Cadastro";
+
 session_start();
 
 $cidades = Cidade::getcidades();

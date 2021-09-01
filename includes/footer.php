@@ -1,5 +1,5 @@
     <!-- Footer Section Begin -->
-    <footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
+    <footer class="footer set-bg" data-setbg="img/footer-bg2.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -30,19 +30,19 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <div class="footer__about">
+                            <!--<h4>Contato</h4>-->
                             <div class="footer__logo">
-                                <a href="#"><img src="img/logo.png" alt=""></a>
+                                <a href="#"><img src="img/logo3.png" alt=""></a>
                             </div>
-                            <h4>(123) 456-78-91096</h4>
+                            <h4>(54) 99250-5667</h4>
                             <ul>
-                                <li>Ernser Vista Suite 437, NY</li>
-                                <li>Info.colorlib@gmail.com</li>
+                                <li>localizaaialtojacui@gmail.com</li>
                             </ul>
                             <div class="footer__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="http://facebook.com"><i class="fa fa-facebook"></i></a>
+                                <a href="http://twitter.com"><i class="fa fa-twitter"></i></a>
+                                <a href="http://linkedin.com"><i class="fa fa-linkedin"></i></a>
+                                <a href="http://youtube.com"><i class="fa fa-youtube-play"></i></a>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <h4>Links</h4>
                             <ul>
                                 <li><a href="./index.php">Home</a></li>
-                                <li><a href="./listagem.php">PontosTurísticos</a></li>
+                                <li><a href="./listagem.php">Pontos Turísticos</a></li>
                                 <li><a href="./about.php">Sobre Nós</a></li>
                                 <li><a href="./contact.php">Fale Conosco</a></li>
                             </ul>

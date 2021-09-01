@@ -458,19 +458,23 @@ ul, ol {
 	text-align: center;
 	max-width: 700px;
 	margin: 0 auto 65px;
+	-webkit-text-stroke-width: px;
+  -webkit-text-stroke-color: #000000;
 }
 
 .hero__text h5 {
 	color: #E9AD28;
 	text-transform: uppercase;
 	letter-spacing: 4px;
-	margin-bottom: 35px;
+	margin-bottom: 35px;	
 }
 
 .hero__text h2 {
 	font-size: 72px;
 	color: #ffffff;
 	line-height: 82px;
+	-webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #101010;
 }
 
 .filter__form {

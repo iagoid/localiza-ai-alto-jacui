@@ -11,6 +11,8 @@ use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
 use \App\Entity\ContatoPontoTuristico;
 
+$title = "Cadastro";
+
 session_start();
 
 if (!$_SESSION['idPontoTuristico']) {

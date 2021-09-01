@@ -15,6 +15,8 @@ use \App\Entity\CategoriasDoPonto;
 use \App\Entity\CidadeDoPonto;
 use \App\Entity\PontosCadPT;
 
+$title = "Lista";
+
 ///////////////////////////// Paginação /////////////////////////////
 $itemsPorPagina = 6;
 $pagina = isset($_GET['page']) && intval($_GET['page'])  ? intval($_GET['page']) : 1;

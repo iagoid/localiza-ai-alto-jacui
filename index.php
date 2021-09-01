@@ -1,17 +1,18 @@
 <?php
-include __DIR__ . '/includes/header.php';
+$title = "Home";
+include __DIR__ . '/includes/header.php'; 
 ?>
 
 <!-- Hero Section Begin -->
-<section class="hero spad set-bg" data-setbg="img/hero.jpg">
+<section class="hero spad set-bg" data-setbg="img/hero2.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="hero__text">
-                    <h5>WELCOME HIROTO</h5>
-                    <h2>Experience the greatest for you holidays.</h2>
+                    <h5>BEM VINDO AO LOCALIZA AÍ ALTO JACUÍ</h5>
+                    <h2>Encontre o lugar perfeito para fugir da rotina.</h2>
                 </div>
-                <form action="#" class="filter__form">
+                <!--<form action="#" class="filter__form">
                     <div class="filter__form__item filter__form__item--search">
                         <p>Location</p>
                         <div class="filter__form__input">
@@ -47,7 +48,7 @@ include __DIR__ . '/includes/header.php';
                         </div>
                     </div>
                     <button type="submit">BOOK NOW</button>
-                </form>
+                </form>-->
             </div>
         </div>
     </div>
@@ -61,19 +62,16 @@ include __DIR__ . '/includes/header.php';
             <div class="col-lg-6">
                 <div class="home__about__text">
                     <div class="section-title">
-                        <h5>ABOUT US</h5>
-                        <h2>Welcome Hiroto Hotel In Street L’Abreuvoir</h2>
+                        <h5>Sobre nós</h5>
+                        <h2>Localiza Aí Alto Jacuí</h2>
                     </div>
-                    <p class="first-para">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                        fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                    <p class="last-para">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque.</p>
-                    <img src="img/home-about/sign.png" alt="">
+                    <p class="first-para">A plataforma Localiza Aí Alto Jacuí foi algo idealizado para juntar os pontos turísticos e localizações importantes da região Alto Jacuí. Agora, quem deseja visitar a região e saber mais sobre ela pelos olhos das pessoas que lá vivem, têm o lugar certo.</p>
+                    <p class="last-para"></p>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="home__about__pic">
-                    <img src="img/home-about/home-about.png" alt="">
+                    <img src="img/home-about/home-about2.png" alt="">
                 </div>
             </div>
         </div>
@@ -81,7 +79,7 @@ include __DIR__ . '/includes/header.php';
 </section>
 <!-- Home About Section End -->
 
-<!-- Services Section Begin -->
+<!-- Services Section Begin
 <section class="services spad">
     <div class="container">
         <div class="row">
@@ -136,9 +134,9 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-<!-- Services Section End -->
+Services Section End
 
-<!-- Home Room Section Begin -->
+ Home Room Section Begin
 <section class="home-room spad">
     <div class="container">
         <div class="row">
@@ -203,9 +201,9 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-<!-- Home Room Section End -->
+Home Room Section End
 
-<!-- Testimonial Section Begin -->
+Testimonial Section Begin
 <section class="testimonial spad">
     <div class="container">
         <div class="row">
@@ -355,9 +353,9 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-<!-- Testimonial Section End -->
+ Testimonial Section End 
 
-<!-- Chooseus Section Begin -->
+ Chooseus Section Begin 
 <div class="chooseus spad set-bg" data-setbg="img/chooseus-bg.jpg">
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -373,9 +371,9 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </div>
-<!-- Chooseus Section End -->
+Chooseus Section End 
 
-<!-- Gallery Section Begin -->
+Gallery Section Begin
 <section class="gallery spad">
     <div class="gallery__text">
         <div class="container">
@@ -403,9 +401,9 @@ include __DIR__ . '/includes/header.php';
         <div class="gallery__item set-bg" data-setbg="img/gallery/gallery-4.jpg"></div>
     </div>
 </section>
-<!-- Gallery Section End -->
+ Gallery Section End
 
-<!-- Latest Blog Section Begin -->
+ Latest Blog Section Begin
 <section class="latest-blog spad">
     <div class="container">
         <div class="row">
@@ -464,7 +462,7 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-<!-- Latest Blog Section End -->
+Latest Blog Section End -->
 
 <?php
 include __DIR__ . '/includes/footer.php';
