@@ -27,7 +27,7 @@ class Database
             $this->connection = new PDO('mysql:host=' . self::HOST . ';dbname=' . self::NAME . '', self::USER, self::PASSWORD);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die('ERROR: ' . $e->PDOException::setMessage());
+            die('ERROR: ' . $e->PDOException->setMessage());
         }
     }
 

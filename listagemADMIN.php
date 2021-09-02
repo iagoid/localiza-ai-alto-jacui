@@ -99,7 +99,13 @@ $paginacao_resultados = '
     </div>
     ';
 
-
+// Alertas 
+$deletadoAlerta = '';
+if (isset($_GET['deletado'])) {
+    $deletadoAlerta = '<div class="alert alert-success" role="alert">
+    Ponto deletado com sucesso.
+  </div>';
+}
 
 include __DIR__ . '/includes/header.php';
 ?>
@@ -107,7 +113,7 @@ include __DIR__ . '/includes/header.php';
 <!-- Blog Section Begin -->
 <section class="blog spad">
     <div class="container">
-
+        <?= $deletadoAlerta ?>
         <div class="col-lg-1 col-md-1">
         </div>
         <div class="col-lg-10 col-md-10">
