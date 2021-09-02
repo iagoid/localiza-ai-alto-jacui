@@ -16,7 +16,7 @@ $title = "Cadastro";
 session_start();
 
 if (!$_SESSION['idPontoTuristico']) {
-    header('location: index.php?status=error');
+    header('location: index?status=error');
     exit;
 }
 
@@ -106,7 +106,7 @@ include __DIR__ . '/includes/header.php';
                 <div class="breadcrumb__text">
                     <h1>Cadastro</h1>
                     <div class="breadcrumb__links">
-                        <a href="./index.php">Home</a>
+                        <a href="./index">Home</a>
                         <span>Cadastro</span>
                     </div>
                 </div>

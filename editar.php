@@ -24,7 +24,7 @@ use \App\Entity\ContatoDoPonto;
 use \App\Entity\CategoriasDoPonto;
 
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
-    header('location: listagem.php?status=error');
+    header('location: listagem?status=error');
     exit;
 }
 

@@ -50,10 +50,10 @@
                         <div class="footer__widget">
                             <h4>Links</h4>
                             <ul>
-                                <li><a href="./index.php">Home</a></li>
-                                <li><a href="./listagem.php">Pontos Turísticos</a></li>
-                                <li><a href="./about.php">Sobre Nós</a></li>
-                                <li><a href="./contact.php">Fale Conosco</a></li>
+                                <li><a href="./index">Home</a></li>
+                                <li><a href="./listagem">Pontos Turísticos</a></li>
+                                <li><a href="./about">Sobre Nós</a></li>
+                                <li><a href="./contact">Fale Conosco</a></li>
                             </ul>
                         </div>
                     </div>

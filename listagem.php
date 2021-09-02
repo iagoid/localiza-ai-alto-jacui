@@ -158,10 +158,8 @@ include __DIR__ . '/includes/header.php';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h1>Our Blog</h1>
+                    <h1>OPontos Turísticos</h1>
                     <div class="breadcrumb__links">
-                        <a href="./index.php">Home</a>
-                        <span>Blog</span>
                     </div>
                 </div>
             </div>

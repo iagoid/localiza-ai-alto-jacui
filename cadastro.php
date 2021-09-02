@@ -117,10 +117,6 @@ include __DIR__ . '/includes/header.php';
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
                     <h1>Cadastro</h1>
-                    <div class="breadcrumb__links">
-                        <a href="./index.php">Home</a>
-                        <span>Cadastro</span>
-                    </div>
                 </div>
             </div>
         </div>
