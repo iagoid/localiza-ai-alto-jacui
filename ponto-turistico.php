@@ -13,6 +13,7 @@ use \App\Entity\ImagensDoPonto;
 use \App\Entity\CategoriasDoPonto;
 use \App\Entity\ContatoDoPonto;
 use \App\Entity\Categoria;
+use \App\Entity\Contato;
 
 if (!isset($_GET['cod']) or !is_numeric(($_GET['cod']))) {
     header('location: index.php?status=error');
@@ -73,13 +74,11 @@ foreach ($imagens as $imagem) {
 $resultadosContato = '';
 
 $whereContato = "cod_pt = " . $pontoTuristico->cod;
-$ContatoDoPonto = ContatoDoPonto::contatoDoPonto($whereContato);
-
-//var_dump($ContatoDoPonto);exit;
+$ContatoDoPonto = Contato::getContatos($whereContato);
 
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
-        $resultadosContato .= '<div class="room_details__desc"><a href="' . $contato->url . '">' . utf8_encode($contato->tipo) . '</a></div>';
+        $resultadosContato .= '<div class="room_details__desc"><a href="' . $contato->descricao . '">' . utf8_encode($contato->tipo) . '</a></div>';
     }
 } else {
     $resultadosContato .= '<div class="room_details__desc">Nenhum contato encontrado</a></div>';

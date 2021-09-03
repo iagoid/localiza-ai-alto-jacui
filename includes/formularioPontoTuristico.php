@@ -18,6 +18,9 @@
         <div class="col-lg-4 col-md-6 col-sm-6">
             <input name="cep" type="number" placeholder="CEP" required pattern="\d{5}-\d{3}" max="99999999">
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <input name="complemento" type="text" placeholder="Complemento" maxlength="100">
+        </div>
     </div>
 
     <h2>Ponto Turístico</h2>

@@ -3,13 +3,11 @@ require_once 'App/Entity/Categoria.php';
 require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Funcionamento.php';
 require_once 'App/Entity/Contato.php';
-require_once 'App/Entity/ContatoPontoTuristico.php';
 
 use \App\Entity\Categoria;
 use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
-use \App\Entity\ContatoPontoTuristico;
 
 $title = "Cadastro";
 
@@ -37,8 +35,6 @@ $objCategoriaPontoTuristico->cod_pt = $idPonto;
 $objContato = new Contato;
 $objContato->cod_pt = $idPonto;
 
-$objContatoPontoTuristico = new ContatoPontoTuristico;
-$objContatoPontoTuristico->cod_pt = $idPonto;
 
 if (isset(
     $_POST['Submit']
@@ -76,13 +72,13 @@ if (isset(
 
     if (isset(
         $_POST['tipo'],
-        $_POST['url']
+        $_POST['descricao']
     )) {
         $i = 0;
-        foreach ($_POST['url'] as $url) {
-            if ($url != "") {
+        foreach ($_POST['descricao'] as $descricao) {
+            if ($descricao != "") {
                 $objContato->tipo = $_POST['tipo'][$i];
-                $objContato->url = $url;
+                $objContato->descricao = $descricao;
                 $objContato->cadastrar();
                 $objContatoPontoTuristico->cod_cont = $objContato->cod;
                 $objContatoPontoTuristico->cadastrar();

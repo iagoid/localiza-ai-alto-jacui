@@ -13,7 +13,7 @@ DELETE FROM ponto_turistico WHERE cod = 1;
 
 
 
-UPDATE contato SET tipo = 'Instagram', url = 'https://www.instagram.com' WHERE cod = 1;
+UPDATE contato SET tipo = 'Instagram', descricao = 'https://www.instagram.com' WHERE cod = 1;
 SELECT * FROM contato WHERE cod = 1;
 DELETE FROM contato WHERE cod = 1;
 

@@ -17,6 +17,7 @@ class Endereco
   public $numero;
   public $bairro;
   public $cep;
+  public $complemento;
 
   public function cadastrar()
   {
@@ -29,6 +30,7 @@ class Endereco
       'numero' => $this->numero,
       'bairro' => $this->bairro,
       'cep' => $this->cep,
+      'complemento' => $this->complemento,
     ]);
 
     $GLOBALS["idEndereco"] =  $this->cod;
@@ -43,6 +45,7 @@ class Endereco
       'numero' => $this->numero,
       'bairro' => $this->bairro,
       'cep' => $this->cep,
+      'complemento' => $this->complemento,
     ]);
   }
 
@@ -54,7 +57,7 @@ class Endereco
   public static function getEnderecos($where = null, $order = null, $limit = null)
   {
     return (new Database('endereco'))->select($where, $order, $limit, "cod, cod_cidade, rua, 
-    numero, bairro, cep")->fetchAll(PDO::FETCH_CLASS);
+    numero, bairro, cep, complemento")->fetchAll(PDO::FETCH_CLASS);
   }
 
   public static function getEndereco($cod)

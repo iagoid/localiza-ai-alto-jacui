@@ -62,7 +62,6 @@ select#multiselect+.nice-select {
 }
 
 .sem_resultados {
-    text-align: end !important;
     margin-bottom: 20px;
 }
 
@@ -77,4 +76,8 @@ img.imagem-ponto-galeria {
 
 .delete__form form a:hover {
     color: white;
+}
+
+.resultados_pontos {
+    justify-content: center;
 }

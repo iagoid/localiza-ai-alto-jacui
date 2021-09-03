@@ -40,10 +40,10 @@ $codCidade = isset($_GET['filtroCidade']) ? $_GET['filtroCidade'] : null;
 $pontosTuristicos = null;
 $whereBusca = null;
 if (isset($_GET['busca'])) {
-    $whereBusca = "nome LIKE '%" . $_GET['busca'] . "%'";
+    $whereBusca = "UPPER(nome) LIKE UPPER('%" . $_GET['busca'] . "%')";
     $qtd = PontoTuristico::getPontoTuristicos($whereBusca, "ponto_turistico.cod DESC");
     $paginacaoScript = paginacao(sizeof($qtd));
-    $qtd = PontoTuristico::getPontoTuristicos($whereBusca, "ponto_turistico.cod DESC", $paginacaoScript);
+    $pontosTuristicos = PontoTuristico::getPontoTuristicos($whereBusca, "ponto_turistico.cod DESC", $paginacaoScript);
 } else {
     $where = null;
     if ($codCategoria && $codCidade) {
@@ -59,7 +59,7 @@ if (isset($_GET['busca'])) {
 }
 
 $cidades = Cidade::getcidades();
-$categorias = Categoria::getcategorias();
+$categorias = Categoria::getcategorias(null, "nome");
 
 
 $categorias_resultados = '';
@@ -93,6 +93,8 @@ if ($pontosTuristicos) {
 
         $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 1);
         $nomeImagem = $imagem ? $imagem[0]->nome : "image-not-found.jpg";
+        $nomeImagem = file_exists('./img/imagens_pt/' . $nomeImagem) ? $imagem[0]->nome : "image-not-found.jpg";
+
 
         $ponto_resultados .= '
             <div class="col-lg-6 col-md-6">
@@ -174,7 +176,7 @@ include __DIR__ . '/includes/header.php';
         <div class="row">
             <div class="col-lg-8 col-md-8">
 
-                <div class="row">
+                <div class="row resultados_pontos">
 
                     <?= $ponto_resultados ?>
 

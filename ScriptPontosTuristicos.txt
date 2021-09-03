@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS endereco(
 	rua VARCHAR(50) NOT NULL,
 	numero smallint NOT NULL,
 	bairro VARCHAR(50) NOT NULL,
+	complemento VARCHAR(100),
 	cep numeric(8) NOT NULL,
 	CONSTRAINT pk_endereco PRIMARY KEY(cod),
 	CONSTRAINT fk_endereco_cidade FOREIGN KEY (cod_cidade) REFERENCES cidade (cod)
@@ -36,16 +37,10 @@ CREATE TABLE IF NOT EXISTS ponto_turistico(
 
 CREATE TABLE IF NOT EXISTS contato(
 	cod SERIAL NOT NULL,
-	tipo VARCHAR(15) NOT NULL,
-	url VARCHAR(255) NOT NULL,
-	CONSTRAINT pk_contato PRIMARY KEY (cod)
-);
-
-CREATE TABLE IF NOT EXISTS cont_pt(
-	cod_cont INTEGER NOT NULL,
 	cod_pt INTEGER NOT NULL,
-	CONSTRAINT pk_cont_pt PRIMARY KEY (cod_cont, cod_pt),
-	CONSTRAINT fk_cod_cont FOREIGN KEY (cod_cont) REFERENCES contato (cod),
+	tipo VARCHAR(15) NOT NULL,
+	descricao VARCHAR(255) NOT NULL,
+	CONSTRAINT pk_contato PRIMARY KEY (cod),
 	CONSTRAINT fk_cod_pt FOREIGN KEY (cod_pt) REFERENCES ponto_turistico (cod)
 );
 
@@ -131,16 +126,19 @@ INSERT INTO categoria (cod, nome) VALUES (2, 'Museu');
 INSERT INTO categoria (cod, nome) VALUES (3, 'Parque');
 INSERT INTO categoria (cod, nome) VALUES (4, 'Natureza');
 INSERT INTO categoria (cod, nome) VALUES (5, 'Outro');
+INSERT INTO categoria (cod, nome) VALUES (6, 'Monumento');
+INSERT INTO categoria (cod, nome) VALUES (7, 'Cultura');
+INSERT INTO categoria (cod, nome) VALUES (8, 'Recreação');
+INSERT INTO categoria (cod, nome) VALUES (9, 'Aventura');
+INSERT INTO categoria (cod, nome) VALUES (10, 'Cinema');
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (1, 34, 'Avenida Vinte e Cinco de Julho', 667, 'Centro', 99450000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (1, 34, 'Avenida Vinte e Cinco de Julho', 667, 'Centro', '', 99450000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (1, 1, '', 'Ano Todo', 10.00, 'Mini Mundo Parque Encantado', 'Mini Parque Encantado possui 35 mini prédios, sendo 9 capelas do interior do município de Selbach e também a Igreja Matriz São Tiago além de uma réplica de um moinho.', 'A casa onde se encontra o Mini Mundo foi construída na area rural de Selbach e depois transferida para a cidade. As madeiras foram numeradas uma a uma para que não se perdesse a ordem e nem como a casa havia sido construída. O Mini Mundo era a moradia do imigrante alemão Ein Bauerhof, que possuía um grande acervo de documentos, móveis, equipamentos de trabalho usados nos tempos da colonização do município. O Mini Parque Encantado foi montado com réplicas das primeiras casa construídas no município mostrando a arquitetura e o modo da vida das famílias alemãs e da origem dos municípios da região.', 30, '-28.63098907470703', '-52.95452880859375');
 
-INSERT INTO contato (cod, tipo, url) VALUES (1, 'Telefone', 'https://criarmeulink.com.br/u/1629895329274');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (1, 1);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (1, 1, 'Telefone', 'https://criarmeulink.com.br/u/1629895329274');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 1);
 
@@ -156,14 +154,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (1, 'mini_mundo2.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (2, 8,'Avenida Padre Francisco Pacheco', 473, 'São Miguel', 98025-015);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (2, 8,'Avenida Padre Francisco Pacheco', 473, 'São Miguel', '', 98025-015);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (2, 2, '','Mês de Outubro', 0, 'Monumento Nossa Senhora de Fátima', 'No mês de outubro, acontece a celebração da Romaria de Fátima, onde reúne fiéis de várias cidades, para comemorar o dia 12 de Nossa Senhora de Fátima.', 'Erguido em um pedestal de 31 metros de altura. Inaugurado em outubro de 1952. A imagem da Santa, existente na capela do monumento, veio de Portugal, assim como uma ampola com água, existente na miniatura da Basílica de Fátima. O sítio é o destino final do trajeto da Grande Romaria de Fátima para os mais de 120 mil romeiros que participam todos os anos deste grande evento em outubro. O local possui uma vista privilegiada da cidade, às margens dos trilhos, com uma natureza repleta de árvores, gramados, pássaros e bancos para sentar. É um lugar de paz e tranquilidade, que conta com uma capela, um altar para celebrar missas e um grande monumento de Nossa Senhora de Fátima', 150.000, '-28.638600247015052', '-53.59515852663985'); 
 
-INSERT INTO contato (cod, tipo, url) VALUES (2, 'Facebook', 'https://m.facebook.com/Santu%C3%A1rio-Nsa-Sra-de-F%C3%A1tima-210878582762426/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (2, 2);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (2, 2, 'Facebook', 'https://m.facebook.com/Santu%C3%A1rio-Nsa-Sra-de-F%C3%A1tima-210878582762426/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (5, 2);
 
@@ -174,14 +170,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (2, 'roma1.png');
 INSERT INTO imagem (cod_pt, nome) VALUES (2, 'roma2.jpg');
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (3, 18, 'Rua Ervino Petry', 100, 'Centro', 99495000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento,  cep) VALUES (3, 18, 'Rua Ervino Petry', 100, 'Centro', '', 99495000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (3, 3, '', 'Ano Todo', 00.00, 'Praça da Lagoa', 'A praça da Lagoa é um ótimo destino para passar uma tarde ao ar livre com sua familia ou amigos.', 'A praça originou o nome de sua cidade, Lagoa dos Três Cantos. Isso porquê, desde o início, ela possuía realmente 3 cantos. A praça hoje está revitalizada, possui ciprestes desenhados e a prefeitura fica juntamente com a Praça. A arquitetura da Prefeitura leva as descendências Alemãs, povo que fundou a cidade.', 1500, '-28.571765', '-52.8561463');
 
-INSERT INTO contato (cod, tipo, url) VALUES (3, 'Site', 'https://lagoa3cantos.rs.gov.br/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (3, 3);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (3, 3, 'Site', 'https://lagoa3cantos.rs.gov.br/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 3);
 
@@ -202,15 +196,13 @@ INSERT INTO imagem (cod_pt, nome) VALUES (3, 'lagoa3.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (4, 41,'Rua Vinte e Tres de Outubro', 0, 'Centro', 99350000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (4, 41,'Rua Vinte e Tres de Outubro', 0, 'Centro', '', 99350000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (4, 4,'','Ano Todo', 00.00, 'Praça Municipal Tranquedo Neves', 'Conhecida como a "Mais Bela Praça do Estado do Rio Grande do Sul"', 'Com mais de 150 esculturas de ciprestes, todos podados artesanalmente até o mês de maio de 2005 pelo Topiário Fredolino Selmiro Schimdt, idealizador de local e que se aposentou aos 70 anos de idade. Fundada em janeiro de 1982, a Praça começou a ser atração na região apenas a partir de 1989, quando o então agricultor Fredolino, conhecido por Mirio, mudou-se para a cidade e desde então dedicou sua vida a cuidar deste local que é o ponto turí­stico mais visitado de toda a região.', '5000', '-28.560850909464275', '-52.750099160117');
 
 
-INSERT INTO contato (cod, tipo, url) VALUES (4, 'Site', 'https://victorgraeff.rs.gov.br/pagina-inicial/praca/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (4, 4);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (4, 4, 'Site', 'https://victorgraeff.rs.gov.br/pagina-inicial/praca/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (4, 4);
 
@@ -231,14 +223,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (4, 'pra3.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (5, 30, 'Avenida Balbuíno Bernhard', 1228, 'Harmonia', 99440000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (5, 30, 'Avenida Balbuíno Bernhard', 1228, 'Harmonia', '', 99440000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (5, 5, '', 'Ano Todo', 00.00, 'Balneário Municipal Vitor Hugo Borowiski', 'O Balneário Municipal é uma boa escolha para passar um fim de semana nas águas do Rio Jacuí.', 'O espaço foi revitalizado pela Prefeitura de Salto do Jacuí, para que moradores da cidade e visitantes pudessem desfrutar de uma experiência única.', 200, '-29.0832733', '-53.2072619');
 
-INSERT INTO contato (cod, tipo, url) VALUES (5, 'Facebook', 'https://www.facebook.com/balneario.sj/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (5, 5);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (5, 5, 'Facebook', 'https://www.facebook.com/balneario.sj/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (4, 5);
 
@@ -257,14 +247,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (5, 'balneario_salto3.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (6, 17,' São João dos Mellos', 0, 'interior', 98130-000); 
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (6, 17,' São João dos Mellos', 0, 'interior', '',98130-000); 
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (6, 6, '', 'Ano Todo', 20.00, 'Jardim das Esculturas', 'Jardim possui uma areá de 60.000 m² e 610 Obras,entre monumentos de 6 m de altura, Possui  trilhas e áreas verdes,além de Restaurante Próprio.', 'O Jardim das Esculturas foi criado no ano de 2005, pelo escultor e proprietário Rogério Bertoldo. Toda a semana, Rogério esculpe uma nova peça, que representa um pouco da sua história, no qual busca deixar o marco dos animais nativos da região, signos orientais, a filosofia, artes marciais e até mesmo amigos e familiares, na trilha da “Montanha do Silêncio”, está a maior escultura do jardim, um buda de 6 metros de altura e 40 toneladas.', 200, '-29.433656227676135', '-53.54044626734097');
 
-INSERT INTO contato (cod, tipo, url) VALUES (6, 'Instagram', 'https://www.instagram.com/jardim_das_esculturas/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (6, 6);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (6, 6, 'Instagram', 'https://www.instagram.com/jardim_das_esculturas/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 6);
 
@@ -279,14 +267,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (6, 'jardim3.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (7, 34, 'RS 223 KM 37', 0, 'Rodovia', 99450000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (7, 34, 'RS 223 KM 37', 0, 'Rodovia', '', 99450000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (7, 7, '', 'Ano Todo', 22.50, 'Recanto do Mel', 'O Recanto do mel é conhecido pelo Café Colonial, com uma vasta variedade de pães, cucas e bolos totalmente artesanais, feitos no restaurante e servidos frescos aos clientes. ', 'O Recanto do mel iniciou suas atividades em 2000, com o objetivo de mostrar e vender ao turista do Rio Grande do Sul e do Brasil as delícias de Selbach e a região do Alto Jacuí, oferecendo o melhor em produtos coloniais e artesanato.', 150, '-28.6448241', '-52.9635586');
 
-INSERT INTO contato (cod, tipo, url) VALUES (7, 'Site', 'https://www.recantodomel.com.br/index.php');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (7, 7);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (7, 7, 'Site', 'https://www.recantodomel.com.br/index.php');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 7);
 
@@ -303,14 +289,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (7, 'recanto_mel2.jpg');
 INSERT INTO imagem (cod_pt, nome) VALUES (7, 'recanto_mel3.jpg');
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (8, 28, 'RS-510', 0, 'Interior', 98230-000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (8, 28, 'RS-510', 0, 'Interior', 'Proximo a Águas da Fonte', 98230-000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (8, 8, '', 'Ano Todo', 00.00, 'Tenda Rural do Aterro', 'A Tenda Rural do Aterro é um ótimo destino para comer comidas coloniais e desfrutar da vista da Barragem do Passo Real.', 'A Tenda foi construída através de projeto e recursos da Prefeitura Municipal, em 25 de novembro de 2016, onde as famílias recebem orientação técnica da EMATER/RS-Ascar na produção e na organização Do grupo da Tenda do Aterro estão associadas às famílias: Luft, Becker, Petry e Ruppenthal.', 60,'-28.733641562404916', '-53.13840994662011');
 
-INSERT INTO contato (cod, tipo, url) VALUES (8, 'Facebook', 'https://www.facebook.com/pages/category/Restaurant/Tenda-Rural-do-Aterro-103227557940337/');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (8, 8);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (8, 8, 'Facebook', 'https://www.facebook.com/pages/category/Restaurant/Tenda-Rural-do-Aterro-103227557940337/');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (1, 8);
 
@@ -328,14 +312,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (8, 'tenda3.jpg');
 
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (9, 25, 'Avenida Sete de Setembro', 0, 'Vila Lucas Araujo', 99072161);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (9, 25, 'Avenida Sete de Setembro', 0, 'Vila Lucas Araujo', '', 99072161);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (9, 9, '', 'Ano Todo', 00.00, 'Parque da Gare', 'O Parque da Gare é um espaço de lazer criado para os moradores de Passo Fundo e seus visitantes. Espaço urbano verde com trilhas de caminhada, fontes e equipamentos para exercício ao ar livre, além de brinquedos para as crianças.', 'O espaço foi criado nos anos 1980, após a desativação da estação ferroviária, porém, não era um lugar agradável de se ir pois não havia infraestrutura adequada e não era bem cuidado. Foi somente na metade de 2016, com o projeto de revitalização, que o local foi resgatado, onde foram gastos aproximadamente 10 milhões de reais.', 5.000, '-28.26627', '-52.4106295');
 
-INSERT INTO contato (cod, tipo, url) VALUES (9, 'Telefone', 'https://criarmeulink.com.br/u/1629914384307');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (9, 9);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (9, 9, 'Telefone', 'https://criarmeulink.com.br/u/1629914384307');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (3, 9);
 
@@ -352,14 +334,12 @@ INSERT INTO imagem (cod_pt, nome) VALUES (9, 'parque_gare2.jpg');
 INSERT INTO imagem (cod_pt, nome) VALUES (9, 'parque_gare3.jpg');
 
 
-INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, cep) VALUES (10, 25, 'RS 142', 0, 'Centro', 99470-000);
+INSERT INTO endereco (cod, cod_cidade, rua, numero, bairro, complemento, cep) VALUES (10, 25, 'RS 142', 0, 'Centro', '', 99470-000);
 
 INSERT INTO ponto_turistico (cod, cod_end, obs, periodo, valor, nome, descr, hist, cap, longi, latit)
 VALUES (10, 10, '', 'Mês de março', 00.00, 'Expodireto', 'A Expodireto Cotrijal é uma das maiores feiras do agronegócio internacional. Focada em tecnologia e negócios, .', 'ORealizada desde o ano 2000, a Expodireto Cotrijal atrai visitantes de mais de 70 países. São 250 mil pessoas que passam pelo parque em cinco dias, ávidas por ver o que os cerca de 500 expositores oferecem, nas áreas de máquinas e equipamentos agrícolas, produção vegetal, produção animal, agricultura familiar, meio ambiente, pesquisa e serviços voltados ao campo.', 5.000, '-28.47601575828467', '-52.801640261900886');
 
-INSERT INTO contato (cod, tipo, url) VALUES (10, 'site', 'https://www.expodireto.cotrijal.com.br/inicial');
-
-INSERT INTO cont_pt (cod_pt, cod_cont) VALUES (10, 10);
+INSERT INTO contato (cod, cod_pt, tipo, descricao) VALUES (10, 10, 'site', 'https://www.expodireto.cotrijal.com.br/inicial');
 
 INSERT INTO cat_pt (cod_cat, cod_pt) VALUES (5, 10);
 

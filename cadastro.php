@@ -35,15 +35,7 @@ if (isset($_POST['Submit'])) {
         $_POST['numero'],
         $_POST['bairro'],
         $_POST['cep'],
-        $_POST['nome'],
-        $_POST['cap'],
-        $_POST['periodo'],
-        $_POST['valor'],
-        $_POST['descr'],
-        $_POST['hist'],
-        $_POST['longi'],
-        $_POST['latit'],
-        $_FILES['imagem']
+        $_POST['complemento']
     )) {
         $objEndereco = new Endereco;
         $objEndereco->cod_cidade = $_POST['cod_cidade'];
@@ -51,8 +43,20 @@ if (isset($_POST['Submit'])) {
         $objEndereco->numero = $_POST['numero'];
         $objEndereco->bairro = $_POST['bairro'];
         $objEndereco->cep = $_POST['cep'];
+        $objEndereco->complemento = $_POST['complemento'];
         $objEndereco->cadastrar();
+    }
 
+    if (isset(
+        $_POST['nome'],
+        $_POST['cap'],
+        $_POST['periodo'],
+        $_POST['valor'],
+        $_POST['descr'],
+        $_POST['hist'],
+        $_POST['longi'],
+        $_POST['latit']
+    )) {
         $objPontoTuristico = new PontoTuristico;
         $objPontoTuristico->nome = $_POST['nome'];
         $objPontoTuristico->cap = $_POST['cap'];
@@ -67,8 +71,11 @@ if (isset($_POST['Submit'])) {
         $objPontoTuristico->cadastrar();
 
         $_SESSION['idPontoTuristico'] = $idPontoTuristico;
+    }
 
-        //IMAGEM
+    if (isset(
+        $_FILES['imagem']
+    ) && $_FILES['imagem']["error"] == null) {
         $file = $_FILES['imagem'];
 
         $fileName = ($_FILES['imagem']['name']);
@@ -99,7 +106,7 @@ if (isset($_POST['Submit'])) {
         }
 
         $objImagem = new Imagem;
-        $objImagem->nome = $fileDestination;
+        $objImagem->nome = $fileNameNew;
         $objImagem->cod_pt = $idPontoTuristico;
         $objImagem->cadastrar();
         $url =  str_replace("cadastro", "cadastro2", $_SERVER['REQUEST_URI']);

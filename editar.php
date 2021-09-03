@@ -8,7 +8,6 @@ require_once 'App/Entity/Categoria.php';
 require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Funcionamento.php';
 require_once 'App/Entity/Contato.php';
-require_once 'App/Entity/ContatoPontoTuristico.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
@@ -19,8 +18,6 @@ use \App\Entity\Categoria;
 use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
-use \App\Entity\ContatoPontoTuristico;
-use \App\Entity\ContatoDoPonto;
 use \App\Entity\CategoriasDoPonto;
 
 $title = "Editar";
@@ -46,7 +43,6 @@ $objCidade = Cidade::getcidade($objEndereco->cod_cidade);
 $objImagem = Imagem::getImagemFromPt($objPontoTuristico->cod);
 
 $whereContato = "cod_pt = " . $objPontoTuristico->cod;
-$objContato = ContatoDoPonto::contatoDoPonto($whereContato);
 
 $whereCategoria = "cod_pt = " . $objPontoTuristico->cod;
 $objCategoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto($whereCategoria);
@@ -114,8 +110,6 @@ do {
     array_splice($objFuncionamento, 0, 0);
 } while (sizeof($objFuncionamento) - 1 > 0);
 
-/*$resultadoContatoTipo = '';
-$resultadoContatoUrl = '';*/
 $resultadoContato = '';
 
 foreach ($objContato as $contato) {
@@ -131,7 +125,7 @@ foreach ($objContato as $contato) {
                 </select>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="url[]" type="url" value="' . $contato->url . '">
+                <input name="descricao[]" type="descricao" value="' . $contato->descricao . '">
             </div>
         </div>';
 }
@@ -164,32 +158,29 @@ $objCategoriaPontoTuristico->cod_pt = $objPontoTuristico->cod;
 $objContato2 = new Contato;
 $objContato2->cod_pt = $objPontoTuristico->cod;
 
-$objContatoPontoTuristico = new ContatoPontoTuristico;
-$objContatoPontoTuristico->cod_pt = $objPontoTuristico->cod;
-
 if (isset(
     $_POST['Submit']
 )) {
-    // for ($i = 0; $i < 7; $i++) {
-    //     $diaString = 'dia' . $i;
-    //     $inicioString = 'inicio' . $i;
-    //     $fimString = 'fim' . $i;
+    for ($i = 0; $i < 7; $i++) {
+        $diaString = 'dia' . $i;
+        $inicioString = 'inicio' . $i;
+        $fimString = 'fim' . $i;
 
-    //     if (isset(
-    //         $_POST[$diaString],
-    //         $_POST[$inicioString],
-    //         $_POST[$fimString]
-    //     )) {
-    //         if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
-    //             foreach ($_POST[$diaString] as $dia) {
-    //                 $objFuncionamento->dia = $dia;
-    //                 $objFuncionamento->inicio = $_POST[$inicioString];
-    //                 $objFuncionamento->fim = $_POST[$fimString];
-    //                 $objFuncionamento->atualizar();
-    //             }
-    //         }
-    //     }
-    // }
+        if (isset(
+            $_POST[$diaString],
+            $_POST[$inicioString],
+            $_POST[$fimString]
+        )) {
+            if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
+                foreach ($_POST[$diaString] as $dia) {
+                    $objFuncionamento->dia = $dia;
+                    $objFuncionamento->inicio = $_POST[$inicioString];
+                    $objFuncionamento->fim = $_POST[$fimString];
+                    $objFuncionamento->atualizar();
+                }
+            }
+        }
+    }
 
 
     if (isset(
@@ -204,14 +195,13 @@ if (isset(
 
     if (isset(
         $_POST['tipo'],
-        $_POST['url']
+        $_POST['descricao']
     )) {
         $i = 0;
-        $objContato2->excluirTodosEnderecosDoPonto($objPontoTuristico->cod);
-        foreach ($_POST['url'] as $url) {
-            if ($url != "") {
+        foreach ($_POST['descricao'] as $descricao) {
+            if ($descricao != "") {
                 $objContato2->tipo = utf8_decode($_POST['tipo'][$i]);
-                $objContato2->url = $url;
+                $objContato2->descricao = $descricao;
                 // Se existe atualiza, senão cria
                 if ($objContato[$i]->cod) {
                     $objContato2->cod = $objContato[$i]->cod;
@@ -306,9 +296,10 @@ if (isset(
         $objImagem->nome = $fileDestination;
         $objImagem->cod_pt = $objPontoTuristico->codTuristico;
         $objImagem->atualizar();
-        /*$url =  str_replace("cadastro", "cadastro2", $_SERVER['REQUEST_URI']);
-        header('Location: ' . $url);*/
     }
+
+    $url =  str_replace("editar", "ponto-turistico", $_SERVER['REQUEST_URI']);
+    header('Location: ' . $url);
 }
 
 include __DIR__ . '/includes/header.php';

@@ -12,7 +12,7 @@ class Contato
 {
   public $cod;
   public $tipo;
-  public $url;
+  public $descricao;
 
   public function cadastrar()
   {
@@ -21,7 +21,7 @@ class Contato
 
     $this->cod = $objDatabase->insert([
       'tipo' => $this->tipo,
-      'url' => $this->url,
+      'descricao' => $this->descricao,
     ]);
     return true;
   }
@@ -30,7 +30,7 @@ class Contato
   {
     return (new Database('contato'))->update('cod = ' . $this->cod, [
       'tipo' => $this->tipo,
-      'url' => $this->url,
+      'descricao' => $this->descricao,
     ]);
   }
 
@@ -41,16 +41,11 @@ class Contato
 
   public static function getContatos($where = null, $order = null, $limit = null)
   {
-    return (new Database('contato'))->select($where, $order, $limit, "cod, tipo, url")->fetchAll(PDO::FETCH_CLASS);
+    return (new Database('contato'))->select($where, $order, $limit, "cod, tipo, descricao")->fetchAll(PDO::FETCH_CLASS);
   }
 
   public static function getContato($cod)
   {
     return (new Database('contato'))->select('cod = ' . $cod)->fetchObject(self::class);
-  }
-
-  public function excluirTodosEnderecosDoPonto($cod_pt)
-  {
-    return (new Database('cont_pt'))->delete('cod_pt = ' . $cod_pt);
   }
 }
