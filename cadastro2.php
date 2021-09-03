@@ -41,7 +41,7 @@ $objContatoPontoTuristico = new ContatoPontoTuristico;
 $objContatoPontoTuristico->cod_pt = $idPonto;
 
 if (isset(
-    $_POST['Submit'],
+    $_POST['Submit']
 )) {
     for ($i = 0; $i < 7; $i++) {
         $diaString = 'dia' . $i;
@@ -51,7 +51,7 @@ if (isset(
         if (isset(
             $_POST[$diaString],
             $_POST[$inicioString],
-            $_POST[$fimString],
+            $_POST[$fimString]
         )) {
             if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
                 foreach ($_POST[$diaString] as $dia) {
@@ -66,7 +66,7 @@ if (isset(
 
 
     if (isset(
-        $_POST['categoria'],
+        $_POST['categoria']
     )) {
         foreach ($_POST['categoria'] as $categoria) {
             $objCategoriaPontoTuristico->cod_cat = $categoria;
@@ -76,7 +76,7 @@ if (isset(
 
     if (isset(
         $_POST['tipo'],
-        $_POST['url'],
+        $_POST['url']
     )) {
         $i = 0;
         foreach ($_POST['url'] as $url) {

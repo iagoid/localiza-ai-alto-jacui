@@ -27,16 +27,19 @@ $(document).ready(function () {
     $('#novo-funcionamento').on('click', function () {
         var lastInput = $("#funcionamentos .div-funcionamento:last-child .dia")
         lastInput.prop('readonly', true);
-        lastInput.val().forEach(day => {
-            newFuncionamento = newFuncionamento.replace(`<option value="${day}">${day}</option>`)
-        });
-        newFuncionamento = newFuncionamento.replaceAll(`dia${newFuncionamentoContador}`, `dia${newFuncionamentoContador+1}`)
-        newFuncionamento = newFuncionamento.replaceAll(`inicio${newFuncionamentoContador}`, `inicio${newFuncionamentoContador+1}`)
-        newFuncionamento = newFuncionamento.replaceAll(`fim${newFuncionamentoContador}`, `fim${newFuncionamentoContador+1}`)
-        if (newFuncionamento.includes("option")) {
-            $(newFuncionamento).hide().appendTo($('#funcionamentos')).show('normal');
+        if (lastInput.val() != "") {
+            lastInput.val().forEach(day => {
+                newFuncionamento = newFuncionamento.replace(`<option value="${day}">${day}</option>`)
+            });
+            newFuncionamento = newFuncionamento.replaceAll(`dia${newFuncionamentoContador}`, `dia${newFuncionamentoContador+1}`)
+            newFuncionamento = newFuncionamento.replaceAll(`inicio${newFuncionamentoContador}`, `inicio${newFuncionamentoContador+1}`)
+            newFuncionamento = newFuncionamento.replaceAll(`fim${newFuncionamentoContador}`, `fim${newFuncionamentoContador+1}`)
+            if (newFuncionamento.includes("option")) {
+                $(newFuncionamento).hide().appendTo($('#funcionamentos')).show('normal');
+            }
+            newFuncionamentoContador++
         }
-        newFuncionamentoContador++
+
     })
 
 

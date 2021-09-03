@@ -75,12 +75,13 @@ class CidadeDoPonto
 
 class ContatoDoPonto
 {
+    public $cod;
     public $url;
     public $tipo;
 
     public static function contatoDoPonto($where = null, $order = null, $limit = null)
     {
-        $script = "SELECT url, tipo FROM ponto_turistico INNER JOIN cont_pt ON ponto_turistico.cod = cont_pt.cod_pt INNER JOIN contato ON cont_pt.cod_cont = contato.cod";
+        $script = "SELECT contato.cod, url, tipo FROM ponto_turistico INNER JOIN cont_pt ON ponto_turistico.cod = cont_pt.cod_pt INNER JOIN contato ON cont_pt.cod_cont = contato.cod";
         return (new Database('funcionamento'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
     }
 }

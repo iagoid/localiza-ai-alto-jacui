@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 div_flex">
             <select name="cod_cidade" class="form-select col-lg-12 col-md-12 col-sm-12 cidade_select">
-                <option selected="selected"><?= utf8_encode($objCidade->nome) ?></option>
+                <option selected="selected" value="<?= $objEndereco->cod_cidade ?>"><?= utf8_encode($objCidade->nome) ?></option>
                 <?= $cidades_resultados ?>
             </select>
         </div>
@@ -59,31 +59,9 @@
     <!--<form method="POST" enctype="multipart/form-data">-->
     <h2>Funcionamento</h2>
     <p>*Caso o estabelecimento não funcione em algum dia da semana deixe o campo em branco, deixe o campo em branco</p>
-    <?= $resultadosFuncionamento ?>
     <div class="" id="funcionamentos">
         <div class="row div-funcionamento">
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <select name="dia0[]" id="" multiple class="dia form-select col-lg-12 col-md-12 col-sm-12">
-                    <option value="Domingo">Domingo</option>
-                    <option value="Segunda">Segunda</option>
-                    <option value="Terça">Terça</option>
-                    <option value="Quarta">Quarta</option>
-                    <option value="Quinta">Quinta</option>
-                    <option value="Sexta">Sexta</option>
-                    <option value="Sábado">Sábado</option>
-                </select>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <label for="inicio0">Inicio</label>
-                <input name="inicio0" type="time">
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <label for="fim0">Fim</label>
-                <input name="fim0" type="time">
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1">
-                <button type="button" id="novo-funcionamento">+</button>
-            </div>
+            <?= $resultadosFuncionamento ?>
         </div>
     </div>
 
@@ -117,5 +95,5 @@
             </select>
         </div>
     </div>
+    <button class="mt-3" type="submit" id="submit-contato" name="Submit">Concluir Edição</button>
 </form>
-<button class="mt-3" type="submit" id="submit-contato" name="Submit">Concluir Edição</button>

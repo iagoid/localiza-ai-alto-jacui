@@ -1,27 +1,9 @@
 <?php
 require_once 'App/Entity/PontoTuristico.php';
-require_once 'App/Entity/Endereco.php';
-require_once 'App/Entity/Cidade.php';
-require_once 'App/Entity/Imagem.php';
-require_once 'App/Entity/JoinsSql.php';
-require_once 'App/Entity/Categoria.php';
-require_once 'App/Entity/CategoriaPontoTuristico.php';
-require_once 'App/Entity/Funcionamento.php';
-require_once 'App/Entity/Contato.php';
-require_once 'App/Entity/ContatoPontoTuristico.php';
 
 use \App\Entity\PontoTuristico;
-use \App\Entity\Endereco;
-use \App\Entity\Cidade;
-use \App\Entity\Imagem;
-use \App\Entity\EnderecoDoPonto;
-use \App\Entity\Categoria;
-use \App\Entity\CategoriaPontoTuristico;
-use \App\Entity\Funcionamento;
-use \App\Entity\Contato;
-use \App\Entity\ContatoPontoTuristico;
-use \App\Entity\ContatoDoPonto;
-use \App\Entity\CategoriasDoPonto;
+
+$title = "Excluir";
 
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
     header('location: listagemADMIN.php?status=error');

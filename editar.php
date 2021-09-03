@@ -23,6 +23,8 @@ use \App\Entity\ContatoPontoTuristico;
 use \App\Entity\ContatoDoPonto;
 use \App\Entity\CategoriasDoPonto;
 
+$title = "Editar";
+
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
     header('location: listagem?status=error');
     exit;
@@ -64,33 +66,53 @@ foreach ($objCategoriaPontoTuristico as $categoria) {
 $objFuncionamento = Funcionamento::getFuncionamentoFromPt($objPontoTuristico->cod);
 $resultadosFuncionamento = '';
 
+$primeiro = true;
 
-foreach ($objFuncionamento as $funcionamento) {
+do {
     $resultadosFuncionamento .= '
-    <div class="row div-funcionamento">
         <div class="col-lg-3 col-md-3 col-sm-3">
-            <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">
-                <option value="' . $funcionamento->dia . '" selected="selected">' . $funcionamento->dia . '</option>
-                <option value="Domingo">Domingo</option>
-                <option value="Segunda">Segunda</option>
-                <option value="Terça">Terça</option>
-                <option value="Quarta">Quarta</option>
-                <option value="Quinta">Quinta</option>
-                <option value="Sexta">Sexta</option>
-                <option value="Sábado">Sábado</option>
-            </select>
+            <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">';
+
+
+    // print_r($objFuncionamento[$i]);
+    // exit;
+    if (sizeof($objFuncionamento) - 1 >= 1) {
+        for ($j = 0 + 1; $j <= sizeof($objFuncionamento) - 1; $j++) {
+            if (
+                ($objFuncionamento[0]->inicio == $objFuncionamento[$j]->inicio)
+                && ($objFuncionamento[0]->fim == $objFuncionamento[$j]->fim)
+            ) {
+
+                $resultadosFuncionamento .= '<option value="' . utf8_encode($objFuncionamento[$j]->dia) . '" selected="selected">' . utf8_encode($objFuncionamento[$j]->dia) . '</option>';
+                array_splice($objFuncionamento, $j, $j);
+                $j--;
+            }
+        }
+    }
+
+    $resultadosFuncionamento .= '</select>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
             <label for="inicio0">Inicio</label>
-            <input name="inicio0" type="time" value="' . $funcionamento->inicio . '">
+            <input name="inicio0" type="time" value="' . $objFuncionamento[0]->inicio . '">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
             <label for="fim0">Fim</label>
-            <input name="fim0" type="time" value="' . $funcionamento->fim . '">
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    </div>';
-}
+            <input name="fim0" type="time" value="' . $objFuncionamento[0]->fim . '">
+        </div>';
+
+    if ($primeiro) {
+        $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1">
+            <button type="button" id="novo-funcionamento">+</button>
+        </div>';
+        $primeiro = false;
+    } else {
+        $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1"></div>';
+    }
+
+
+    array_splice($objFuncionamento, 0, 0);
+} while (sizeof($objFuncionamento) - 1 > 0);
 
 /*$resultadoContatoTipo = '';
 $resultadoContatoUrl = '';*/
@@ -139,56 +161,67 @@ $objFuncionamento->cod_pt = $objPontoTuristico->cod;
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
 $objCategoriaPontoTuristico->cod_pt = $objPontoTuristico->cod;
 
-$objContato = new Contato;
-$objContato->cod_pt = $objPontoTuristico->cod;
+$objContato2 = new Contato;
+$objContato2->cod_pt = $objPontoTuristico->cod;
 
 $objContatoPontoTuristico = new ContatoPontoTuristico;
 $objContatoPontoTuristico->cod_pt = $objPontoTuristico->cod;
 
-if (isset($_POST['Submit'])) {
-    for ($i = 0; $i < 7; $i++) {
-        $diaString = 'dia' . $i;
-        $inicioString = 'inicio' . $i;
-        $fimString = 'fim' . $i;
+if (isset(
+    $_POST['Submit']
+)) {
+    // for ($i = 0; $i < 7; $i++) {
+    //     $diaString = 'dia' . $i;
+    //     $inicioString = 'inicio' . $i;
+    //     $fimString = 'fim' . $i;
 
-        if (isset(
-            $_POST[$diaString],
-            $_POST[$inicioString],
-            $_POST[$fimString],
-        )) {
-            if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
-                foreach ($_POST[$diaString] as $dia) {
-                    $objFuncionamento->dia = $dia;
-                    $objFuncionamento->inicio = $_POST[$inicioString];
-                    $objFuncionamento->fim = $_POST[$fimString];
-                    $objFuncionamento->atualizar();
-                }
-            }
-        }
-    }
+    //     if (isset(
+    //         $_POST[$diaString],
+    //         $_POST[$inicioString],
+    //         $_POST[$fimString]
+    //     )) {
+    //         if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
+    //             foreach ($_POST[$diaString] as $dia) {
+    //                 $objFuncionamento->dia = $dia;
+    //                 $objFuncionamento->inicio = $_POST[$inicioString];
+    //                 $objFuncionamento->fim = $_POST[$fimString];
+    //                 $objFuncionamento->atualizar();
+    //             }
+    //         }
+    //     }
+    // }
 
 
     if (isset(
-        $_POST['categoria'],
+        $_POST['categoria']
     )) {
+        $objCategoriaPontoTuristico->excluirTodasCategoriasDoPonto($objPontoTuristico->cod);
         foreach ($_POST['categoria'] as $categoria) {
             $objCategoriaPontoTuristico->cod_cat = $categoria;
-            $objCategoriaPontoTuristico->atualizar();
+            $objCategoriaPontoTuristico->cadastrar();
         }
     }
 
     if (isset(
         $_POST['tipo'],
-        $_POST['url'],
+        $_POST['url']
     )) {
         $i = 0;
+        $objContato2->excluirTodosEnderecosDoPonto($objPontoTuristico->cod);
         foreach ($_POST['url'] as $url) {
             if ($url != "") {
-                $objContato->tipo = $_POST['tipo'][$i];
-                $objContato->url = $url;
-                $objContato->atualizar();
-                $objContatoPontoTuristico->cod_cont = $objContato->cod;
-                $objContatoPontoTuristico->atualizar();
+                $objContato2->tipo = utf8_decode($_POST['tipo'][$i]);
+                $objContato2->url = $url;
+                // Se existe atualiza, senão cria
+                if ($objContato[$i]->cod) {
+                    $objContato2->cod = $objContato[$i]->cod;
+                    $objContato2->atualizar();
+                } else {
+                    $objContato2->cadastrar();
+                }
+
+                $objContatoPontoTuristico->cod_cont = $objContato2->cod;
+                $objContatoPontoTuristico->cadastrar();
             }
             $i++;
         }
@@ -206,36 +239,41 @@ if (isset($_POST['Submit'])) {
         $_POST['descr'],
         $_POST['hist'],
         $_POST['longi'],
-        $_POST['latit'],
-        $_FILES['imagem']
+        $_POST['latit']
     )) {
-        $objEndereco = new Endereco;
-        $objEndereco->cod_cidade = $_POST['cod_cidade'];
-        $objEndereco->rua = $_POST['rua'];
-        $objEndereco->numero = $_POST['numero'];
-        $objEndereco->bairro = $_POST['bairro'];
-        $objEndereco->cep = $_POST['cep'];
-        $objEndereco->atualizar();
+        $objEndereco2 = new Endereco;
+        $objEndereco2->cod = $objEndereco->cod;
+        $objEndereco2->cod_cidade = $_POST['cod_cidade'];
+        $objEndereco2->rua = utf8_decode($_POST['rua']);
+        $objEndereco2->numero = $_POST['numero'];
+        $objEndereco2->bairro = utf8_decode($_POST['bairro']);
+        $objEndereco2->cep = $_POST['cep'];
+        $objEndereco2->atualizar();
 
-        $objPontoTuristico = new PontoTuristico;
-        $objPontoTuristico->nome = $_POST['nome'];
-        $objPontoTuristico->cap = $_POST['cap'];
-        $objPontoTuristico->obs = $_POST['obs'];
-        $objPontoTuristico->periodo = $_POST['periodo'];
-        $objPontoTuristico->valor = $_POST['valor'];
-        $objPontoTuristico->descr = $_POST['descr'];
-        $objPontoTuristico->hist = $_POST['hist'];
-        $objPontoTuristico->longi = $_POST['longi'];
-        $objPontoTuristico->latit = $_POST['latit'];
-        $objPontoTuristico->cod_end = $idEndereco;
-        $objPontoTuristico->atualizar();
+        $objPontoTuristico2 = new PontoTuristico;
+        $objPontoTuristico2->cod = $objPontoTuristico->cod;
+        $objPontoTuristico2->nome = utf8_decode($_POST['nome']);
+        $objPontoTuristico2->cap = $_POST['cap'];
+        $objPontoTuristico2->obs = utf8_decode($_POST['obs']);
+        $objPontoTuristico2->periodo = utf8_decode($_POST['periodo']);
+        $objPontoTuristico2->valor = $_POST['valor'];
+        $objPontoTuristico2->descr = utf8_decode($_POST['descr']);
+        $objPontoTuristico2->hist = utf8_decode($_POST['hist']);
+        $objPontoTuristico2->longi = $_POST['longi'];
+        $objPontoTuristico2->latit = $_POST['latit'];
+        $objPontoTuristico2->cod_end = $objEndereco2->cod;
+        $objPontoTuristico2->atualizar();
+    }
 
-        /*echo "<pre>";
-        print_r($objPontoTuristico);
-        echo "</pre>";*/
-
-        //IMAGEM
+    //IMAGEM
+    if (
+        isset(
+            $_FILES['imagem']
+        ) && $_FILES['imagem']["error"] == null
+    ) {
         $file = $_FILES['imagem'];
+        print_r($file["error"]);
+        exit;
 
         $fileName = ($_FILES['imagem']['name']);
         $fileTmpName = $_FILES['imagem']['tmp_name'];
@@ -276,25 +314,6 @@ if (isset($_POST['Submit'])) {
 include __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Breadcrumb Begin -->
-<!--<div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
-                    <h1>Cadastro</h1>
-                    <div class="breadcrumb__links">
-                        <a href="./index.php">Home</a>
-                        <span>Cadastro</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- Breadcrumb End -->
-
-
 <section class="history spad">
     <div class="container">
         <div class="row">
@@ -317,9 +336,9 @@ include __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
             <div class="contact__form">
-                <!--<?php
-                    //include __DIR__ . '/includes/EditarContato.php';
-                    ?>-->
+                <?php
+                // include __DIR__ . '/includes/EditarContato.php';
+                ?>
             </div>
         </div>
     </div>

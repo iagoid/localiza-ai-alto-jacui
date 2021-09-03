@@ -37,6 +37,11 @@ class CategoriaPontoTuristico
     return (new Database('cat_pt'))->delete('cod_cat = ' . $this->cod_cat . 'AND cod_pt = ' . $this->cod_pt);
   }
 
+  public function excluirTodasCategoriasDoPonto($cod_pt)
+  {
+    return (new Database('cat_pt'))->delete('cod_pt = ' . $cod_pt);
+  }
+
   public static function getcategoriasporntoturistico($where = null, $order = null, $limit = null)
   {
     return (new Database('cat_pt'))->select($where, $order, $limit, "cod_cat, cod_pt")->fetchAll(PDO::FETCH_CLASS);

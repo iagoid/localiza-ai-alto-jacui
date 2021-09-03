@@ -48,4 +48,9 @@ class Contato
   {
     return (new Database('contato'))->select('cod = ' . $cod)->fetchObject(self::class);
   }
+
+  public function excluirTodosEnderecosDoPonto($cod_pt)
+  {
+    return (new Database('cont_pt'))->delete('cod_pt = ' . $cod_pt);
+  }
 }

@@ -7,6 +7,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+$title = "Contato";
+
 $mail = new PHPMailer(true);
 
 if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['mensagem'])) {
