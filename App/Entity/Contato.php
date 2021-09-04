@@ -11,6 +11,7 @@ use PDO;
 class Contato
 {
   public $cod;
+  public $cod_pt;
   public $tipo;
   public $descricao;
 
@@ -20,6 +21,7 @@ class Contato
     $objDatabase = new Database('contato');
 
     $this->cod = $objDatabase->insert([
+      'cod_pt' => $this->cod_pt,
       'tipo' => $this->tipo,
       'descricao' => $this->descricao,
     ]);
@@ -29,6 +31,7 @@ class Contato
   public function atualizar()
   {
     return (new Database('contato'))->update('cod = ' . $this->cod, [
+      '$cod_pt' => $this->cod_pt,
       'tipo' => $this->tipo,
       'descricao' => $this->descricao,
     ]);
@@ -41,7 +44,7 @@ class Contato
 
   public static function getContatos($where = null, $order = null, $limit = null)
   {
-    return (new Database('contato'))->select($where, $order, $limit, "cod, tipo, descricao")->fetchAll(PDO::FETCH_CLASS);
+    return (new Database('contato'))->select($where, $order, $limit, "cod, cod_pt, tipo, descricao")->fetchAll(PDO::FETCH_CLASS);
   }
 
   public static function getContato($cod)

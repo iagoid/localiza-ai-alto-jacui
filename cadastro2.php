@@ -28,7 +28,6 @@ $objFuncionamento = new Funcionamento;
 $objFuncionamento->cod_pt = $idPonto;
 
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
-$objCategoriaPontoTuristico->cod_pt = $idPonto;
 
 $objContato = new Contato;
 $objContato->cod_pt = $idPonto;
@@ -63,6 +62,7 @@ if (isset(
         $_POST['categoria']
     )) {
         foreach ($_POST['categoria'] as $categoria) {
+            $objCategoriaPontoTuristico->cod_pt = $idPonto;
             $objCategoriaPontoTuristico->cod_cat = $categoria;
             $objCategoriaPontoTuristico->cadastrar();
         }
@@ -75,11 +75,12 @@ if (isset(
         $i = 0;
         foreach ($_POST['descricao'] as $descricao) {
             if ($descricao != "") {
+                $objContato->cod_pt = $idPonto;
                 $objContato->tipo = $_POST['tipo'][$i];
                 $objContato->descricao = $descricao;
+                print_r($objContato);
                 $objContato->cadastrar();
-                $objContatoPontoTuristico->cod_cont = $objContato->cod;
-                $objContatoPontoTuristico->cadastrar();
+                // exit;
             }
             $i++;
         }

@@ -14,7 +14,6 @@ use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
-use \App\Entity\EnderecoDoPonto;
 use \App\Entity\Categoria;
 use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
@@ -47,6 +46,7 @@ $objCidade = Cidade::getcidade($objEndereco->cod_cidade);
 $objImagem = Imagem::getImagemFromPt($objPontoTuristico->cod);
 
 $whereContato = "cod_pt = " . $objPontoTuristico->cod;
+$objContato = Contato::getContatos($whereContato);
 
 $whereCategoria = "cod_pt = " . $objPontoTuristico->cod;
 $objCategoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto($whereCategoria);
@@ -68,72 +68,83 @@ $resultadosFuncionamento = '';
 
 $primeiro = true;
 
-do {
-    $resultadosFuncionamento .= '
-        <div class="col-lg-3 col-md-3 col-sm-3">
-            <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">';
+if (sizeof($objFuncionamento) > 0) {
+    do {
+        $resultadosFuncionamento .= '
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">';
 
 
-    // print_r($objFuncionamento[$i]);
-    // exit;
-    if (sizeof($objFuncionamento) - 1 >= 1) {
-        for ($j = 0 + 1; $j <= sizeof($objFuncionamento) - 1; $j++) {
-            if (
-                ($objFuncionamento[0]->inicio == $objFuncionamento[$j]->inicio)
-                && ($objFuncionamento[0]->fim == $objFuncionamento[$j]->fim)
-            ) {
+        if (sizeof($objFuncionamento) - 1 >= 1) {
+            for ($j = 0 + 1; $j <= sizeof($objFuncionamento) - 1; $j++) {
+                if (
+                    ($objFuncionamento[0]->inicio == $objFuncionamento[$j]->inicio)
+                    && ($objFuncionamento[0]->fim == $objFuncionamento[$j]->fim)
+                ) {
 
-                $resultadosFuncionamento .= '<option value="' . utf8_encode($objFuncionamento[$j]->dia) . '" selected="selected">' . utf8_encode($objFuncionamento[$j]->dia) . '</option>';
-                array_splice($objFuncionamento, $j, $j);
-                $j--;
+                    $resultadosFuncionamento .= '<option value="' . utf8_encode($objFuncionamento[$j]->dia) . '" selected="selected">' . utf8_encode($objFuncionamento[$j]->dia) . '</option>';
+                    array_splice($objFuncionamento, $j, $j);
+                    $j--;
+                }
             }
         }
-    }
 
-    $resultadosFuncionamento .= '</select>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-            <label for="inicio0">Inicio</label>
-            <input name="inicio0" type="time" value="' . $objFuncionamento[0]->inicio . '">
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-            <label for="fim0">Fim</label>
-            <input name="fim0" type="time" value="' . $objFuncionamento[0]->fim . '">
-        </div>';
-
-    if ($primeiro) {
-        $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1">
-            <button type="button" id="novo-funcionamento">+</button>
-        </div>';
-        $primeiro = false;
-    } else {
-        $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1"></div>';
-    }
-
-
-    array_splice($objFuncionamento, 0, 0);
-} while (sizeof($objFuncionamento) - 1 > 0);
-
-$resultadoContato = '';
-
-foreach ($objContato as $contato) {
-    $resultadoContato .= '<div class="row div-contato">
-            <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
-                <select name="tipo[]" id="" class="tipo form-select col-lg-12 col-md-12 col-sm-12">
-                    <option selected="selected" value="' . $contato->tipo . '">' . $contato->tipo . '</option>
-                    <option value="Instagram">Instagram</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Twitter">Twitter</option>
-                    <option value="Telefone">Telefone</option>
-                    <option value="Email">Email</option>
-                </select>
+        $resultadosFuncionamento .= '</select>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="descricao[]" type="descricao" value="' . $contato->descricao . '">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <label for="inicio0">Inicio</label>
+                <input name="inicio0" type="time" value="' . $objFuncionamento[0]->inicio . '">
             </div>
-        </div>';
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <label for="fim0">Fim</label>
+                <input name="fim0" type="time" value="' . $objFuncionamento[0]->fim . '">
+            </div>';
+
+        if ($primeiro) {
+            $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1">
+                <button type="button" id="novo-funcionamento">+</button>
+            </div>';
+            $primeiro = false;
+        } else {
+            $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1"></div>';
+        }
+
+
+        array_splice($objFuncionamento, 0, 0);
+    } while (sizeof($objFuncionamento) - 1 > 0);
 }
 
+$primeiroContato = true;
+$resultadoContato = '';
+if (sizeof($objContato) > 0) {
+    foreach ($objContato as $contato) {
+        $resultadoContato .= '
+            <div class="row div-contato">
+                <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
+                    <select name="tipo[]" id="" class="tipo form-select col-lg-12 col-md-12 col-sm-12">
+                        <option selected="selected" value="' . $contato->tipo . '">' . $contato->tipo . '</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Telefone">Telefone</option>
+                        <option value="Email">Email</option>
+                    </select>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                    <input name="descricao[]" type="descricao" value="' . $contato->descricao . '">
+                </div>';
+        if ($primeiroContato) {
+            $resultadoContato .= '
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                        <button type="button" id="novo-contato">+</button>
+                </div>
+            </div>';
+            $primeiroContato = false;
+        } else {
+            $resultadoContato .= '</div>';
+        }
+    }
+}
 
 //ATUALIZAÇÃO
 
@@ -154,7 +165,6 @@ foreach ($categorias as $categoria) {
 }
 
 $objFuncionamento = new Funcionamento;
-$objFuncionamento->cod_pt = $objPontoTuristico->cod;
 
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
 $objCategoriaPontoTuristico->cod_pt = $objPontoTuristico->cod;
@@ -162,6 +172,7 @@ $objCategoriaPontoTuristico->cod_pt = $objPontoTuristico->cod;
 $objContato2 = new Contato;
 $objContato2->cod_pt = $objPontoTuristico->cod;
 
+Funcionamento::excluirFuncionamentoDoPontoTuristico($objPontoTuristico->cod);
 if (isset(
     $_POST['Submit']
 )) {
@@ -177,10 +188,11 @@ if (isset(
         )) {
             if ($_POST[$fimString] != "" && $_POST[$inicioString] != "") {
                 foreach ($_POST[$diaString] as $dia) {
+                    $objFuncionamento->cod_pt = $objPontoTuristico->cod;
                     $objFuncionamento->dia = $dia;
                     $objFuncionamento->inicio = $_POST[$inicioString];
                     $objFuncionamento->fim = $_POST[$fimString];
-                    $objFuncionamento->atualizar();
+                    $objFuncionamento->cadastrar();
                 }
             }
         }
@@ -213,9 +225,6 @@ if (isset(
                 } else {
                     $objContato2->cadastrar();
                 }
-
-                $objContatoPontoTuristico->cod_cont = $objContato2->cod;
-                $objContatoPontoTuristico->cadastrar();
             }
             $i++;
         }

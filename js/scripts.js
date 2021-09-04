@@ -57,7 +57,7 @@ $(document).ready(function () {
                 </select>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8">
-                <input name="url[]" type="url">
+                <input name="descricao[]" type="descricao">
             </div>
         </div>`
 

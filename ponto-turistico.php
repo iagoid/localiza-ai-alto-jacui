@@ -78,7 +78,19 @@ $ContatoDoPonto = Contato::getContatos($whereContato);
 
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
-        $resultadosContato .= '<div class="room_details__desc"><a href="' . $contato->descricao . '">' . utf8_encode($contato->tipo) . '</a></div>';
+        if (strtoupper($contato->tipo) == "SITE") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        } else if (strtoupper($contato->tipo) == "INSTAGRAM") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        } else if (strtoupper($contato->tipo) == "FACEBOOK") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        } else if (strtoupper($contato->tipo) == "TWITTER") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        } else if (strtoupper($contato->tipo) == "TELEFONE") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        } else if (strtoupper($contato->tipo) == "EMAIL") {
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . utf8_encode($contato->tipo) . '</a></i></div>';
+        }
     }
 } else {
     $resultadosContato .= '<div class="room_details__desc">Nenhum contato encontrado</a></div>';

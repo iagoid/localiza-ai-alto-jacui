@@ -68,23 +68,6 @@
     <h2>Contato</h2>
     <div id="contatos">
         <?= $resultadoContato ?>
-        <!--<div class="row div-contato">
-            <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
-                <select name="tipo[]" id="" class="tipo form-select col-lg-12 col-md-12 col-sm-12">
-                    <option value="Instagram">Instagram</option>
-                    <option value="Facebook">Facebook</option>
-                    <option value="Twitter">Twitter</option>
-                    <option value="Telefone">Telefone</option>
-                    <option value="Email">Email</option>
-                </select>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7">
-                <input name="url[]" type="url" required >
-            </div>-->
-        <div class="col-lg-1 col-md-1 col-sm-1">
-            <button type="button" id="novo-contato">+</button>
-        </div>
-    </div>
     </div>
     <h4>Categorias</h4>
     <div class="row">
