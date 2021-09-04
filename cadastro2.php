@@ -9,9 +9,7 @@ use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
 
-$title = "Cadastro";
-
-session_start();
+$title = "ADMIN CADASTRO";
 
 if (!$_SESSION['idPontoTuristico']) {
     header('location: index?status=error');

@@ -6,7 +6,9 @@ require_once 'App/Entity/Cidade.php';
 require_once 'App/Entity/Imagem.php';
 require_once 'App/Entity/Endereco.php';
 require_once 'App/Entity/JoinsSql.php';
+require_once 'App/Session/Login.php';
 
+use \App\Session\Login;
 use \App\Entity\PontoTuristico;
 use \App\Entity\Categoria;
 use \App\Entity\Cidade;
@@ -160,7 +162,7 @@ include __DIR__ . '/includes/header.php';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h1>OPontos Turísticos</h1>
+                    <h1>Pontos Turísticos</h1>
                     <div class="breadcrumb__links">
                     </div>
                 </div>

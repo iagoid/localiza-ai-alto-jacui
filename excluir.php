@@ -1,9 +1,13 @@
 <?php
 require_once 'App/Entity/PontoTuristico.php';
+require_once 'App/Session/Login.php';
 
 use \App\Entity\PontoTuristico;
+use \App\Session\Login;
 
-$title = "Excluir";
+Login::requireLogin();
+
+$title = "ADMIN EXCLUIR";
 
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
     header('location: listagemADMIN.php?status=error');

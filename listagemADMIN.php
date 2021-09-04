@@ -3,12 +3,16 @@ require_once 'App/Entity/PontoTuristico.php';
 require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Imagem.php';
 require_once 'App/Entity/JoinsSql.php';
+require_once 'App/Session/Login.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Imagem;
 use \App\Entity\PontosCadPT;
+use \App\Session\Login;
 
-$title = "ADMIN";
+Login::requireLogin();
+
+$title = "LISTA ADMIN";
 
 ///////////////////////////// Paginação /////////////////////////////
 $itemsPorPagina = 9;

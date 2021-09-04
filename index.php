@@ -1,4 +1,7 @@
 <?php
+
+
+
 $title = "Home";
 include __DIR__ . '/includes/header.php'; 
 ?>

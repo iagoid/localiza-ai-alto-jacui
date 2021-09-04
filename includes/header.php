@@ -1,3 +1,17 @@
+<?php
+    
+    require_once 'App/Session/Login.php';
+
+    use \App\Session\Login;
+
+    $usuarioLogado = Login::getUsuarioLogado();
+
+    $usuario = $usuarioLogado ? '<a href="perfil.php"><span class="mr-2 fa fa-user"></span>' . $usuarioLogado['nome'] . '</a>'.' <a href="logout.php">Sair</a>' :
+    '<a href="login.php"><span class="mr-2 fa fa-user-o"></span>Entrar</a>'
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -70,7 +84,11 @@
                                 </ul>
                             </nav>
                             <div class="header__nav__widget">
-                                <a href="./contact">Fale Conosco<span class="arrow_right"></span></a>
+                                <a href="./contact">Fale Conosco <span class="fa arrow_right"></span></a>
+                            </div>
+                            
+                            <div class="ml-3 header__nav__widget">
+                                <?=$usuario?>
                             </div>
                         </div>
                     </div>

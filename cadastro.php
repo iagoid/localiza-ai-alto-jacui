@@ -3,15 +3,18 @@ require_once 'App/Entity/PontoTuristico.php';
 require_once 'App/Entity/Endereco.php';
 require_once 'App/Entity/Cidade.php';
 require_once 'App/Entity/Imagem.php';
+require_once 'App/Session/Login.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
 use \App\Entity\Cidade;
 use \App\Entity\Imagem;
+use \App\Session\Login;
 
-$title = "Cadastro";
+Login::requireLogin();
 
-session_start();
+
+$title = "ADMIN CADASTRO";
 
 $cidades = Cidade::getcidades();
 

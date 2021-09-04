@@ -8,6 +8,7 @@ require_once 'App/Entity/Categoria.php';
 require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Funcionamento.php';
 require_once 'App/Entity/Contato.php';
+require_once 'App/Session/Login.php';
 
 use \App\Entity\PontoTuristico;
 use \App\Entity\Endereco;
@@ -19,8 +20,11 @@ use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
 use \App\Entity\CategoriasDoPonto;
+use \App\Session\Login;
 
-$title = "Editar";
+Login::requireLogin();
+
+$title = "ADMIN EDITAR";
 
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
     header('location: listagem?status=error');
