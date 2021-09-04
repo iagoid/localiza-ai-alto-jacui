@@ -42,7 +42,7 @@
                 </select>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7">
-                <input name="descricao" type="text" required>
+                <input name="descricao[]" type="text" required>
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1">
                 <button type="button" id="novo-contato">+</button>
