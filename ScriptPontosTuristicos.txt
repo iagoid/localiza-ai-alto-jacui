@@ -78,6 +78,15 @@ CREATE TABLE IF NOT EXISTS funcionamento(
 	CONSTRAINT fk_func_pt FOREIGN KEY (cod_pt) REFERENCES ponto_turistico (cod)
 );
 
+
+CREATE TABLE IF NOT EXISTS usuarios(
+	cod SERIAL NOT NULL,
+	nome VARCHAR(50) NOT NULL,
+	login VARCHAR(50) NOT NULL UNIQUE,
+	senha VARCHAR(255) NOT NULL,
+	CONSTRAINT pk_usuarios PRIMARY KEY (cod)
+)
+
 INSERT INTO cidade (nome, uf) VALUES ('Alto Alegre', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Arroio do Tigre', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Boa Vista do Incra', 'RS');
@@ -355,6 +364,9 @@ INSERT INTO funcionamento (cod_pt, dia, inicio, fim) VALUES (10, 'Domingo', '08:
 INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo1.png');
 INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo2.jpg');
 INSERT INTO imagem (cod_pt, nome) VALUES (10, 'expo3.jpg');
+
+
+INSERT INTO usuarios (nome, login, senha) VALUES ('admin','admin','admin')
 
 
 
