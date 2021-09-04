@@ -44,7 +44,7 @@ select#multiselect+.nice-select {
     font-size: 18px;
 }
 
-.blog__item__text.admin a.edit:hover {
+.blog__item__text.admin a.edit:hover, .contato_link a:hover, a:visited {
     color: rgb(65, 65, 238);
 }
 

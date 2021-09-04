@@ -45,6 +45,11 @@ class Funcionamento
     return (new Database('funcionamento'))->delete('cod = ' . $this->cod);
   }
 
+  public static function excluirFuncionamentoDoPontoTuristico($cod_pt)
+  {
+    return (new Database('funcionamento'))->delete('cod_pt = ' . $cod_pt);
+  }
+
   public static function getFuncionamentoFromPt($cod_pt)
   {
     return (new Database('funcionamento'))->select('cod_pt = ' . $cod_pt)->fetchAll(PDO::FETCH_CLASS);

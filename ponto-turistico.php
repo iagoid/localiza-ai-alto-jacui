@@ -78,7 +78,7 @@ $ContatoDoPonto = Contato::getContatos($whereContato);
 
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
-        $resultadosContato .= '<div class="room_details__desc"><a href="' . $contato->descricao . '">' . utf8_encode($contato->tipo) . '</a></div>';
+        $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '">' . utf8_encode($contato->tipo) . '</a></div>';
     }
 } else {
     $resultadosContato .= '<div class="room_details__desc">Nenhum contato encontrado</a></div>';

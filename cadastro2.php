@@ -80,8 +80,6 @@ if (isset(
                 $objContato->tipo = $_POST['tipo'][$i];
                 $objContato->descricao = $descricao;
                 $objContato->cadastrar();
-                $objContatoPontoTuristico->cod_cont = $objContato->cod;
-                $objContatoPontoTuristico->cadastrar();
             }
             $i++;
         }
