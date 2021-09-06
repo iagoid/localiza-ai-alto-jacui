@@ -71,8 +71,49 @@ $(document).ready(function () {
         newContatoContador++
     })
 
+
+    // Imagem
+    $(".upload_images").on('change', function () {
+        changeImage(this)
+    })
+
+    function changeImage(input) {
+        var reader;
+        if (input.files && input.files[0]) {
+            reader = new FileReader();
+            reader.onload = function (e) {
+                $(".imagem_visualizador").last().attr('src', e.target.result)
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    // Adiciona um novo campo de imagem
+    var novaImagem = `
+    <div class="row imagem">
+        <div class="col-lg-7 col-md-7 col-sm-12">
+            <label>Enviar imagem(ns)</label>
+            <input name="imagem[]" type="file" class='upload_images' accept="image/*" multiple>
+            <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" multiple>
+
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 div_imagem_visualizador">
+            <img class="imagem_visualizador" />
+        </div>
+    </div>`
+
+
+    $('#nova-imagem').on('click', function () {
+        $(novaImagem).hide().appendTo($('#imagens-div')).show('normal');
+        newContatoContador++
+    })
+
+
+    // Tira do read only pra enviar
     $("#submit-contato").on('click', function () {
         $("#funcionamentos .div-funcionamento .dia").prop('readonly', false);
         $("#contatos .div-contato .tipo").prop('disabled', false);
     })
+
 })

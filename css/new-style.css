@@ -90,3 +90,13 @@ img.imagem-ponto-galeria {
 .resultados_pontos {
     justify-content: center;
 }
+
+.div_imagem_visualizador {
+    display: flex;
+    justify-content: center;
+}
+
+.div_imagem_visualizador img {
+    height: 180px;
+    width: auto;
+}
