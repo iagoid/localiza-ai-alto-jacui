@@ -60,14 +60,15 @@ $resultadoTemporada = '<h5>Temporada: ' . utf8_encode($pontoTuristico->periodo) 
                     <h5>Valor por visitante: R$ ' . $pontoTuristico->valor . '</h5>
                     <h5>Capacidade: ' . $pontoTuristico->cap . ' visitantes</h5>';
 
+
 $resultadosImagem = '';
-$j = 0;
 foreach ($imagens as $imagem) {
     $nomeImagem = $imagem->nome ? $imagem->nome : "image-not-found.jpg";
+    $imagemDescricao = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : $pontoTuristico->nome;
 
     $resultadosImagem .= '
     <div class="col-lg-3 col-md-4 col-12">
-        <img class="img-fluid img-thumbnail imagem-ponto-galeria" src="img/imagens_pt/' . $nomeImagem . '" alt="">
+        <img class="img-fluid img-thumbnail imagem-ponto-galeria" src="img/imagens_pt/' . $nomeImagem . '" alt="' . $imagemDescricao . '">
     </div>';
 }
 

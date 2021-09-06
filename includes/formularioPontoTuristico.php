@@ -52,9 +52,21 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <input name="longi" type="text" placeholder="Longitude (Google Maps)" max="20" required>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <label>Enviar imagem(ns)</label>
-            <input name="imagem" type="file" accept="image/*" required>
+    </div>
+    <div id="imagens-div">
+        <div class="row imagem">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <label>Enviar imagem(ns)</label>
+                <input name="imagem[]" type="file" class='upload_images' accept="image/*" multiple required>
+                <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" multiple>
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
+                <img class="imagem_visualizador" />
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1">
+                <button type="button" id="nova-imagem">+</button>
+            </div>
         </div>
     </div>
 

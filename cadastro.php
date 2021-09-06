@@ -73,45 +73,46 @@ if (isset($_POST['Submit'])) {
         $_SESSION['idPontoTuristico'] = $idPontoTuristico;
     }
 
-    if (isset(
-        $_FILES['imagem']
-    ) && $_FILES['imagem']["error"] == null) {
-        $file = $_FILES['imagem'];
+    $fileNames = array_filter($_FILES['imagem']['name']);
+    if (!empty($fileNames)) {
+        $i = 0;
+        foreach ($_FILES['imagem']['name'] as $file) {
+            $fileName = $_FILES['imagem']['name'][$i];
+            $fileSize = $_FILES['imagem']['size'][$i];
+            $fileError = $_FILES['imagem']['error'][$i];
+            $fileType = $_FILES['imagem']['type'][$i];
 
-        $fileName = ($_FILES['imagem']['name']);
-        $fileTmpName = $_FILES['imagem']['tmp_name'];
-        $fileSize = $_FILES['imagem']['size'];
-        $fileError = $_FILES['imagem']['error'];
-        $fileType = $_FILES['imagem']['type'];
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
 
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
+            $allowed = array('jpg', 'jpeg', 'png');
 
-        $allowed = array('jpg', 'jpeg', 'png');
-
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 500000) {
+            if (in_array($fileActualExt, $allowed)) {
+                if ($fileError === 0) {
                     $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'img/imagens_pt/' . $fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
+                    move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $fileDestination);
+
+
+                    $descricao_imagem = $_POST['descricao_imagem'][$i] ? $_POST['descricao_imagem'][$i] : "";
+                    $objImagem = new Imagem;
+                    $objImagem->nome = $fileNameNew;
+                    $objImagem->descricao_imagem = $descricao_imagem;
+                    $objImagem->cod_pt = $idPontoTuristico;
+                    $objImagem->cadastrar();
                 } else {
-                    echo "O arquivo é muito grande!";
+                    print_r("Ocorreu um erro ao enviar o arquivo!");
                 }
             } else {
-                echo "Ocorreu um erro ao enviar o arquivo!";
+                print_r("Essa extenção de arquivo não é suportada!");
             }
-        } else {
-            echo "Essa extenção de arquivo não é suportada!";
+            $i++;
         }
-
-        $objImagem = new Imagem;
-        $objImagem->nome = $fileNameNew;
-        $objImagem->cod_pt = $idPontoTuristico;
-        $objImagem->cadastrar();
-        $url =  str_replace("cadastro", "cadastro2", $_SERVER['REQUEST_URI']);
-        header('Location: ' . $url);
     }
+
+
+    $url =  str_replace("cadastro", "cadastro2", $_SERVER['REQUEST_URI']);
+    header('Location: ' . $url);
 }
 
 include __DIR__ . '/includes/header.php';
