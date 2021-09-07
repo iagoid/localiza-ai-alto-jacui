@@ -45,38 +45,31 @@ $objCidade = Cidade::getcidade($objEndereco->cod_cidade);
 
 $objImagem = Imagem::getImagens("cod_pt = " . $objPontoTuristico->cod);
 $imagensSalvasNoBD = array();
+$nomeImagensSalvasNoBD = array();
 $resultadoImagens = "";
-$primeiraImagem = true;
 foreach ($objImagem as $imagem) {
-    array_push($imagensSalvasNoBD, $imagem->nome);
+    array_push($imagensSalvasNoBD, $imagem->cod);
+    array_push($nomeImagensSalvasNoBD, $imagem->nome);
     $descricao_imagem = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : "";
     $nomeImagem = file_exists('./img/imagens_pt/' . $imagem->nome) ? $imagem->nome : "image-not-found.jpg";
 
     $resultadoImagens .=  '
-        <div class="row imagem">
-            <div class="col-lg-7 col-md-7 col-sm-12">
+        <div class="row div_sessao_imagem">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <button type="button" class="close delete-image" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
                 <label>Enviar imagem(ns)</label>
-                <input name="cod_imagem[]" hidden multiple value="' . $imagem->cod . '">
+                <input name="cod_imagem[]" hidden class="upload_images" multiple value="' . $imagem->cod . '">
                 <input name="descricao_imagem_no_BD[]" type="text" placeholder="Descrição da imagem" multiple 
                 value="' . $descricao_imagem . '">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
                 <img class="imagem_visualizador" src="./img/imagens_pt/' . $nomeImagem . '" />
             </div>
-        ';
-
-    if ($primeiraImagem) {
-        $resultadoImagens .= '
-                <div class="col-lg-1 col-md-1 col-sm-1">
-                    <button type="button" id="nova-imagem">+</button>
-                </div>
             </div>';
-        $primeiraImagem = false;
-    } else {
-        $resultadoImagens .= '
-                <div class="col-lg-1 col-md-1 col-sm-1"></div>
-            </div>';
-    }
 }
 
 
@@ -87,15 +80,23 @@ $objContato = Contato::getContatos($whereContato);
 
 $whereCategoria = "cod_pt = " . $objPontoTuristico->cod;
 $objCategoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto($whereCategoria);
-
-$i = 0;
+$categorias = Categoria::getcategorias();
 
 $resultadosCategoriasNome = '';
 $resultadosCategoriasCod = '';
 
-foreach ($objCategoriaPontoTuristico as $categoria) {
-    $resultadosCategoriasNome .= $categoria->nome;
-    $resultadosCategoriasCod .= $categoria->cod;
+$categoriasDoPonto = array();
+foreach ($objCategoriaPontoTuristico as $categoria_do_ponto) {
+    array_push($categoriasDoPonto, $categoria_do_ponto->nome);
+}
+
+$categorias_resultados = '';
+foreach ($categorias as $categoria) {
+    if (in_array($categoria->nome, $categoriasDoPonto)) {
+        $categorias_resultados .= '<option selected  value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+    } else {
+        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
+    }
 }
 
 $objFuncionamento = Funcionamento::getFuncionamentoFromPt($objPontoTuristico->cod);
@@ -133,16 +134,10 @@ if (sizeof($objFuncionamento) > 0) {
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <label for="fim0">Fim</label>
                 <input name="fim0" type="time" value="' . $objFuncionamento[0]->fim . '">
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1">
             </div>';
 
-        if ($primeiro) {
-            $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1">
-                <button type="button" id="novo-funcionamento">+</button>
-            </div>';
-            $primeiro = false;
-        } else {
-            $resultadosFuncionamento .= '<div class="col-lg-1 col-md-1 col-sm-1"></div>';
-        }
 
 
         array_splice($objFuncionamento, 0, 0);
@@ -190,13 +185,6 @@ foreach ($cidades as $cidade) {
     $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
 }
 
-$categorias = Categoria::getcategorias();
-
-$categorias_resultados = '';
-foreach ($categorias as $categoria) {
-    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
-}
-
 $objFuncionamento = new Funcionamento;
 
 $objCategoriaPontoTuristico = new CategoriaPontoTuristico;
@@ -205,10 +193,11 @@ $objCategoriaPontoTuristico->cod_pt = $objPontoTuristico->cod;
 $objContato2 = new Contato;
 $objContato2->cod_pt = $objPontoTuristico->cod;
 
-Funcionamento::excluirFuncionamentoDoPontoTuristico($objPontoTuristico->cod);
 if (isset(
     $_POST['Submit']
 )) {
+    Funcionamento::excluirFuncionamentoDoPontoTuristico($objPontoTuristico->cod);
+
     for ($i = 0; $i < 7; $i++) {
         $diaString = 'dia' . $i;
         $inicioString = 'inicio' . $i;
@@ -249,7 +238,7 @@ if (isset(
         $i = 0;
         foreach ($_POST['descricao'] as $descricao) {
             if ($descricao != "") {
-                $objContato2->tipo = utf8_decode($_POST['tipo'][$i]);
+                $objContato2->tipo = $_POST['tipo'][$i];
                 $objContato2->descricao = $descricao;
                 // Se existe atualiza, senão cria
                 if ($objContato[$i]->cod) {
@@ -280,21 +269,21 @@ if (isset(
         $objEndereco2 = new Endereco;
         $objEndereco2->cod = $objEndereco->cod;
         $objEndereco2->cod_cidade = $_POST['cod_cidade'];
-        $objEndereco2->rua = utf8_decode($_POST['rua']);
+        $objEndereco2->rua = $_POST['rua'];
         $objEndereco2->numero = $_POST['numero'];
-        $objEndereco2->bairro = utf8_decode($_POST['bairro']);
+        $objEndereco2->bairro = $_POST['bairro'];
         $objEndereco2->cep = $_POST['cep'];
         $objEndereco2->atualizar();
 
         $objPontoTuristico2 = new PontoTuristico;
         $objPontoTuristico2->cod = $objPontoTuristico->cod;
-        $objPontoTuristico2->nome = utf8_decode($_POST['nome']);
+        $objPontoTuristico2->nome = $_POST['nome'];
         $objPontoTuristico2->cap = $_POST['cap'];
-        $objPontoTuristico2->obs = utf8_decode($_POST['obs']);
-        $objPontoTuristico2->periodo = utf8_decode($_POST['periodo']);
+        $objPontoTuristico2->obs = $_POST['obs'];
+        $objPontoTuristico2->periodo = $_POST['periodo'];
         $objPontoTuristico2->valor = $_POST['valor'];
-        $objPontoTuristico2->descr = utf8_decode($_POST['descr']);
-        $objPontoTuristico2->hist = utf8_decode($_POST['hist']);
+        $objPontoTuristico2->descr = $_POST['descr'];
+        $objPontoTuristico2->hist = $_POST['hist'];
         $objPontoTuristico2->longi = $_POST['longi'];
         $objPontoTuristico2->latit = $_POST['latit'];
         $objPontoTuristico2->cod_end = $objEndereco2->cod;
@@ -311,11 +300,30 @@ if (isset(
         // exit;
         foreach ($_POST['cod_imagem'] as $i => $cod) {
             $objImagem2 = new Imagem;
-            $objImagem2->cod = $cod;
-            $objImagem2->nome = $imagensSalvasNoBD[$i];
-            $objImagem2->descricao_imagem = utf8_decode($_POST['descricao_imagem_no_BD'][$i]);
-            $objImagem2->cod_pt = $objPontoTuristico->cod;
-            $objImagem2->atualizar();
+
+
+            if (in_array($cod, $imagensSalvasNoBD)) {
+                $objImagem2->cod = $cod;
+                $objImagem2->descricao_imagem = $_POST['descricao_imagem_no_BD'][$i];
+                $objImagem2->cod_pt = $cod;
+
+                // Remove dos arrays as imagens
+                $key = array_search($cod, $imagensSalvasNoBD);
+                unset($imagensSalvasNoBD[$key]);
+
+                $key = array_search($cod, $nomeImagensSalvasNoBD);
+                $objImagem2->nome = $nomeImagensSalvasNoBD[$key];
+                unset($nomeImagensSalvasNoBD[$key]);
+
+                $objImagem2->atualizar();
+            }
+        }
+
+        foreach ($imagensSalvasNoBD as $codigo) {
+            $objImagem2 = new Imagem;
+
+            $objImagem2->cod = $codigo;
+            $objImagem2->excluir();
         }
     }
 

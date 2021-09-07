@@ -93,14 +93,19 @@ $(document).ready(function () {
 
     // Adiciona um novo campo de imagem
     var novaImagem = `
-    <div class="row imagem">
-        <div class="col-lg-7 col-md-7 col-sm-12">
+    <div class="row div_sessao_imagem">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <button type="button" class="close delete-image" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
             <label>Enviar imagem(ns)</label>
             <input name="imagem[]" type="file" class='upload_images' accept="image/*" multiple>
             <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" maxlength="49" multiple>
 
         </div>
-        <div class="col-lg-5 col-md-5 col-sm-12 div_imagem_visualizador">
+        <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
             <img class="imagem_visualizador" />
         </div>
     </div>`
@@ -109,6 +114,13 @@ $(document).ready(function () {
     $('#nova-imagem').on('click', function () {
         $(novaImagem).hide().appendTo($('#imagens-div')).show('normal');
         newContatoContador++
+    })
+
+
+    // Deleta a div da image
+    $("#imagens-div").delegate('.close.delete-image', 'click', function () {
+        $index = $(".close.delete-image").index(this)
+        $(".div_sessao_imagem").eq($index).remove()
     })
 
 

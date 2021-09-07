@@ -50,15 +50,16 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <input name="longi" type="text" placeholder="Longitude (Google Maps)" max="20" required value="<?= $objPontoTuristico->longi ?>">
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <label>Enviar imagem(ns)</label>
-            <input name="imagem" type="file" accept="image/*"><img src="<?= $objImagem->nome ?>">
-        </div>
     </div>
 
     <h2>Funcionamento</h2>
     <p>*Caso o estabelecimento não funcione em algum dia da semana deixe o campo em branco, deixe o campo em branco</p>
     <div class="" id="funcionamentos">
+        <div class="row div-funcionamento">
+            <div class="col-1 offset-lg-11 offset-md-11 offset-sm-11">
+                <button type="button" id="novo-funcionamento">+</button>
+            </div>
+        </div>
         <div class="row div-funcionamento">
             <?= $resultadosFuncionamento ?>
         </div>
@@ -72,13 +73,17 @@
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
             <select name="categoria[]" multiple class="form-control" id="multiselect" class="multiselect">
-                <option selected="selected" value="<?= $resultadosCategoriasCod ?>"><?= $resultadosCategoriasNome ?></option>
                 <?= $categorias_resultados ?>
             </select>
         </div>
     </div>
     <h4>Images</h4>
     <div id="imagens-div">
+        <div class="row row-imagem">
+            <div class="col-1 offset-lg-11 offset-md-11 offset-sm-11">
+                <button type="button" id="nova-imagem">+</button>
+            </div>
+        </div>
         <?= $resultadoImagens ?>
     </div>
     <button class="mt-3" type="submit" id="submit-contato" name="Submit">Concluir Edição</button>

@@ -54,8 +54,13 @@
         </div>
     </div>
     <div id="imagens-div">
+        <div class="row row-imagem">
+            <div class="col-1 offset-lg-11 offset-md-11 offset-sm-11">
+                <button type="button" id="nova-imagem">+</button>
+            </div>
+        </div>
         <div class="row imagem">
-            <div class="col-lg-7 col-md-7 col-sm-12">
+            <div class="col-lg-8 col-md-8 col-sm-12">
                 <label>Enviar imagem(ns)</label>
                 <input name="imagem[]" type="file" class='upload_images' accept="image/*" multiple required>
                 <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" maxlength="49" multiple>
@@ -63,9 +68,6 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
                 <img class="imagem_visualizador" />
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1">
-                <button type="button" id="nova-imagem">+</button>
             </div>
         </div>
     </div>

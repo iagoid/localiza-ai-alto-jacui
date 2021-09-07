@@ -31,8 +31,6 @@ class Imagem
   public function atualizar()
   {
     return (new Database('imagem'))->update('cod = ' . $this->cod, [
-      'cod_pt' => $this->cod_pt,
-      'nome' => $this->nome,
       'descricao_imagem' => $this->descricao_imagem,
     ]);
   }
