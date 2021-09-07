@@ -26,14 +26,14 @@ Login::requireLogin();
 $title = "ADMIN EDITAR";
 
 if (!isset($_GET['cod']) or !is_numeric($_GET['cod'])) {
-    header('location: listagem?status=error');
+    header('location: listagemADMIN?status=error');
     exit;
 }
 
 $objPontoTuristico = PontoTuristico::getPontoTuristico($_GET['cod']);
 
 if (!$objPontoTuristico instanceof PontoTuristico) {
-    header('location: listagem.php?status=error');
+    header('location: listagemADMIN?status=error');
     exit;
 }
 
@@ -55,8 +55,6 @@ $i = 0;
 
 $resultadosCategoriasNome = '';
 $resultadosCategoriasCod = '';
-
-//var_dump($objCategoriaPontoTuristico);exit;
 
 foreach ($objCategoriaPontoTuristico as $categoria) {
     $resultadosCategoriasNome .= utf8_encode($categoria->nome);
@@ -334,19 +332,6 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-<section class="history spad">
-    <div class="container">
-        <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
-            <div class="contact__form">
-                <?php
-                // include __DIR__ . '/includes/EditarContato.php';
-                ?>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 
 <?php
 include __DIR__ . '/includes/footer.php';

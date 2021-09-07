@@ -49,7 +49,7 @@ select#multiselect+.nice-select {
 }
 
 .contato_link a, .contato_link i {
-    font-size: 22px;
+    font-size: 18px;
     margin-top: 20px;
 }
 
@@ -103,4 +103,13 @@ img.imagem-ponto-galeria {
 .div_imagem_visualizador img {
     height: 180px;
     width: auto;
+}
+
+span#user-loged {
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    color: #e9ad28;
+    line-height: 27px;
+    font-weight: 400;
+    margin-right: 20px;
 }

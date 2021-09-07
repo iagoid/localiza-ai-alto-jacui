@@ -31,7 +31,7 @@ class Contato
   public function atualizar()
   {
     return (new Database('contato'))->update('cod = ' . $this->cod, [
-      '$cod_pt' => $this->cod_pt,
+      'cod_pt' => $this->cod_pt,
       'tipo' => $this->tipo,
       'descricao' => $this->descricao,
     ]);

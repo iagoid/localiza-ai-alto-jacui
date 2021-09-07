@@ -55,8 +55,7 @@
             <input name="imagem" type="file" accept="image/*"><img src="<?= $objImagem->nome ?>">
         </div>
     </div>
-    <!--</form>-->
-    <!--<form method="POST" enctype="multipart/form-data">-->
+
     <h2>Funcionamento</h2>
     <p>*Caso o estabelecimento não funcione em algum dia da semana deixe o campo em branco, deixe o campo em branco</p>
     <div class="" id="funcionamentos">

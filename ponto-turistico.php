@@ -11,7 +11,6 @@ use \App\Entity\Funcionamento;
 use \App\Entity\Imagem;
 use \App\Entity\ImagensDoPonto;
 use \App\Entity\CategoriasDoPonto;
-use \App\Entity\ContatoDoPonto;
 use \App\Entity\Categoria;
 use \App\Entity\Contato;
 
@@ -80,17 +79,17 @@ $ContatoDoPonto = Contato::getContatos($whereContato);
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
         if (strtoupper($contato->tipo) == "SITE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "INSTAGRAM") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "FACEBOOK") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "TWITTER") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "TELEFONE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "EMAIL") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . utf8_encode($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
         }
     }
 } else {
@@ -166,7 +165,13 @@ include __DIR__ . '/includes/header.php';
             <div class="row">
                 <?= $resultadosImagem ?>
             </div>
+            <?php
+            include __DIR__ . '/includes/Mapa.php';
+            ?>
+
         </div>
+    </div>
+
 
 </section>
 
@@ -184,10 +189,6 @@ include __DIR__ . '/includes/header.php';
         </div>
     </div>
 </section>
-
-<?php
-include __DIR__ . '/includes/Mapa.php';
-?>
 
 
 <?php

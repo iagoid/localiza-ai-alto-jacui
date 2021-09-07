@@ -6,10 +6,15 @@ use \App\Session\Login;
 
 $usuarioLogado = Login::getUsuarioLogado();
 
-$usuario = $usuarioLogado ? '<a href="perfil.php"><span class="mr-2 fa fa-user"></span>' . $usuarioLogado['nome'] . '</a>' . ' <a href="logout.php">Sair</a>' :
+$usuario = $usuarioLogado ? '<span id="user-loged"> Olá, ' . $usuarioLogado['nome'] . '</span> <a href="logout.php">Sair</a>' :
     '<a href="login.php"><span class="mr-2 fa fa-user-o"></span>Entrar</a>';
 
-$link = $usuarioLogado ? '<li><a href="./listagemADMIN">Pontos Turísticos</a></li>' : '<li><a href="./listagem">Pontos Turísticos</a></li>';
+$link = $usuarioLogado ? '<li><a href="./listagemADMIN">Pontos Turísticos</a></li>
+    <li><a href="./cadastro">Cadastro</a></li>' : '<li><a href="./listagem">Pontos Turísticos</a></li>';
+
+$linkContato = $usuarioLogado ? "" : '<div class="header__nav__widget">
+    <a href="./contact">Fale Conosco <span class="fa arrow_right"></span></a>
+    </div>';
 
 ?>
 
@@ -84,9 +89,7 @@ $link = $usuarioLogado ? '<li><a href="./listagemADMIN">Pontos Turísticos</a></
                                     <li><a href="./about">Sobre Nós</a></li>
                                 </ul>
                             </nav>
-                            <div class="header__nav__widget">
-                                <a href="./contact">Fale Conosco <span class="fa arrow_right"></span></a>
-                            </div>
+                            <?= $linkContato ?>
 
                             <div class="ml-3 header__nav__widget">
                                 <?= $usuario ?>
