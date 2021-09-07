@@ -90,6 +90,9 @@ img.imagem-ponto-galeria {
 .delete__form form a:hover {
     color: white;
 }
+.delete__form h2 {
+    text-align: center;
+}
 
 .resultados_pontos {
     justify-content: center;

@@ -34,16 +34,18 @@ include __DIR__ . '/includes/header.php';
 
 
 <section class="history spad">
-    <div class="container">
-        <div class="col-lg-12 offset-lg-12 col-md-12 col-sm-12">
-            <div class="delete__form">
+    <div class="row">
+        <div class="col-lg-3"></div>
+            <div class="delete__form col-lg-6">
                 <?= $resultado ?>
+                <div class="col-lg-12 mt-4">
                 <form action="" method="post">
                     <button type="Submit" name="Submit" class="btn btn-danger">Sim</button>
                     <a href="listagemADMIN.php" id="nao-excluir" class="btn btn-success">Não</a>
                 </form>
             </div>
-        </div>
+            </div>
+        <div class="col-lg-3"></div>
     </div>
 </section>
 
