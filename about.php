@@ -7,7 +7,7 @@ include __DIR__ . '/includes/header.php';
 
 
 <!-- Breadcrumb Begin -->
-<div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.jpg">
+<div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -21,28 +21,36 @@ include __DIR__ . '/includes/header.php';
 <!-- Breadcrumb End -->
 
 <!-- About Section Begin -->
-<section class="about spad">
+<section class="about spad"  style="background-color: #ededed;">
     <div class="container">
         <div class="about__content">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section-title">
-                        <h5>Our Specialization</h5>
-                        <h2>Welcome Hiroto</h2>
+                        <h5>NOSSA HISTÓRIA</h5>
+                        <h2>Localiza Aí Alto Jacuí</h2>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="about__text">
-                        <p>Metasurfaces are generally designed by placing scatterers in periodic or pseudo-periodic
-                            grids.</p>
-                        <p>I am convinced the only way to make money online is to have a consistent Advertising
-                            plan. A plan you are willing to work hard on and commit to for a selected period of
-                            time. When making this plan, you need to do two things.</p>
+                        <p>A Center On One, criada em 2021, busca reunir as melhores informações dos pontos turiscos da região do alto Jacui, em apenas um site, de forma funcional, essa é a ideia principal por trás do Localiza Aí Alto Jacuí.</p>
+  
+                        <p>Na Center On One, possuímos um acervo de imagens para nossos turistas terem uma prévia do que irão conhecer. Temos informações  de horário de funcionamento atualizadas de cada ponto turistico, com os dias da semana e período do ano de abertura.</p>
+
+                        <p>Ainda podemos conhecer um pouco da história e cultura de cada lugar, antes mesmo de visitá-lo.</p>
+                        
+                        <p>Você pode selecionar os pontos turiscos por cidade ou mesmo por categoria, já que a região do alto Jacui conta com várias opções, entre elas parques, monumentos, restaurantes típicos, festivais, praças entre outros.</p>
+                        
+                        <p>Com nosso nosso site, você tem a acesso a links que permitem conhecer as redes sociais do seu ponto turistico e também o valor de entrada.</p>
+                        
+                        <p>Nós da Center On One, buscamos a praticidade e confiabilidade em pontos turiscos em um único lugar, para que nosso cliente não perca horas pesquisando em vários sites, podendo aproveitar seu tempo visitando vários pontos turiscos.</p> 
+                        
+                        <p>Center On One! Em um único lugar</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="services__item">
                     <img src="img/services/services-1.png" alt="">
@@ -91,22 +99,22 @@ include __DIR__ . '/includes/header.php';
                         projections.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>
 <!-- About Section End -->
 
 <!-- Chooseus Section Begin -->
-<div class="chooseus spad set-bg" data-setbg="img/chooseus-bg.jpg">
+<div class="chooseus spad set-bg">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-8 text-center">
                 <div class="chooseus__text">
                     <div class="section-title">
-                        <h5>WHY CHOOSE US</h5>
-                        <h2>Contact us now to get the latest deals and for the next booking</h2>
+                        <h5>VENHA PARA O LOCALIZA AÍ</h5>
+                        <h2><span style="color: black">Fale com a gente para adicionar seu ponto no site</span></h2>
                     </div>
-                    <a href="#" class="primary-btn">Booking Now</a>
+                    <a href="contact.php" class="primary-btn" style="background-color: #ededed; color: black; text-decoration: blink; text-decoration-color: orange;">Contate-nos</a>
                 </div>
             </div>
         </div>
@@ -115,7 +123,7 @@ include __DIR__ . '/includes/header.php';
 <!-- Chooseus Section End -->
 
 <!-- History Section Begin -->
-<section class="history spad">
+<!--<section class="history spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -166,7 +174,7 @@ include __DIR__ . '/includes/header.php';
             </div>
         </div>
     </div>
-</section>
+</section>-->
 <!-- History Section End -->
 
 <?php

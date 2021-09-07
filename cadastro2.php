@@ -98,7 +98,7 @@ include __DIR__ . '/includes/header.php';
 ?>
 
 <!-- Breadcrumb Begin -->
-<div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.jpg">
+<div class="breadcrumb-option set-bg" data-setbg="img/breadcrumb-bg.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
