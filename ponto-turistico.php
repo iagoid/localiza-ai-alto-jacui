@@ -9,7 +9,6 @@ require_once 'App/Entity/Contato.php';
 use \App\Entity\PontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Imagem;
-use \App\Entity\ImagensDoPonto;
 use \App\Entity\CategoriasDoPonto;
 use \App\Entity\Categoria;
 use \App\Entity\Contato;
@@ -61,14 +60,18 @@ $resultadoTemporada = '<h5>Temporada: ' . utf8_encode($pontoTuristico->periodo) 
 
 
 $resultadosImagem = '';
-foreach ($imagens as $imagem) {
-    $nomeImagem = $imagem->nome ? $imagem->nome : "image-not-found.jpg";
-    $imagemDescricao = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : $pontoTuristico->nome;
 
-    $resultadosImagem .= '
+
+if (!empty($imagens)) {
+    foreach ($imagens as $imagem) {
+        $nomeImagem = file_exists('./img/imagens_pt/' . $imagem->nome) ? $imagem->nome : "image-not-found.jpg";
+        $imagemDescricao = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : $pontoTuristico->nome;
+
+        $resultadosImagem .= '
     <div class="col-lg-3 col-md-4 col-12">
         <img class="img-fluid img-thumbnail imagem-ponto-galeria" src="img/imagens_pt/' . $nomeImagem . '" alt="' . $imagemDescricao . '">
     </div>';
+    }
 }
 
 $resultadosContato = '';
@@ -99,8 +102,7 @@ if (is_array($ContatoDoPonto)) {
 $pontos3 = "";
 $listagempontos = PontoTuristico::getPontoTuristicos(null, null, 3);
 foreach ($listagempontos as $ponto) {
-    $imagem = ImagensDoPonto::imagensDoPonto("cod_pt = " . $ponto->cod, null, null, 3);
-
+    $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 3);
 
     $nomeImagem = "";
     if (sizeof($imagem) > 0) {

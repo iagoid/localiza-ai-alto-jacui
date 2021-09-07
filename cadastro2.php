@@ -3,11 +3,15 @@ require_once 'App/Entity/Categoria.php';
 require_once 'App/Entity/CategoriaPontoTuristico.php';
 require_once 'App/Entity/Funcionamento.php';
 require_once 'App/Entity/Contato.php';
+require_once 'App/Session/Login.php';
 
 use \App\Entity\Categoria;
 use \App\Entity\CategoriaPontoTuristico;
 use \App\Entity\Funcionamento;
 use \App\Entity\Contato;
+use \App\Session\Login;
+
+Login::requireLogin();
 
 $title = "ADMIN CADASTRO";
 
@@ -85,7 +89,7 @@ if (isset(
             $i++;
         }
     }
-    session_destroy();
+    $_SESSION['idPontoTuristico'] = null;
     $url =  str_replace("cadastro2", "ponto-turistico?cod=" . $idPonto, $_SERVER['REQUEST_URI']);
     header('Location: ' . $url);
 }

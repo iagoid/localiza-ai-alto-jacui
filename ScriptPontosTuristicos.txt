@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS cidade (
 CREATE TABLE IF NOT EXISTS endereco(
 	cod SERIAL NOT NULL,
 	cod_cidade INTEGER NOT NULL,
-	rua VARCHAR(50) NOT NULL,
+	rua VARCHAR(70) NOT NULL,
 	numero smallint NOT NULL,
 	bairro VARCHAR(50) NOT NULL,
 	complemento VARCHAR(100),

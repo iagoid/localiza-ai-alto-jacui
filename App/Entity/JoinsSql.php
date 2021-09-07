@@ -19,19 +19,6 @@ class CategoriasDoPonto
     }
 }
 
-class PontosDaCategoria
-{
-    public $cod;
-    public $nome;
-
-    public static function pontosDaCategoria($where = null, $order = null, $limit = null)
-    {
-        $script = "SELECT ponto_turistico.nome, ponto_turistico.cod FROM categoria INNER JOIN cat_pt ON cat_pt.cod_cat =
-            categoria.cod INNER JOIN ponto_turistico ON cat_pt.cod_cat = ponto_turistico.cod";
-        return (new Database('ponto_turistico'))->join($script, $where, $order, $limit, "cod, nome")->fetchAll(PDO::FETCH_CLASS);
-    }
-}
-
 class PontosCadPT
 {
     public $cod;
@@ -49,9 +36,9 @@ class PontosCadPT
 
     public static function pontosCadPT($where = null, $order = null, $limit = null)
     {
-        $script = "SELECT * FROM ponto_turistico INNER JOIN cat_pt ON cat_pt.cod_pt=ponto_turistico.cod INNER JOIN endereco ON endereco.cod=ponto_turistico.cod_end";
+        $script = "SELECT cat_pt.cod_pt as cod, cod_end,  obs, periodo, valor, nome, descr, hist, cap, longi, latit, cod_cat FROM ponto_turistico INNER JOIN cat_pt ON cat_pt.cod_pt=ponto_turistico.cod INNER JOIN endereco ON endereco.cod=ponto_turistico.cod_end";
         $group = "GROUP BY ponto_turistico.cod";
-        return (new Database('ponto_turistico'))->join($script,  $where, $order, $limit, "*", $group)->fetchAll(PDO::FETCH_CLASS);
+        return (new Database('ponto_turistico'))->join($script,  $where, $order, $limit, null, $group)->fetchAll(PDO::FETCH_CLASS);
     }
 }
 
@@ -71,41 +58,3 @@ class CidadeDoPonto
         return (new Database('endereco'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
     }
 }
-
-class ImagensDoPonto
-{
-    public $nome;
-    public $cod_pt;
-    public $codigo;
-
-    public static function imagensDoPonto($where = null, $order = null, $limit = null)
-    {
-        $script = "SELECT imagem.nome FROM imagem INNER JOIN ponto_turistico ON imagem.cod_pt = ponto_turistico.cod";
-        return (new Database('imagem'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
-    }
-}
-
-class EnderecoDoPonto
-{
-    public $nome;
-    public $cod_end;
-    public $codigo;
-
-    public static function enderecoDoPonto($where = null, $order = null, $limit = null)
-    {
-        $script = "SELECT * FROM endereco INNER JOIN ponto_turistico ON endereco.cod = ponto_turistico.cod_end";
-        return (new Database('endereco'))->join($script, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS);
-    }
-}
-
-/*class PontoTuristico1
-{
-    public $nome;
-    public $cod_end;
-    public $codigo;
-
-    public static function pontoTuristico1($where = null, $order = null, $limit = null)
-    {
-        $script = "SELECT * FROM endereco INNER JOIN ponto_turistico ON endereco.cod = ponto_turistico.cod_end INNER JOIN cidade on cidade.cod = endereco.cod_cidade"
-    }
-}*/

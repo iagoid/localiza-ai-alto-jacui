@@ -50,6 +50,7 @@ $primeiraImagem = true;
 foreach ($objImagem as $imagem) {
     array_push($imagensSalvasNoBD, $imagem->nome);
     $descricao_imagem = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : "";
+    $nomeImagem = file_exists('./img/imagens_pt/' . $imagem->nome) ? $imagem->nome : "image-not-found.jpg";
 
     $resultadoImagens .=  '
         <div class="row imagem">
@@ -60,7 +61,7 @@ foreach ($objImagem as $imagem) {
                 value="' . $descricao_imagem . '">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
-                <img class="imagem_visualizador" src="./img/imagens_pt/' . $imagem->nome . '" />
+                <img class="imagem_visualizador" src="./img/imagens_pt/' . $nomeImagem . '" />
             </div>
         ';
 

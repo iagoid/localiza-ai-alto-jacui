@@ -51,7 +51,12 @@ if ($pontosTuristicos) {
     $ponto_resultados = "";
     foreach ($pontosTuristicos as $ponto) {
         $imagem = Imagem::getImagens("cod_pt = " . $ponto->cod, null, null, 1);
-        $nomeImagem = $imagem ? $imagem[0]->nome : "image-not-found.jpg";
+        $nomeImagem;
+        if (!empty($imagem)) {
+            $nomeImagem = file_exists('./img/imagens_pt/' . $imagem[0]->nome) ? $imagem[0]->nome : "image-not-found.jpg";
+        } else {
+            $nomeImagem = "image-not-found.jpg";
+        }
 
         $ponto_resultados .= '
         <div class="col-lg-4 col-md-4">

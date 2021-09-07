@@ -73,7 +73,7 @@ $(document).ready(function () {
 
 
     // Imagem
-    $(".upload_images").on('change', function () {
+    $("#imagens-div").delegate(".upload_images", 'change', function () {
         changeImage(this)
     })
 
@@ -81,8 +81,10 @@ $(document).ready(function () {
         var reader;
         if (input.files && input.files[0]) {
             reader = new FileReader();
+            $index = $(".upload_images").index(input)
+
             reader.onload = function (e) {
-                $(".imagem_visualizador").last().attr('src', e.target.result)
+                $(".imagem_visualizador").eq($index).attr('src', e.target.result)
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -95,7 +97,7 @@ $(document).ready(function () {
         <div class="col-lg-7 col-md-7 col-sm-12">
             <label>Enviar imagem(ns)</label>
             <input name="imagem[]" type="file" class='upload_images' accept="image/*" multiple>
-            <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" multiple>
+            <input name="descricao_imagem[]" type="text" placeholder="Descrição da imagem" maxlength="49" multiple>
 
         </div>
         <div class="col-lg-5 col-md-5 col-sm-12 div_imagem_visualizador">
