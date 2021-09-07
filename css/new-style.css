@@ -102,7 +102,8 @@ img.imagem-ponto-galeria {
 
 .div_imagem_visualizador img {
     height: 180px;
-    width: auto;
+    width: 250px;
+    padding: 5px;
 }
 
 span#user-loged {

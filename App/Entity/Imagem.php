@@ -44,7 +44,7 @@ class Imagem
 
   public static function getImagens($where = null, $order = null, $limit = null)
   {
-    return (new Database('imagem'))->select($where, $order, $limit, "cod, cod_pt, nome")->fetchAll(PDO::FETCH_CLASS);
+    return (new Database('imagem'))->select($where, $order, $limit, "cod, cod_pt, nome, descricao_imagem")->fetchAll(PDO::FETCH_CLASS);
   }
 
   public static function getImagem($where = null, $order = null, $limit = null)

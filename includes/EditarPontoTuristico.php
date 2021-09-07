@@ -77,5 +77,9 @@
             </select>
         </div>
     </div>
+    <h4>Images</h4>
+    <div id="imagens-div">
+        <?= $resultadoImagens ?>
+    </div>
     <button class="mt-3" type="submit" id="submit-contato" name="Submit">Concluir Edição</button>
 </form>

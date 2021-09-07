@@ -43,7 +43,43 @@ $objEndereco = Endereco::getEndereco($objPontoTuristico->cod_end);
 
 $objCidade = Cidade::getcidade($objEndereco->cod_cidade);
 
-$objImagem = Imagem::getImagemFromPt($objPontoTuristico->cod);
+$objImagem = Imagem::getImagens("cod_pt = " . $objPontoTuristico->cod);
+$imagensSalvasNoBD = array();
+$resultadoImagens = "";
+$primeiraImagem = true;
+foreach ($objImagem as $imagem) {
+    array_push($imagensSalvasNoBD, $imagem->nome);
+    $descricao_imagem = isset($imagem->descricao_imagem) ? $imagem->descricao_imagem : "";
+
+    $resultadoImagens .=  '
+        <div class="row imagem">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <label>Enviar imagem(ns)</label>
+                <input name="cod_imagem[]" hidden multiple value="' . $imagem->cod . '">
+                <input name="descricao_imagem_no_BD[]" type="text" placeholder="Descrição da imagem" multiple 
+                value="' . $descricao_imagem . '">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 div_imagem_visualizador">
+                <img class="imagem_visualizador" src="./img/imagens_pt/' . $imagem->nome . '" />
+            </div>
+        ';
+
+    if ($primeiraImagem) {
+        $resultadoImagens .= '
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                    <button type="button" id="nova-imagem">+</button>
+                </div>
+            </div>';
+        $primeiraImagem = false;
+    } else {
+        $resultadoImagens .= '
+                <div class="col-lg-1 col-md-1 col-sm-1"></div>
+            </div>';
+    }
+}
+
+
+
 
 $whereContato = "cod_pt = " . $objPontoTuristico->cod;
 $objContato = Contato::getContatos($whereContato);
@@ -265,46 +301,61 @@ if (isset(
     }
 
     //IMAGEM
-    if (
-        isset(
-            $_FILES['imagem']
-        ) && $_FILES['imagem']["error"] == null
-    ) {
-        $file = $_FILES['imagem'];
-        print_r($file["error"]);
-        exit;
+    // Verifica as imagens que já estão no banco
+    if (isset(
+        $_POST['cod_imagem'],
+        $_POST['descricao_imagem_no_BD']
+    )) {
+        // print_r($_POST['descricao_imagem_no_BD']);
+        // exit;
+        foreach ($_POST['cod_imagem'] as $i => $cod) {
+            $objImagem2 = new Imagem;
+            $objImagem2->cod = $cod;
+            $objImagem2->nome = $imagensSalvasNoBD[$i];
+            $objImagem2->descricao_imagem = utf8_decode($_POST['descricao_imagem_no_BD'][$i]);
+            $objImagem2->cod_pt = $objPontoTuristico->cod;
+            $objImagem2->atualizar();
+        }
+    }
 
-        $fileName = ($_FILES['imagem']['name']);
-        $fileTmpName = $_FILES['imagem']['tmp_name'];
-        $fileSize = $_FILES['imagem']['size'];
-        $fileError = $_FILES['imagem']['error'];
-        $fileType = $_FILES['imagem']['type'];
 
-        $fileExt = explode('.', $fileName);
-        $fileActualExt = strtolower(end($fileExt));
 
-        $allowed = array('jpg', 'jpeg', 'png');
+    // Se é uma nova imagem
+    $fileNames = array_filter($_FILES['imagem']['name']);
+    if (!empty($fileNames)) {
+        $i = 0;
+        foreach ($_FILES['imagem']['name'] as $file) {
+            $fileName = $_FILES['imagem']['name'][$i];
+            $fileSize = $_FILES['imagem']['size'][$i];
+            $fileError = $_FILES['imagem']['error'][$i];
+            $fileType = $_FILES['imagem']['type'][$i];
 
-        if (in_array($fileActualExt, $allowed)) {
-            if ($fileError === 0) {
-                if ($fileSize < 500000) {
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array('jpg', 'jpeg', 'png');
+
+            if (in_array($fileActualExt, $allowed)) {
+                if ($fileError === 0) {
                     $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'img/imagens_pt/' . $fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
+                    move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $fileDestination);
+
+
+                    $descricao_imagem = $_POST['descricao_imagem'][$i] ? $_POST['descricao_imagem'][$i] : "";
+                    $objImagem = new Imagem;
+                    $objImagem->nome = $fileNameNew;
+                    $objImagem->descricao_imagem = $descricao_imagem;
+                    $objImagem->cod_pt = $objPontoTuristico->cod;
+                    $objImagem->cadastrar();
                 } else {
-                    echo "O arquivo é muito grande!";
+                    print_r("Ocorreu um erro ao enviar o arquivo!");
                 }
             } else {
-                echo "Ocorreu um erro ao enviar o arquivo!";
+                print_r("Essa extenção de arquivo não é suportada!");
             }
-        } else {
-            echo "Essa extenção de arquivo não é suportada!";
+            $i++;
         }
-
-        $objImagem = new Imagem;
-        $objImagem->nome = $fileDestination;
-        $objImagem->cod_pt = $objPontoTuristico->codTuristico;
-        $objImagem->atualizar();
     }
 
     $url =  str_replace("editar", "ponto-turistico", $_SERVER['REQUEST_URI']);
