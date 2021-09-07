@@ -24,25 +24,25 @@ $funcionamentos = Funcionamento::getFuncionamentoFromPt($_GET['cod']);
 $imagens = Imagem::getImagens("cod_pt = " . $_GET['cod']);
 $categorias = Categoria::getcategorias($_GET['cod']);
 
-$title = utf8_encode($pontoTuristico->nome);
+$title = $pontoTuristico->nome;
 
 $resultadosCategorias = '';
 foreach ($categorias as $categoria) {
     $categoriaPontoTuristico = CategoriasDoPonto::categoriasDoPonto("cod_pt = " . $pontoTuristico->cod, null, null, 1);
-    $resultadosCategorias = $categoriaPontoTuristico ? '<div class="tag">' . utf8_encode($categoriaPontoTuristico[0]->nome) . '</div>' : " ";
+    $resultadosCategorias = $categoriaPontoTuristico ? '<div class="tag">' . $categoriaPontoTuristico[0]->nome . '</div>' : " ";
 }
 
 $resultadosPontoTuristico = '<div class="room__details__title">
-                        <h2>' . utf8_encode($pontoTuristico->nome) . '</h2>
+                        <h2>' . $pontoTuristico->nome . '</h2>
                     </div>
                     <div class="room__details__desc">
                         <p><a' . $resultadosCategorias . '</p>
                     </div>
                     <div class="room__details__desc">
-                        <p>' . utf8_encode($pontoTuristico->descr) . '</p>
+                        <p>' . $pontoTuristico->descr . '</p>
                         <h2>História:</h2>
-                        <p>' . utf8_encode($pontoTuristico->hist) . '</p>
-                        <p>' . utf8_encode($pontoTuristico->obs) . '</p>
+                        <p>' . $pontoTuristico->hist . '</p>
+                        <p>' . $pontoTuristico->obs . '</p>
                     </div>';
 
 $resultadosFuncionamento = '';
@@ -50,11 +50,11 @@ $i = 0;
 
 foreach ($funcionamentos as $funcionamento) {
     $resultadosFuncionamento .= '<div class="room__details__more__facilities__item">
-        <h6>' . utf8_encode($funcionamento->dia) . ': Das ' . $funcionamento->inicio . ' as ' . $funcionamento->fim . '</h6>
+        <h6>' . $funcionamento->dia . ': Das ' . $funcionamento->inicio . ' as ' . $funcionamento->fim . '</h6>
         </div>';
 }
 
-$resultadoTemporada = '<h5>Temporada: ' . utf8_encode($pontoTuristico->periodo) . '</h5>
+$resultadoTemporada = '<h5>Temporada: ' . $pontoTuristico->periodo . '</h5>
                     <h5>Valor por visitante: R$ ' . $pontoTuristico->valor . '</h5>
                     <h5>Capacidade: ' . $pontoTuristico->cap . ' visitantes</h5>';
 
@@ -82,17 +82,17 @@ $ContatoDoPonto = Contato::getContatos($whereContato);
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
         if (strtoupper($contato->tipo) == "SITE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . strtoupper($contato->tipo) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "INSTAGRAM") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . strtoupper($contato->tipo) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "FACEBOOK") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . strtoupper($contato->tipo) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "TWITTER") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . strtoupper($contato->tipo) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "TELEFONE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . strtoupper($contato->tipo) . '</a></i></div>';
         } else if (strtoupper($contato->tipo) == "EMAIL") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . strtoupper(utf8_encode($contato->tipo)) . '</a></i></div>';
+            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . strtoupper($contato->tipo) . '</a></i></div>';
         }
     }
 } else {
@@ -117,7 +117,7 @@ foreach ($listagempontos as $ponto) {
                         <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
                     </div>
                     <div class="blog__item__text">
-                        <h5><a href="#">' . utf8_encode($ponto->nome) . '</a></h5>
+                        <h5><a href="#">' . $ponto->nome . '</a></h5>
                     </div>
                 </div>
             </div>';

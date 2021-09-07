@@ -67,9 +67,9 @@ $categorias = Categoria::getcategorias(null, "nome");
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
     if ($codCategoria == $categoria->cod) {
-        $categorias_resultados .= '<option selected value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
+        $categorias_resultados .= '<option selected value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
     } else {
-        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
+        $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
     }
 }
 
@@ -77,9 +77,9 @@ foreach ($categorias as $categoria) {
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
     if ($codCidade == $cidade->cod) {
-        $cidades_resultados .= '<option selected value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
+        $cidades_resultados .= '<option selected value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
     } else {
-        $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
+        $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
     }
 }
 
@@ -110,8 +110,8 @@ if ($pontosTuristicos) {
                     ' . $categoriaNome . '
                 </div>
                 <div class="blog__item__text">
-                    <p><i class="fa fa-map-o"></i>' .  utf8_encode($cidadeNome) . '</p>
-                    <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . utf8_encode($ponto->nome) . '</a></h5>
+                    <p><i class="fa fa-map-o"></i>' .  $cidadeNome . '</p>
+                    <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
                 </div>
             </div>
         </div>

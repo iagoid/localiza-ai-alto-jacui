@@ -24,7 +24,12 @@ class Database
     private function setConnection()
     {
         try {
-            $this->connection = new PDO('mysql:host=' . self::HOST . ';dbname=' . self::NAME . '', self::USER, self::PASSWORD);
+            $this->connection = new PDO(
+                'mysql:host=' . self::HOST . ';dbname=' . self::NAME . ';',
+                self::USER,
+                self::PASSWORD,
+                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+            );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die('ERROR: ' . $e->PDOException->setMessage());
@@ -51,8 +56,6 @@ class Database
         $query = 'INSERT INTO ' . $this->table . '(' . implode(',', $fields) . ')
         VALUES (' . implode(",", $binds) . ')';
 
-        print_r($query);
-        print_r(array_values($values));
         $this->execute($query, array_values($values));
         return $this->connection->lastInsertId();
     }
