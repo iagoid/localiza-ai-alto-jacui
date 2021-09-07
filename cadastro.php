@@ -20,7 +20,7 @@ $cidades = Cidade::getcidades();
 
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
-    $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
+    $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
 }
 
 $idEndereco;
@@ -37,11 +37,11 @@ if (isset($_POST['Submit'])) {
     )) {
         $objEndereco = new Endereco;
         $objEndereco->cod_cidade = $_POST['cod_cidade'];
-        $objEndereco->rua = utf8_encode($_POST['rua']);
+        $objEndereco->rua = $_POST['rua'];
         $objEndereco->numero = $_POST['numero'];
-        $objEndereco->bairro = utf8_encode($_POST['bairro']);
+        $objEndereco->bairro = $_POST['bairro'];
         $objEndereco->cep = $_POST['cep'];
-        $objEndereco->complemento = utf8_encode($_POST['complemento']);
+        $objEndereco->complemento = $_POST['complemento'];
         $objEndereco->cadastrar();
     }
 
@@ -56,13 +56,13 @@ if (isset($_POST['Submit'])) {
         $_POST['latit']
     )) {
         $objPontoTuristico = new PontoTuristico;
-        $objPontoTuristico->nome = utf8_encode($_POST['nome']);
+        $objPontoTuristico->nome = $_POST['nome'];
         $objPontoTuristico->cap = $_POST['cap'];
-        $objPontoTuristico->obs = utf8_encode($_POST['obs']);
-        $objPontoTuristico->periodo = utf8_encode($_POST['periodo']);
+        $objPontoTuristico->obs = $_POST['obs'];
+        $objPontoTuristico->periodo = $_POST['periodo'];
         $objPontoTuristico->valor = $_POST['valor'];
-        $objPontoTuristico->descr = utf8_encode($_POST['descr']);
-        $objPontoTuristico->hist = utf8_encode($_POST['hist']);
+        $objPontoTuristico->descr = $_POST['descr'];
+        $objPontoTuristico->hist = $_POST['hist'];
         $objPontoTuristico->longi = $_POST['longi'];
         $objPontoTuristico->latit = $_POST['latit'];
         $objPontoTuristico->cod_end = $idEndereco;
@@ -92,7 +92,7 @@ if (isset($_POST['Submit'])) {
                     move_uploaded_file($_FILES['imagem']['tmp_name'][$i], $fileDestination);
 
 
-                    $descricao_imagem = $_POST['descricao_imagem'][$i] ? utf8_encode($_POST['descricao_imagem'][$i]) : "";
+                    $descricao_imagem = $_POST['descricao_imagem'][$i] ? $_POST['descricao_imagem'][$i] : "";
                     $objImagem = new Imagem;
                     $objImagem->nome = $fileNameNew;
                     $objImagem->descricao_imagem = $descricao_imagem;

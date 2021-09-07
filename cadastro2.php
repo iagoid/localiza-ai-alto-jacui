@@ -24,7 +24,7 @@ $categorias = Categoria::getcategorias();
 
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
-    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
+    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
 }
 
 $idPonto = $_SESSION['idPontoTuristico'];

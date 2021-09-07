@@ -21,7 +21,7 @@ if (!$objPontoTuristico instanceof PontoTuristico) {
     exit;
 }
 
-$resultado = '<h2>Deseja mesmo excluir o ponto ' . utf8_encode($objPontoTuristico->nome) . '?</h2>';
+$resultado = '<h2>Deseja mesmo excluir o ponto ' . $objPontoTuristico->nome . '?</h2>';
 
 if (isset($_POST['Submit'])) {
     $objPontoTuristico->excluir();

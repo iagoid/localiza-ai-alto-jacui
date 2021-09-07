@@ -94,7 +94,7 @@ $resultadosCategoriasNome = '';
 $resultadosCategoriasCod = '';
 
 foreach ($objCategoriaPontoTuristico as $categoria) {
-    $resultadosCategoriasNome .= utf8_encode($categoria->nome);
+    $resultadosCategoriasNome .= $categoria->nome;
     $resultadosCategoriasCod .= $categoria->cod;
 }
 
@@ -117,7 +117,7 @@ if (sizeof($objFuncionamento) > 0) {
                     && ($objFuncionamento[0]->fim == $objFuncionamento[$j]->fim)
                 ) {
 
-                    $resultadosFuncionamento .= '<option value="' . utf8_encode($objFuncionamento[$j]->dia) . '" selected="selected">' . utf8_encode($objFuncionamento[$j]->dia) . '</option>';
+                    $resultadosFuncionamento .= '<option value="' . $objFuncionamento[$j]->dia . '" selected="selected">' . $objFuncionamento[$j]->dia . '</option>';
                     array_splice($objFuncionamento, $j, $j);
                     $j--;
                 }
@@ -187,14 +187,14 @@ $cidades = Cidade::getcidades();
 
 $cidades_resultados = '';
 foreach ($cidades as $cidade) {
-    $cidades_resultados .= '<option value="' . $cidade->cod . '">' . utf8_encode($cidade->nome) . '</option>';
+    $cidades_resultados .= '<option value="' . $cidade->cod . '">' . $cidade->nome . '</option>';
 }
 
 $categorias = Categoria::getcategorias();
 
 $categorias_resultados = '';
 foreach ($categorias as $categoria) {
-    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . utf8_encode($categoria->nome) . '</option>';
+    $categorias_resultados .= '<option value="' . $categoria->cod . '">' . $categoria->nome . '</option>';
 }
 
 $objFuncionamento = new Funcionamento;

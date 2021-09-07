@@ -65,7 +65,7 @@ if ($pontosTuristicos) {
                     <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
                 </div>
                 <div class="blog__item__text ponto_name">
-                    <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . utf8_encode($ponto->nome) . '</a></h5>
+                    <h5><a href="ponto-turistico.php?cod=' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
                 </div>
                 <div class="blog__item__text admin">
                     <a class="edit"  href="editar.php?cod=' . $ponto->cod . '"><i class="fa fa-edit"></i> Editar</a>
