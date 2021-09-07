@@ -148,8 +148,6 @@ if (sizeof($objContato) > 0) {
 
 //ATUALIZAÇÃO
 
-session_start();
-
 $cidades = Cidade::getcidades();
 
 $cidades_resultados = '';

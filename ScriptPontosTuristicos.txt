@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	login VARCHAR(50) NOT NULL UNIQUE,
 	senha VARCHAR(255) NOT NULL,
 	CONSTRAINT pk_usuarios PRIMARY KEY (cod)
-)
+);
 
 INSERT INTO cidade (nome, uf) VALUES ('Alto Alegre', 'RS');
 INSERT INTO cidade (nome, uf) VALUES ('Arroio do Tigre', 'RS');

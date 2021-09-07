@@ -40,7 +40,7 @@ include __DIR__ . '/includes/header.php';
                 <?= $resultado ?>
                 <form action="" method="post">
                     <button type="Submit" name="Submit" class="btn btn-danger">Sim</button>
-                    <a href="listagemADMIN.php" class="btn btn-success">Não</a>
+                    <a href="listagemADMIN.php" id="nao-excluir" class="btn btn-success">Não</a>
                 </form>
             </div>
         </div>

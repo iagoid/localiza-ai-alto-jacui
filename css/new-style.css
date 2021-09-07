@@ -65,6 +65,10 @@ select#multiselect+.nice-select {
     color: rgb(255, 35, 35);
 }
 
+a#nao-excluir {
+    color: white !important;
+}
+
 .blog__item__text.ponto_name {
     padding-top: 5px;
     text-align: center;
