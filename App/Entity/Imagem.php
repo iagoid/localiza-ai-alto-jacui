@@ -45,12 +45,13 @@ class Imagem
     return (new Database('imagem'))->select($where, $order, $limit, "cod, cod_pt, nome, descricao_imagem")->fetchAll(PDO::FETCH_CLASS);
   }
 
-  public static function getImagem($where = null, $order = null, $limit = null)
-  {
-    return (new Database('imagem'))->select($where, $order, $limit, "cod, cod_pt, nome")->fetchObject(self::class);
-  }
   public static function getImagemFromPt($cod_pt)
   {
     return (new Database('imagem'))->select('cod_pt = ' . $cod_pt)->fetchObject(self::class);
+  }
+
+  public static function excluirIamgensDoPontoTuristico($cod_pt)
+  {
+    return (new Database('imagem'))->delete('cod_pt = ' . $cod_pt);
   }
 }

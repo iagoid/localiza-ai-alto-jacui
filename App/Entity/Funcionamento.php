@@ -40,11 +40,6 @@ class Funcionamento
     ]);
   }
 
-  public function excluir()
-  {
-    return (new Database('funcionamento'))->delete('cod = ' . $this->cod);
-  }
-
   public static function excluirFuncionamentoDoPontoTuristico($cod_pt)
   {
     return (new Database('funcionamento'))->delete('cod_pt = ' . $cod_pt);

@@ -47,8 +47,8 @@ class Contato
     return (new Database('contato'))->select($where, $order, $limit, "cod, cod_pt, tipo, descricao")->fetchAll(PDO::FETCH_CLASS);
   }
 
-  public static function getContato($cod)
+  public static function excluirContatoDoPontoTuristico($cod_pt)
   {
-    return (new Database('contato'))->select('cod = ' . $cod)->fetchObject(self::class);
+    return (new Database('contato'))->delete('cod_pt = ' . $cod_pt);
   }
 }
