@@ -242,7 +242,8 @@ if (isset(
                 $objContato2->tipo = $_POST['tipo'][$i];
                 $objContato2->descricao = $descricao;
                 // Se existe atualiza, senão cria
-                if ($objContato[$i]->cod) {
+                $precisaAtualizar = isset($objContato[$i]) ? $objContato[$i]->cod : null;
+                if ($precisaAtualizar) {
                     $objContato2->cod = $objContato[$i]->cod;
                     $objContato2->atualizar();
                 } else {
@@ -297,8 +298,6 @@ if (isset(
         $_POST['cod_imagem'],
         $_POST['descricao_imagem_no_BD']
     )) {
-        // print_r($_POST['descricao_imagem_no_BD']);
-        // exit;
         foreach ($_POST['cod_imagem'] as $i => $cod) {
             $objImagem2 = new Imagem;
 
@@ -311,9 +310,6 @@ if (isset(
                 // Remove dos arrays as imagens
                 $key = array_search($cod, $imagensSalvasNoBD);
                 unset($imagensSalvasNoBD[$key]);
-
-                $key = array_search($cod, $nomeImagensSalvasNoBD);
-                $objImagem2->nome = $nomeImagensSalvasNoBD[$key];
                 unset($nomeImagensSalvasNoBD[$key]);
 
                 $objImagem2->atualizar();

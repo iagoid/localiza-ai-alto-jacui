@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS imagem(
 	cod SERIAL NOT NULL,
 	cod_pt INTEGER NOT NULL,
 	nome VARCHAR(50) NOT NULL,
-	descricao_imagem VARCHAR(50),
+	descricao_imagem VARCHAR(150),
 	CONSTRAINT pk_imagens PRIMARY KEY (cod),
 	CONSTRAINT fk_imagens_pt FOREIGN KEY (cod_pt) REFERENCES ponto_turistico (cod)
 );
