@@ -21,6 +21,7 @@ use \App\Entity\Contato;
 use \App\Entity\CategoriasDoPonto;
 use \App\Session\Login;
 
+// ini_set('memory_limit', '-1');
 Login::requireLogin();
 
 $title = "ADMIN EDITAR";
@@ -108,18 +109,19 @@ if (sizeof($objFuncionamento) > 0) {
     do {
         $resultadosFuncionamento .= '
             <div class="col-lg-3 col-md-3 col-sm-3">
-                <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">';
+                <select name="dia0[]" multiple id="dia0" class="dia form-select col-lg-12 col-md-12 col-sm-12">
+                <option value="' . $objFuncionamento[0]->dia . '" selected="selected">' . $objFuncionamento[0]->dia . '</option>';
 
 
         if (sizeof($objFuncionamento) - 1 >= 1) {
-            for ($j = 0 + 1; $j <= sizeof($objFuncionamento) - 1; $j++) {
+            for ($j = 1; $j <= sizeof($objFuncionamento) - 1; $j++) {
                 if (
                     ($objFuncionamento[0]->inicio == $objFuncionamento[$j]->inicio)
                     && ($objFuncionamento[0]->fim == $objFuncionamento[$j]->fim)
                 ) {
 
                     $resultadosFuncionamento .= '<option value="' . $objFuncionamento[$j]->dia . '" selected="selected">' . $objFuncionamento[$j]->dia . '</option>';
-                    array_splice($objFuncionamento, $j, $j);
+                    array_splice($objFuncionamento, $j, 1);
                     $j--;
                 }
             }
@@ -139,8 +141,7 @@ if (sizeof($objFuncionamento) > 0) {
             </div>';
 
 
-
-        array_splice($objFuncionamento, 0, 0);
+        array_splice($objFuncionamento, 0, 1);
     } while (sizeof($objFuncionamento) - 1 > 0);
 }
 
