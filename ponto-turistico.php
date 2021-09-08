@@ -111,13 +111,14 @@ foreach ($listagempontos as $ponto) {
         $nomeImagem = "image-not-found.jpg";
     }
 
+
     $pontos3 .= '<div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
                     <div class="blog__item__pic">
                         <img src="img/imagens_pt/' . $nomeImagem . '" alt="">
                     </div>
                     <div class="blog__item__text">
-                        <h5><a href="#">' . $ponto->nome . '</a></h5>
+                        <h5><a href="./ponto-turistico?cod=' . $ponto->cod . '">' . $ponto->nome . '</a></h5>
                     </div>
                 </div>
             </div>';
