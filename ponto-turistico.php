@@ -137,7 +137,7 @@ include __DIR__ . '/includes/header.php';
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="room__details__more__facilities">
                                 <h2>Funcionamento:</h2>
-                                <div class="row">
+                                <div class="row mb-5">
                                     <div class="col-lg-6">
                                         <?= $resultadoTemporada ?>
                                     </div>
@@ -164,7 +164,7 @@ include __DIR__ . '/includes/header.php';
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-5">
                 <?= $resultadosImagem ?>
             </div>
             <?php

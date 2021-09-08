@@ -54,7 +54,7 @@
 
     <h2>Funcionamento</h2>
     <p>*Caso o estabelecimento não funcione em algum dia da semana deixe o campo em branco, deixe o campo em branco</p>
-    <div class="" id="funcionamentos">
+    <div class="mb-3" id="funcionamentos">
         <div class="row div-funcionamento">
             <div class="col-1 offset-lg-11 offset-md-11 offset-sm-11">
                 <button type="button" id="novo-funcionamento">+</button>
@@ -69,15 +69,15 @@
     <div id="contatos">
         <?= $resultadoContato ?>
     </div>
-    <h4>Categorias</h4>
-    <div class="row">
+    <h2>Categorias</h2>
+    <div class="row mb-3">
         <div class="col-lg-4 col-md-4 col-sm-4 div_flex">
             <select name="categoria[]" multiple class="form-control" id="multiselect" class="multiselect">
                 <?= $categorias_resultados ?>
             </select>
         </div>
     </div>
-    <h4>Images</h4>
+    <h2>Images</h2>
     <div id="imagens-div">
         <div class="row row-imagem">
             <div class="col-1 offset-lg-11 offset-md-11 offset-sm-11">
