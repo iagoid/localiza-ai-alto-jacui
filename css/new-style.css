@@ -45,16 +45,20 @@ select#multiselect+.nice-select {
 }
 
 .blog__item__text.admin a.edit:hover, .contato_link a:hover, a:visited {
-    color: rgb(65, 65, 238);
+    color: #2523a1;
 }
 
 .contato_link a, .contato_link i {
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 20px;    
 }
 
 .contato_link i {
     margin-right: 1s5px;
+}
+
+.contato_link h9{
+    font-family: Lucida, sans-serif;
 }
 
 .blog__item__text.admin a.delete {

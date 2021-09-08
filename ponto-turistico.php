@@ -82,17 +82,17 @@ $ContatoDoPonto = Contato::getContatos($whereContato);
 if (is_array($ContatoDoPonto)) {
     foreach ($ContatoDoPonto as $contato) {
         if (strtoupper($contato->tipo) == "SITE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-site"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         } else if (strtoupper($contato->tipo) == "INSTAGRAM") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-instagram"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         } else if (strtoupper($contato->tipo) == "FACEBOOK") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-facebook"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         } else if (strtoupper($contato->tipo) == "TWITTER") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-twitter"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         } else if (strtoupper($contato->tipo) == "TELEFONE") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-phone"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         } else if (strtoupper($contato->tipo) == "EMAIL") {
-            $resultadosContato .= '<div class="room_details__desc contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o">' . strtoupper($contato->tipo) . '</a></i></div>';
+            $resultadosContato .= '<div class=" contato_link"><a href="' . $contato->descricao . '"><i class="fa fa-envelope-o"><h9> ' . strtoupper($contato->tipo) . '</h9></a></i></div>';
         }
     }
 } else {
